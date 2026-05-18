@@ -1,0 +1,104 @@
+{
+  "eventId": "EXP-20260518-001",
+  "eventType": "COLLISION",
+  "scenarioId": "SCH-COLLISION-001",
+  "scenarioName": "追尾碰撞（跟车过近）",
+  "timeMillis": 1740000139000,
+  "location": "苏州·工业园区",
+  "summary": "【追尾碰撞（跟车过近）】COLLISION，HIGH等级；发生于隧道入口（雾），涉及施工区域未封闭完全",
+  "triggerReasons": [
+    "已发生接触或显著减速碰撞",
+    "行车记录仪/EDR 可佐证碰撞瞬间车速与制动",
+    "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+  ],
+  "severity": "HIGH",
+  "autoDrivingState": "L2_ASSIST",
+  "telemetry": [
+    {
+      "tMs": -4200,
+      "speedKph": 63.0,
+      "axMS2": -1.8,
+      "brake": 36,
+      "steerDeg": 1.6
+    },
+    {
+      "tMs": -3550,
+      "speedKph": 53.8,
+      "axMS2": -3.2,
+      "brake": 48,
+      "steerDeg": 0.9
+    },
+    {
+      "tMs": -2900,
+      "speedKph": 44.6,
+      "axMS2": -5.8,
+      "brake": 72,
+      "steerDeg": 2.2
+    },
+    {
+      "tMs": -2250,
+      "speedKph": 35.4,
+      "axMS2": -8.9,
+      "brake": 100,
+      "steerDeg": 3.4
+    },
+    {
+      "tMs": -1600,
+      "speedKph": 26.2,
+      "axMS2": -9.7,
+      "brake": 100,
+      "steerDeg": -3.1
+    },
+    {
+      "tMs": -950,
+      "speedKph": 17.0,
+      "axMS2": -7.5,
+      "brake": 87,
+      "steerDeg": 1.8
+    },
+    {
+      "tMs": -770,
+      "speedKph": 5.9,
+      "axMS2": -10.62,
+      "brake": 100,
+      "steerDeg": -0.9
+    }
+  ],
+  "responsibility": {
+    "driverFactor": 61,
+    "systemFactor": 25,
+    "environmentFactor": 14,
+    "conclusion": "责任倾向：碰撞后果以纵向安全距离不足或突发障碍为主，需结合行车记录仪与路权认定",
+    "reasons": [
+      "【反应时间】888ms — 偏长（>800ms），建议关注注意力状态",
+      "【制动上升时间】412ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+      "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+      "【AEB/系统介入】-775ms",
+      "【制动时 TTC 估算】2.35s — 时距尚可",
+      "【事故前 3s 均速】25.8 km/h"
+    ]
+  },
+  "environment": {
+    "weather": "雾",
+    "road": "隧道入口",
+    "obstacle": "施工区域未封闭完全",
+    "laneMarking": "清晰"
+  },
+  "decisionTrace": {
+    "sensorInput": "前向毫米波雷达 + 摄像头融合",
+    "perception": "本车与目标相对运动估计；施工区域未封闭完全 场景下 TTC 估计更新频率正常",
+    "planning": "规划在隧道入口保持车道并请求舒适制动；未触发紧急换道",
+    "control": "纵向制动请求建立；碰撞前约 0.3s 达到最大制动能力"
+  },
+  "derivedSignals": {
+    "reactionTimeMs": 888,
+    "brakeRiseTimeMs": 412,
+    "aebDelayMs": -775,
+    "ttcAtBrakeSeconds": 2.35,
+    "brakeEffective": false,
+    "maxSteerLast2sDeg": 8.2,
+    "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+    "riskPredictionSummary": "端侧风险模型：COLLISION 置信偏高，建议云端复盘侧重证据链一致性"
+  },
+  "experimentGroup": "C"
+}

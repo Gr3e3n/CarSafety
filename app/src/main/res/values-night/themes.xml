@@ -1,0 +1,13 @@
+﻿<resources>
+    <style name="Theme.VehTrust" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/background</item>
+        <item name="colorPrimary">@color/module_blue</item>
+        <item name="colorPrimaryVariant">@color/module_blue_light</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/module_teal</item>
+        <item name="colorSecondaryVariant">@color/module_teal</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:statusBarColor">#1E293B</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

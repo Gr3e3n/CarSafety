@@ -1,0 +1,4796 @@
+[
+  {
+    "eventId": "EXP-20260518-001",
+    "eventType": "COLLISION",
+    "scenarioId": "SCH-COLLISION-001",
+    "scenarioName": "追尾碰撞（跟车过近）",
+    "timeMillis": 1740000139000,
+    "location": "苏州·工业园区",
+    "summary": "【追尾碰撞（跟车过近）】COLLISION，HIGH等级；发生于隧道入口（雾），涉及施工区域未封闭完全",
+    "triggerReasons": [
+      "已发生接触或显著减速碰撞",
+      "行车记录仪/EDR 可佐证碰撞瞬间车速与制动",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "L2_ASSIST",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 63.0,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": 1.6
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 53.8,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": 0.9
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 44.6,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": 2.2
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 35.4,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": 3.4
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 26.2,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": -3.1
+      },
+      {
+        "tMs": -950,
+        "speedKph": 17.0,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": 1.8
+      },
+      {
+        "tMs": -770,
+        "speedKph": 5.9,
+        "axMS2": -10.62,
+        "brake": 100,
+        "steerDeg": -0.9
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 61,
+      "systemFactor": 25,
+      "environmentFactor": 14,
+      "conclusion": "责任倾向：碰撞后果以纵向安全距离不足或突发障碍为主，需结合行车记录仪与路权认定",
+      "reasons": [
+        "【反应时间】888ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】412ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-775ms",
+        "【制动时 TTC 估算】2.35s — 时距尚可",
+        "【事故前 3s 均速】25.8 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "雾",
+      "road": "隧道入口",
+      "obstacle": "施工区域未封闭完全",
+      "laneMarking": "清晰"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "本车与目标相对运动估计；施工区域未封闭完全 场景下 TTC 估计更新频率正常",
+      "planning": "规划在隧道入口保持车道并请求舒适制动；未触发紧急换道",
+      "control": "纵向制动请求建立；碰撞前约 0.3s 达到最大制动能力"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 888,
+      "brakeRiseTimeMs": 412,
+      "aebDelayMs": -775,
+      "ttcAtBrakeSeconds": 2.35,
+      "brakeEffective": false,
+      "maxSteerLast2sDeg": 8.2,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：COLLISION 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-002",
+    "eventType": "COLLISION",
+    "scenarioId": "SCH-COLLISION-002",
+    "scenarioName": "侧向刮擦（变道冲突）",
+    "timeMillis": 1740000278000,
+    "location": "苏州·工业园区",
+    "summary": "【侧向刮擦（变道冲突）】COLLISION，HIGH等级；发生于城市主干道（晴），涉及前车急刹制动灯亮起",
+    "triggerReasons": [
+      "已发生接触或显著减速碰撞",
+      "行车记录仪/EDR 可佐证碰撞瞬间车速与制动",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "MANUAL",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 74.5,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -1.6
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 65.3,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": 3.7
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 56.1,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": 3.9
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 46.9,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": 0.1
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 37.7,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": 0.4
+      },
+      {
+        "tMs": -950,
+        "speedKph": 28.5,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": -1.8
+      },
+      {
+        "tMs": -770,
+        "speedKph": 10.0,
+        "axMS2": -11.05,
+        "brake": 100,
+        "steerDeg": 0.3
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 71,
+      "systemFactor": 14,
+      "environmentFactor": 15,
+      "conclusion": "责任倾向：碰撞后果以纵向安全距离不足或突发障碍为主，需结合行车记录仪与路权认定",
+      "reasons": [
+        "【反应时间】1299ms — 过长（>1200ms），显著增加碰撞风险",
+        "【制动上升时间】365ms（踏板 20%→80%）— 制动果断",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-361ms",
+        "【制动时 TTC 估算】1.62s — 时距尚可",
+        "【事故前 3s 均速】35.8 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "晴",
+      "road": "城市主干道",
+      "obstacle": "前车急刹制动灯亮起",
+      "laneMarking": "反光"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "本车与目标相对运动估计；前车急刹制动灯亮起 场景下 TTC 估计更新频率正常",
+      "planning": "规划在城市主干道保持车道并请求舒适制动；未触发紧急换道",
+      "control": "纵向制动请求建立；碰撞前约 0.3s 达到最大制动能力"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 1299,
+      "brakeRiseTimeMs": 365,
+      "aebDelayMs": -361,
+      "ttcAtBrakeSeconds": 1.62,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 7.4,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：COLLISION 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-003",
+    "eventType": "COLLISION",
+    "scenarioId": "SCH-COLLISION-003",
+    "scenarioName": "静止障碍碰撞",
+    "timeMillis": 1740000417000,
+    "location": "西安·高新区",
+    "summary": "【静止障碍碰撞】COLLISION，LOW等级；发生于城市主干道（晴），涉及慢车占道",
+    "triggerReasons": [
+      "已发生接触或显著减速碰撞",
+      "行车记录仪/EDR 可佐证碰撞瞬间车速与制动",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "LOW",
+    "autoDrivingState": "MANUAL",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 87.8,
+        "axMS2": -0.9,
+        "brake": 28,
+        "steerDeg": 0.3
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 78.6,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": 2.7
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 69.4,
+        "axMS2": -3.5,
+        "brake": 51,
+        "steerDeg": -1.3
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 60.2,
+        "axMS2": -4.2,
+        "brake": 57,
+        "steerDeg": -2.2
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 69,
+      "systemFactor": 17,
+      "environmentFactor": 14,
+      "conclusion": "责任倾向：碰撞后果以纵向安全距离不足或突发障碍为主，需结合行车记录仪与路权认定",
+      "reasons": [
+        "【反应时间】783ms — 处于可接受区间，仍建议复盘人因",
+        "【制动上升时间】545ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+        "强制动",
+        "【AEB/系统介入】-293ms",
+        "【制动时 TTC 估算】2.41s — 时距尚可",
+        "【事故前 3s 均速】74.0 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "晴",
+      "road": "城市主干道",
+      "obstacle": "慢车占道",
+      "laneMarking": "模糊"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "本车与目标相对运动估计；慢车占道 场景下 TTC 估计更新频率正常",
+      "planning": "规划在城市主干道保持车道并请求舒适制动；未触发紧急换道",
+      "control": "纵向制动请求建立；碰撞前约 0.3s 达到最大制动能力"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 783,
+      "brakeRiseTimeMs": 545,
+      "aebDelayMs": -293,
+      "ttcAtBrakeSeconds": 2.41,
+      "brakeEffective": false,
+      "maxSteerLast2sDeg": 3.9,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：COLLISION 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-004",
+    "eventType": "COLLISION",
+    "scenarioId": "SCH-COLLISION-004",
+    "scenarioName": "倒车碰撞非机动车",
+    "timeMillis": 1740000556000,
+    "location": "成都·高新区",
+    "summary": "【倒车碰撞非机动车】COLLISION，LOW等级；发生于收费站广场（晴），涉及路面抛洒物",
+    "triggerReasons": [
+      "已发生接触或显著减速碰撞",
+      "行车记录仪/EDR 可佐证碰撞瞬间车速与制动",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "LOW",
+    "autoDrivingState": "L2_ASSIST",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 73.8,
+        "axMS2": -0.9,
+        "brake": 28,
+        "steerDeg": 2.8
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 64.6,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -0.0
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 55.4,
+        "axMS2": -3.5,
+        "brake": 51,
+        "steerDeg": 4.5
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 46.2,
+        "axMS2": -4.2,
+        "brake": 57,
+        "steerDeg": 4.1
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 58,
+      "systemFactor": 30,
+      "environmentFactor": 12,
+      "conclusion": "责任倾向：碰撞后果以纵向安全距离不足或突发障碍为主，需结合行车记录仪与路权认定",
+      "reasons": [
+        "【反应时间】1150ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】330ms（踏板 20%→80%）— 制动果断",
+        "强制动",
+        "【AEB/系统介入】-669ms",
+        "【制动时 TTC 估算】2.39s — 时距尚可",
+        "【事故前 3s 均速】60.0 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "晴",
+      "road": "收费站广场",
+      "obstacle": "路面抛洒物",
+      "laneMarking": "清晰"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "本车与目标相对运动估计；路面抛洒物 场景下 TTC 估计更新频率正常",
+      "planning": "规划在收费站广场保持车道并请求舒适制动；未触发紧急换道",
+      "control": "纵向制动请求建立；碰撞前约 0.3s 达到最大制动能力"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 1150,
+      "brakeRiseTimeMs": 330,
+      "aebDelayMs": -669,
+      "ttcAtBrakeSeconds": 2.39,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 4.4,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：COLLISION 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-005",
+    "eventType": "COLLISION",
+    "scenarioId": "SCH-COLLISION-005",
+    "scenarioName": "环岛内连环碰撞",
+    "timeMillis": 1740000695000,
+    "location": "南京·雨花台区",
+    "summary": "【环岛内连环碰撞】COLLISION，MEDIUM等级；发生于施工借道段（晴），涉及匝道汇流冲突",
+    "triggerReasons": [
+      "已发生接触或显著减速碰撞",
+      "行车记录仪/EDR 可佐证碰撞瞬间车速与制动",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "MEDIUM",
+    "autoDrivingState": "L2_ASSIST",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 57.0,
+        "axMS2": -1.2,
+        "brake": 30,
+        "steerDeg": 4.3
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 47.8,
+        "axMS2": -2.4,
+        "brake": 41,
+        "steerDeg": 2.3
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 38.6,
+        "axMS2": -4.1,
+        "brake": 56,
+        "steerDeg": -2.0
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 29.4,
+        "axMS2": -6.3,
+        "brake": 76,
+        "steerDeg": -0.5
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 20.2,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -0.4
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 68,
+      "systemFactor": 22,
+      "environmentFactor": 10,
+      "conclusion": "责任倾向：碰撞后果以纵向安全距离不足或突发障碍为主，需结合行车记录仪与路权认定",
+      "reasons": [
+        "【反应时间】1334ms — 过长（>1200ms），显著增加碰撞风险",
+        "【制动上升时间】282ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+        "强制动",
+        "【AEB/系统介入】-634ms",
+        "【制动时 TTC 估算】2.21s — 时距尚可",
+        "【事故前 3s 均速】38.6 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "晴",
+      "road": "施工借道段",
+      "obstacle": "匝道汇流冲突",
+      "laneMarking": "夜间磨损不清"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "本车与目标相对运动估计；匝道汇流冲突 场景下 TTC 估计更新频率正常",
+      "planning": "规划在施工借道段保持车道并请求舒适制动；未触发紧急换道",
+      "control": "纵向制动请求建立；碰撞前约 0.3s 达到最大制动能力"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 1334,
+      "brakeRiseTimeMs": 282,
+      "aebDelayMs": -634,
+      "ttcAtBrakeSeconds": 2.21,
+      "brakeEffective": false,
+      "maxSteerLast2sDeg": 4.5,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：COLLISION 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-006",
+    "eventType": "COLLISION",
+    "scenarioId": "SCH-COLLISION-006",
+    "scenarioName": "匝道末端减速不及",
+    "timeMillis": 1740000834000,
+    "location": "上海·浦东新区",
+    "summary": "【匝道末端减速不及】COLLISION，MEDIUM等级；发生于隧道入口（小雨），涉及慢车占道",
+    "triggerReasons": [
+      "已发生接触或显著减速碰撞",
+      "行车记录仪/EDR 可佐证碰撞瞬间车速与制动",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "MEDIUM",
+    "autoDrivingState": "AUTONOMOUS",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 58.7,
+        "axMS2": -1.2,
+        "brake": 30,
+        "steerDeg": -1.3
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 49.5,
+        "axMS2": -2.4,
+        "brake": 41,
+        "steerDeg": 1.8
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 40.3,
+        "axMS2": -4.1,
+        "brake": 56,
+        "steerDeg": 2.1
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 31.1,
+        "axMS2": -6.3,
+        "brake": 76,
+        "steerDeg": -0.5
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 21.9,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -1.2
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 64,
+      "systemFactor": 25,
+      "environmentFactor": 11,
+      "conclusion": "责任倾向：碰撞后果以纵向安全距离不足或突发障碍为主，需结合行车记录仪与路权认定",
+      "reasons": [
+        "【反应时间】1269ms — 过长（>1200ms），显著增加碰撞风险",
+        "【制动上升时间】495ms（踏板 20%→80%）— 制动果断",
+        "强制动",
+        "【AEB/系统介入】-602ms",
+        "【制动时 TTC 估算】2.94s — 时距尚可",
+        "【事故前 3s 均速】40.3 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "小雨",
+      "road": "隧道入口",
+      "obstacle": "慢车占道",
+      "laneMarking": "反光"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "本车与目标相对运动估计；慢车占道 场景下 TTC 估计更新频率正常",
+      "planning": "规划在隧道入口保持车道并请求舒适制动；未触发紧急换道",
+      "control": "纵向制动请求建立；碰撞前约 0.3s 达到最大制动能力"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 1269,
+      "brakeRiseTimeMs": 495,
+      "aebDelayMs": -602,
+      "ttcAtBrakeSeconds": 2.94,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 6.2,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：COLLISION 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-007",
+    "eventType": "COLLISION",
+    "scenarioId": "SCH-COLLISION-007",
+    "scenarioName": "隧道内低速追尾",
+    "timeMillis": 1740000973000,
+    "location": "上海·浦东新区",
+    "summary": "【隧道内低速追尾】COLLISION，MEDIUM等级；发生于快速路（冰雪），涉及行人靠近路缘",
+    "triggerReasons": [
+      "已发生接触或显著减速碰撞",
+      "行车记录仪/EDR 可佐证碰撞瞬间车速与制动",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "MEDIUM",
+    "autoDrivingState": "MANUAL",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 49.3,
+        "axMS2": -1.2,
+        "brake": 30,
+        "steerDeg": 2.6
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 40.1,
+        "axMS2": -2.4,
+        "brake": 41,
+        "steerDeg": 4.3
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 30.9,
+        "axMS2": -4.1,
+        "brake": 56,
+        "steerDeg": 1.0
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 21.7,
+        "axMS2": -6.3,
+        "brake": 76,
+        "steerDeg": 2.2
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 15.0,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": 2.8
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 68,
+      "systemFactor": 22,
+      "environmentFactor": 10,
+      "conclusion": "责任倾向：碰撞后果以纵向安全距离不足或突发障碍为主，需结合行车记录仪与路权认定",
+      "reasons": [
+        "【反应时间】1221ms — 过长（>1200ms），显著增加碰撞风险",
+        "【制动上升时间】532ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+        "强制动",
+        "【AEB/系统介入】-525ms",
+        "【制动时 TTC 估算】2.11s — 时距尚可",
+        "【事故前 3s 均速】31.4 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "冰雪",
+      "road": "快速路",
+      "obstacle": "行人靠近路缘",
+      "laneMarking": "反光"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "本车与目标相对运动估计；行人靠近路缘 场景下 TTC 估计更新频率正常",
+      "planning": "规划在快速路保持车道并请求舒适制动；未触发紧急换道",
+      "control": "纵向制动请求建立；碰撞前约 0.3s 达到最大制动能力"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 1221,
+      "brakeRiseTimeMs": 532,
+      "aebDelayMs": -525,
+      "ttcAtBrakeSeconds": 2.11,
+      "brakeEffective": false,
+      "maxSteerLast2sDeg": 5.3,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：COLLISION 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-008",
+    "eventType": "AUTOPILOT_FAULT",
+    "scenarioId": "SCH-AUTOPILOT_FAULT-008",
+    "scenarioName": "NOA 异常退出未提示",
+    "timeMillis": 1740001112000,
+    "location": "深圳·南山区",
+    "summary": "【NOA 异常退出未提示】AUTOPILOT_FAULT，HIGH等级；发生于园区内部路（侧风偏大），涉及右侧车辆强行切入",
+    "triggerReasons": [
+      "智驾功能异常退出或控制振荡",
+      "系统日志记录降级原因码",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "AUTONOMOUS",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 67.5,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -0.3
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 58.3,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": 0.8
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 49.1,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": 1.9
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 39.9,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": -1.6
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 30.7,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": 1.9
+      },
+      {
+        "tMs": -950,
+        "speedKph": 21.5,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": -0.7
+      },
+      {
+        "tMs": -770,
+        "speedKph": 7.5,
+        "axMS2": -10.49,
+        "brake": 100,
+        "steerDeg": -2.0
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 20,
+      "systemFactor": 70,
+      "environmentFactor": 10,
+      "conclusion": "责任倾向：智驾系统异常/降级为主，驾驶员接管响应为辅",
+      "reasons": [
+        "【反应时间】730ms — 处于可接受区间，仍建议复盘人因",
+        "【制动上升时间】312ms（踏板 20%→80%）— 制动果断",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-880ms",
+        "【制动时 TTC 估算】2.62s — 时距尚可",
+        "【事故前 3s 均速】29.7 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "侧风偏大",
+      "road": "园区内部路",
+      "obstacle": "右侧车辆强行切入",
+      "laneMarking": "模糊"
+    },
+    "decisionTrace": {
+      "sensorInput": "11V5R+前向激光雷达融合（含高精地图车道）",
+      "perception": "车道线置信度波动；目标跟踪 ID 切换导致纵向目标丢失 120ms",
+      "planning": "规划请求最小风险轨迹重算；触发 MRM 前的横向振荡抑制不足",
+      "control": "横向力矩与制动协调延迟；降级提示与制动力建立不同步"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 730,
+      "brakeRiseTimeMs": 312,
+      "aebDelayMs": -880,
+      "ttcAtBrakeSeconds": 2.62,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 5.5,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：AUTOPILOT_FAULT 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-009",
+    "eventType": "AUTOPILOT_FAULT",
+    "scenarioId": "SCH-AUTOPILOT_FAULT-009",
+    "scenarioName": "横向控制振荡诱发偏离",
+    "timeMillis": 1740001251000,
+    "location": "西安·高新区",
+    "summary": "【横向控制振荡诱发偏离】AUTOPILOT_FAULT，LOW等级；发生于收费站广场（小雨），涉及施工锥桶偏移",
+    "triggerReasons": [
+      "智驾功能异常退出或控制振荡",
+      "系统日志记录降级原因码",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "LOW",
+    "autoDrivingState": "AUTONOMOUS",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 84.4,
+        "axMS2": -0.9,
+        "brake": 28,
+        "steerDeg": 2.1
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 75.2,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -0.4
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 66.0,
+        "axMS2": -3.5,
+        "brake": 51,
+        "steerDeg": -0.8
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 56.8,
+        "axMS2": -4.2,
+        "brake": 57,
+        "steerDeg": -1.3
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 22,
+      "systemFactor": 66,
+      "environmentFactor": 12,
+      "conclusion": "责任倾向：智驾系统异常/降级为主，驾驶员接管响应为辅",
+      "reasons": [
+        "【反应时间】650ms — 处于可接受区间，仍建议复盘人因",
+        "【制动上升时间】361ms（踏板 20%→80%）— 制动果断",
+        "强制动",
+        "【AEB/系统介入】-280ms",
+        "【制动时 TTC 估算】2.95s — 时距尚可",
+        "【事故前 3s 均速】70.6 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "小雨",
+      "road": "收费站广场",
+      "obstacle": "施工锥桶偏移",
+      "laneMarking": "清晰"
+    },
+    "decisionTrace": {
+      "sensorInput": "11V5R+前向激光雷达融合（含高精地图车道）",
+      "perception": "车道线置信度波动；目标跟踪 ID 切换导致纵向目标丢失 120ms",
+      "planning": "规划请求最小风险轨迹重算；触发 MRM 前的横向振荡抑制不足",
+      "control": "横向力矩与制动协调延迟；降级提示与制动力建立不同步"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 650,
+      "brakeRiseTimeMs": 361,
+      "aebDelayMs": -280,
+      "ttcAtBrakeSeconds": 2.95,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 8.3,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：AUTOPILOT_FAULT 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-010",
+    "eventType": "AUTOPILOT_FAULT",
+    "scenarioId": "SCH-AUTOPILOT_FAULT-010",
+    "scenarioName": "感知误检导致误制动",
+    "timeMillis": 1740001390000,
+    "location": "武汉·东湖高新区",
+    "summary": "【感知误检导致误制动】AUTOPILOT_FAULT，HIGH等级；发生于高架匝道（雾），涉及前车急刹制动灯亮起",
+    "triggerReasons": [
+      "智驾功能异常退出或控制振荡",
+      "系统日志记录降级原因码",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "AUTONOMOUS",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 76.4,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": 0.5
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 67.2,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": -0.8
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 58.0,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -0.5
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 48.8,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": -0.2
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 39.6,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": -1.5
+      },
+      {
+        "tMs": -950,
+        "speedKph": 30.4,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": 0.5
+      },
+      {
+        "tMs": -770,
+        "speedKph": 10.6,
+        "axMS2": -10.65,
+        "brake": 100,
+        "steerDeg": 1.4
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 32,
+      "systemFactor": 58,
+      "environmentFactor": 10,
+      "conclusion": "责任倾向：智驾系统异常/降级为主，驾驶员接管响应为辅",
+      "reasons": [
+        "【反应时间】580ms — 处于可接受区间，仍建议复盘人因",
+        "【制动上升时间】594ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】未检测到系统主动介入",
+        "【制动时 TTC 估算】2.25s — 时距尚可",
+        "【事故前 3s 均速】37.5 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "雾",
+      "road": "高架匝道",
+      "obstacle": "前车急刹制动灯亮起",
+      "laneMarking": "模糊"
+    },
+    "decisionTrace": {
+      "sensorInput": "11V5R+前向激光雷达融合（含高精地图车道）",
+      "perception": "车道线置信度波动；目标跟踪 ID 切换导致纵向目标丢失 120ms",
+      "planning": "规划请求最小风险轨迹重算；触发 MRM 前的横向振荡抑制不足",
+      "control": "横向力矩与制动协调延迟；降级提示与制动力建立不同步"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 580,
+      "brakeRiseTimeMs": 594,
+      "aebDelayMs": -1,
+      "ttcAtBrakeSeconds": 2.25,
+      "brakeEffective": false,
+      "maxSteerLast2sDeg": 8.8,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：AUTOPILOT_FAULT 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-011",
+    "eventType": "AUTOPILOT_FAULT",
+    "scenarioId": "SCH-AUTOPILOT_FAULT-011",
+    "scenarioName": "规划轨迹突变",
+    "timeMillis": 1740001529000,
+    "location": "上海·浦东新区",
+    "summary": "【规划轨迹突变】AUTOPILOT_FAULT，HIGH等级；发生于长下坡接弯（雾），涉及外卖非机动车占道",
+    "triggerReasons": [
+      "智驾功能异常退出或控制振荡",
+      "系统日志记录降级原因码",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "AUTONOMOUS",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 68.9,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -0.6
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 59.7,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": -0.5
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 50.5,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -0.5
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 41.3,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": -0.2
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 32.1,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": 0.4
+      },
+      {
+        "tMs": -950,
+        "speedKph": 22.9,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": -0.4
+      },
+      {
+        "tMs": -770,
+        "speedKph": 8.0,
+        "axMS2": -10.82,
+        "brake": 100,
+        "steerDeg": 1.8
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 29,
+      "systemFactor": 62,
+      "environmentFactor": 9,
+      "conclusion": "责任倾向：智驾系统异常/降级为主，驾驶员接管响应为辅",
+      "reasons": [
+        "【反应时间】430ms — 处于可接受区间，仍建议复盘人因",
+        "【制动上升时间】464ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-540ms",
+        "【制动时 TTC 估算】2.89s — 时距尚可",
+        "【事故前 3s 均速】31.0 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "雾",
+      "road": "长下坡接弯",
+      "obstacle": "外卖非机动车占道",
+      "laneMarking": "反光"
+    },
+    "decisionTrace": {
+      "sensorInput": "11V5R+前向激光雷达融合（含高精地图车道）",
+      "perception": "车道线置信度波动；目标跟踪 ID 切换导致纵向目标丢失 120ms",
+      "planning": "规划请求最小风险轨迹重算；触发 MRM 前的横向振荡抑制不足",
+      "control": "横向力矩与制动协调延迟；降级提示与制动力建立不同步"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 430,
+      "brakeRiseTimeMs": 464,
+      "aebDelayMs": -540,
+      "ttcAtBrakeSeconds": 2.89,
+      "brakeEffective": false,
+      "maxSteerLast2sDeg": 5.4,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：AUTOPILOT_FAULT 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-012",
+    "eventType": "AUTOPILOT_FAULT",
+    "scenarioId": "SCH-AUTOPILOT_FAULT-012",
+    "scenarioName": "传感器融合短时失效",
+    "timeMillis": 1740001668000,
+    "location": "苏州·工业园区",
+    "summary": "【传感器融合短时失效】AUTOPILOT_FAULT，HIGH等级；发生于施工借道段（多云），涉及行人突然横穿",
+    "triggerReasons": [
+      "智驾功能异常退出或控制振荡",
+      "系统日志记录降级原因码",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "AUTONOMOUS",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 69.8,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -0.1
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 60.6,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": 0.4
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 51.4,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": 0.4
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 42.2,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": 0.9
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 33.0,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": -0.0
+      },
+      {
+        "tMs": -950,
+        "speedKph": 23.8,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": -1.5
+      },
+      {
+        "tMs": -770,
+        "speedKph": 8.3,
+        "axMS2": -9.34,
+        "brake": 100,
+        "steerDeg": -1.2
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 20,
+      "systemFactor": 70,
+      "environmentFactor": 10,
+      "conclusion": "责任倾向：智驾系统异常/降级为主，驾驶员接管响应为辅",
+      "reasons": [
+        "【反应时间】525ms — 处于可接受区间，仍建议复盘人因",
+        "【制动上升时间】417ms（踏板 20%→80%）— 制动果断",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-880ms",
+        "【制动时 TTC 估算】2.96s — 时距尚可",
+        "【事故前 3s 均速】31.7 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "多云",
+      "road": "施工借道段",
+      "obstacle": "行人突然横穿",
+      "laneMarking": "施工临时标线"
+    },
+    "decisionTrace": {
+      "sensorInput": "11V5R+前向激光雷达融合（含高精地图车道）",
+      "perception": "车道线置信度波动；目标跟踪 ID 切换导致纵向目标丢失 120ms",
+      "planning": "规划请求最小风险轨迹重算；触发 MRM 前的横向振荡抑制不足",
+      "control": "横向力矩与制动协调延迟；降级提示与制动力建立不同步"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 525,
+      "brakeRiseTimeMs": 417,
+      "aebDelayMs": -880,
+      "ttcAtBrakeSeconds": 2.96,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 8.6,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：AUTOPILOT_FAULT 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-013",
+    "eventType": "AUTOPILOT_FAULT",
+    "scenarioId": "SCH-AUTOPILOT_FAULT-013",
+    "scenarioName": "接管请求延迟",
+    "timeMillis": 1740001807000,
+    "location": "深圳·南山区",
+    "summary": "【接管请求延迟】AUTOPILOT_FAULT，HIGH等级；发生于快速路（小雨），涉及前车急刹制动灯亮起",
+    "triggerReasons": [
+      "智驾功能异常退出或控制振荡",
+      "系统日志记录降级原因码",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "AUTONOMOUS",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 91.8,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -1.3
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 82.6,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": -0.4
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 73.4,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": 0.4
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 64.2,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": -1.2
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 55.0,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": 2.3
+      },
+      {
+        "tMs": -950,
+        "speedKph": 45.8,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": 1.7
+      },
+      {
+        "tMs": -770,
+        "speedKph": 16.0,
+        "axMS2": -9.84,
+        "brake": 100,
+        "steerDeg": -1.0
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 29,
+      "systemFactor": 62,
+      "environmentFactor": 9,
+      "conclusion": "责任倾向：智驾系统异常/降级为主，驾驶员接管响应为辅",
+      "reasons": [
+        "【反应时间】938ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】536ms（踏板 20%→80%）— 制动果断",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-540ms",
+        "【制动时 TTC 估算】3.11s — 时距尚可",
+        "【事故前 3s 均速】50.9 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "小雨",
+      "road": "快速路",
+      "obstacle": "前车急刹制动灯亮起",
+      "laneMarking": "模糊"
+    },
+    "decisionTrace": {
+      "sensorInput": "11V5R+前向激光雷达融合（含高精地图车道）",
+      "perception": "车道线置信度波动；目标跟踪 ID 切换导致纵向目标丢失 120ms",
+      "planning": "规划请求最小风险轨迹重算；触发 MRM 前的横向振荡抑制不足",
+      "control": "横向力矩与制动协调延迟；降级提示与制动力建立不同步"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 938,
+      "brakeRiseTimeMs": 536,
+      "aebDelayMs": -540,
+      "ttcAtBrakeSeconds": 3.11,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 6.1,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：AUTOPILOT_FAULT 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-014",
+    "eventType": "DRIVER_SLOW_REACTION",
+    "scenarioId": "SCH-DRIVER_SLOW_REACTION-014",
+    "scenarioName": "前车急刹反应滞后",
+    "timeMillis": 1740001946000,
+    "location": "北京·亦庄",
+    "summary": "【前车急刹反应滞后】DRIVER_SLOW_REACTION，LOW等级；发生于高架匝道（多云），涉及路面抛洒物",
+    "triggerReasons": [
+      "制动反应延迟",
+      "驾驶员注意力分散或跟车过近",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "LOW",
+    "autoDrivingState": "L2_ASSIST",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 71.7,
+        "axMS2": -0.9,
+        "brake": 28,
+        "steerDeg": 0.2
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 62.5,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -3.7
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 53.3,
+        "axMS2": -3.5,
+        "brake": 51,
+        "steerDeg": 4.4
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 44.1,
+        "axMS2": -4.2,
+        "brake": 57,
+        "steerDeg": -4.1
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 58,
+      "systemFactor": 30,
+      "environmentFactor": 12,
+      "conclusion": "责任倾向：驾驶员主要责任（反应不足/跟车过近）",
+      "reasons": [
+        "【反应时间】1050ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】431ms（踏板 20%→80%）— 制动果断",
+        "强制动",
+        "【AEB/系统介入】-553ms",
+        "【制动时 TTC 估算】1.91s — 时距尚可",
+        "【事故前 3s 均速】57.9 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "多云",
+      "road": "高架匝道",
+      "obstacle": "路面抛洒物",
+      "laneMarking": "夜间磨损不清"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "前车距离与相对速度估计；路面抛洒物 风险权重上调",
+      "planning": "规划在高架匝道场景下保持车道并请求减速；目标时距1.33s 振荡",
+      "control": "横纵向解耦控制；制动请求爬升速率受舒适性与 AEB 仲裁影响"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 1050,
+      "brakeRiseTimeMs": 431,
+      "aebDelayMs": -553,
+      "ttcAtBrakeSeconds": 1.91,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 5.0,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：DRIVER_SLOW_REACTION 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-015",
+    "eventType": "DRIVER_SLOW_REACTION",
+    "scenarioId": "SCH-DRIVER_SLOW_REACTION-015",
+    "scenarioName": "夜间眩光下制动偏晚",
+    "timeMillis": 1740002085000,
+    "location": "武汉·东湖高新区",
+    "summary": "【夜间眩光下制动偏晚】DRIVER_SLOW_REACTION，HIGH等级；发生于隧道入口（小雨），涉及行人突然横穿",
+    "triggerReasons": [
+      "制动反应延迟",
+      "驾驶员注意力分散或跟车过近",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "MANUAL",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 71.2,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": 0.9
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 62.0,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": 1.4
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 52.8,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -2.2
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 43.6,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": 1.9
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 34.4,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": 3.5
+      },
+      {
+        "tMs": -950,
+        "speedKph": 25.2,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": 2.2
+      },
+      {
+        "tMs": -770,
+        "speedKph": 8.8,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": -1.2
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 68,
+      "systemFactor": 22,
+      "environmentFactor": 10,
+      "conclusion": "责任倾向：驾驶员主要责任（反应不足/跟车过近）",
+      "reasons": [
+        "【反应时间】1456ms — 过长（>1200ms），显著增加碰撞风险",
+        "【制动上升时间】596ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-785ms",
+        "【制动时 TTC 估算】2.12s — 时距尚可",
+        "【事故前 3s 均速】33.0 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "小雨",
+      "road": "隧道入口",
+      "obstacle": "行人突然横穿",
+      "laneMarking": "夜间磨损不清"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "前车距离与相对速度估计；行人突然横穿 风险权重上调",
+      "planning": "规划在隧道入口场景下保持车道并请求减速；目标时距1.35s 振荡",
+      "control": "横纵向解耦控制；制动请求爬升速率受舒适性与 AEB 仲裁影响"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 1456,
+      "brakeRiseTimeMs": 596,
+      "aebDelayMs": -785,
+      "ttcAtBrakeSeconds": 2.12,
+      "brakeEffective": false,
+      "maxSteerLast2sDeg": 8.0,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：DRIVER_SLOW_REACTION 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-016",
+    "eventType": "DRIVER_SLOW_REACTION",
+    "scenarioId": "SCH-DRIVER_SLOW_REACTION-016",
+    "scenarioName": "分心使用手机",
+    "timeMillis": 1740002224000,
+    "location": "苏州·工业园区",
+    "summary": "【分心使用手机】DRIVER_SLOW_REACTION，LOW等级；发生于收费站广场（多云），涉及慢车占道",
+    "triggerReasons": [
+      "制动反应延迟",
+      "驾驶员注意力分散或跟车过近",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "LOW",
+    "autoDrivingState": "MANUAL",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 62.8,
+        "axMS2": -0.9,
+        "brake": 28,
+        "steerDeg": -0.5
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 53.6,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": 4.0
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 44.4,
+        "axMS2": -3.5,
+        "brake": 51,
+        "steerDeg": 2.2
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 35.2,
+        "axMS2": -4.2,
+        "brake": 57,
+        "steerDeg": 2.6
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 68,
+      "systemFactor": 22,
+      "environmentFactor": 10,
+      "conclusion": "责任倾向：驾驶员主要责任（反应不足/跟车过近）",
+      "reasons": [
+        "【反应时间】1309ms — 过长（>1200ms），显著增加碰撞风险",
+        "【制动上升时间】318ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+        "强制动",
+        "【AEB/系统介入】-432ms",
+        "【制动时 TTC 估算】2.65s — 时距尚可",
+        "【事故前 3s 均速】49.0 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "多云",
+      "road": "收费站广场",
+      "obstacle": "慢车占道",
+      "laneMarking": "施工临时标线"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "前车距离与相对速度估计；慢车占道 风险权重上调",
+      "planning": "规划在收费站广场场景下保持车道并请求减速；目标时距1.26s 振荡",
+      "control": "横纵向解耦控制；制动请求爬升速率受舒适性与 AEB 仲裁影响"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 1309,
+      "brakeRiseTimeMs": 318,
+      "aebDelayMs": -432,
+      "ttcAtBrakeSeconds": 2.65,
+      "brakeEffective": false,
+      "maxSteerLast2sDeg": 5.2,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：DRIVER_SLOW_REACTION 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-017",
+    "eventType": "DRIVER_SLOW_REACTION",
+    "scenarioId": "SCH-DRIVER_SLOW_REACTION-017",
+    "scenarioName": "跟车距离过近",
+    "timeMillis": 1740002363000,
+    "location": "杭州·滨江区",
+    "summary": "【跟车距离过近】DRIVER_SLOW_REACTION，MEDIUM等级；发生于收费站广场（雾），涉及前方车辆减速未打灯",
+    "triggerReasons": [
+      "制动反应延迟",
+      "驾驶员注意力分散或跟车过近",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "MEDIUM",
+    "autoDrivingState": "MANUAL",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 73.5,
+        "axMS2": -1.2,
+        "brake": 30,
+        "steerDeg": 4.3
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 64.3,
+        "axMS2": -2.4,
+        "brake": 41,
+        "steerDeg": 1.8
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 55.1,
+        "axMS2": -4.1,
+        "brake": 56,
+        "steerDeg": 4.2
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 45.9,
+        "axMS2": -6.3,
+        "brake": 76,
+        "steerDeg": -0.4
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 36.7,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": 3.3
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 58,
+      "systemFactor": 30,
+      "environmentFactor": 12,
+      "conclusion": "责任倾向：驾驶员主要责任（反应不足/跟车过近）",
+      "reasons": [
+        "【反应时间】814ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】547ms（踏板 20%→80%）— 制动果断",
+        "强制动",
+        "【AEB/系统介入】-761ms",
+        "【制动时 TTC 估算】3.08s — 时距尚可",
+        "【事故前 3s 均速】55.1 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "雾",
+      "road": "收费站广场",
+      "obstacle": "前方车辆减速未打灯",
+      "laneMarking": "雨天反光"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "前车距离与相对速度估计；前方车辆减速未打灯 风险权重上调",
+      "planning": "规划在收费站广场场景下保持车道并请求减速；目标时距1.24s 振荡",
+      "control": "横纵向解耦控制；制动请求爬升速率受舒适性与 AEB 仲裁影响"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 814,
+      "brakeRiseTimeMs": 547,
+      "aebDelayMs": -761,
+      "ttcAtBrakeSeconds": 3.08,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 5.3,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：DRIVER_SLOW_REACTION 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-018",
+    "eventType": "DRIVER_SLOW_REACTION",
+    "scenarioId": "SCH-DRIVER_SLOW_REACTION-018",
+    "scenarioName": "雨雾视距不足仍高速接近",
+    "timeMillis": 1740002502000,
+    "location": "南京·雨花台区",
+    "summary": "【雨雾视距不足仍高速接近】DRIVER_SLOW_REACTION，MEDIUM等级；发生于施工借道段（雾），涉及施工锥桶偏移",
+    "triggerReasons": [
+      "制动反应延迟",
+      "驾驶员注意力分散或跟车过近",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "MEDIUM",
+    "autoDrivingState": "L2_ASSIST",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 52.8,
+        "axMS2": -1.2,
+        "brake": 30,
+        "steerDeg": 3.9
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 43.6,
+        "axMS2": -2.4,
+        "brake": 41,
+        "steerDeg": 2.6
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 34.4,
+        "axMS2": -4.1,
+        "brake": 56,
+        "steerDeg": -2.5
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 25.2,
+        "axMS2": -6.3,
+        "brake": 76,
+        "steerDeg": 4.3
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 16.0,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": 1.4
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 77,
+      "systemFactor": 12,
+      "environmentFactor": 11,
+      "conclusion": "责任倾向：驾驶员主要责任（反应不足/跟车过近）",
+      "reasons": [
+        "【反应时间】1317ms — 过长（>1200ms），显著增加碰撞风险",
+        "【制动上升时间】297ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+        "强制动",
+        "【AEB/系统介入】-176ms",
+        "【制动时 TTC 估算】2.81s — 时距尚可",
+        "【事故前 3s 均速】34.4 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "雾",
+      "road": "施工借道段",
+      "obstacle": "施工锥桶偏移",
+      "laneMarking": "施工临时标线"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "前车距离与相对速度估计；施工锥桶偏移 风险权重上调",
+      "planning": "规划在施工借道段场景下保持车道并请求减速；目标时距1.13s 振荡",
+      "control": "横纵向解耦控制；制动请求爬升速率受舒适性与 AEB 仲裁影响"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 1317,
+      "brakeRiseTimeMs": 297,
+      "aebDelayMs": -176,
+      "ttcAtBrakeSeconds": 2.81,
+      "brakeEffective": false,
+      "maxSteerLast2sDeg": 2.6,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：DRIVER_SLOW_REACTION 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-019",
+    "eventType": "DRIVER_SLOW_REACTION",
+    "scenarioId": "SCH-DRIVER_SLOW_REACTION-019",
+    "scenarioName": "匝道汇流未预留时距",
+    "timeMillis": 1740002641000,
+    "location": "西安·高新区",
+    "summary": "【匝道汇流未预留时距】DRIVER_SLOW_REACTION，HIGH等级；发生于城市主干道（晴），涉及静止排队车龙末端",
+    "triggerReasons": [
+      "制动反应延迟",
+      "驾驶员注意力分散或跟车过近",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "L2_ASSIST",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 81.3,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -3.1
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 72.1,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": -3.1
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 62.9,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": 0.3
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 53.7,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": -4.2
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 44.5,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": -3.6
+      },
+      {
+        "tMs": -950,
+        "speedKph": 35.3,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": -0.5
+      },
+      {
+        "tMs": -770,
+        "speedKph": 12.4,
+        "axMS2": -9.97,
+        "brake": 100,
+        "steerDeg": 0.8
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 64,
+      "systemFactor": 26,
+      "environmentFactor": 10,
+      "conclusion": "责任倾向：驾驶员主要责任（反应不足/跟车过近）",
+      "reasons": [
+        "【反应时间】894ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】628ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-493ms",
+        "【制动时 TTC 估算】1.92s — 时距尚可",
+        "【事故前 3s 均速】41.8 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "晴",
+      "road": "城市主干道",
+      "obstacle": "静止排队车龙末端",
+      "laneMarking": "反光"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "前车距离与相对速度估计；静止排队车龙末端 风险权重上调",
+      "planning": "规划在城市主干道场景下保持车道并请求减速；目标时距1.53s 振荡",
+      "control": "横纵向解耦控制；制动请求爬升速率受舒适性与 AEB 仲裁影响"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 894,
+      "brakeRiseTimeMs": 628,
+      "aebDelayMs": -493,
+      "ttcAtBrakeSeconds": 1.92,
+      "brakeEffective": false,
+      "maxSteerLast2sDeg": 8.3,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：DRIVER_SLOW_REACTION 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-020",
+    "eventType": "AEB_DELAY_OR_MISS",
+    "scenarioId": "SCH-AEB_DELAY_OR_MISS-020",
+    "scenarioName": "AEB 触发过晚",
+    "timeMillis": 1740002780000,
+    "location": "上海·浦东新区",
+    "summary": "【AEB 触发过晚】AEB_DELAY_OR_MISS，HIGH等级；发生于长下坡接弯（多云），涉及前车急刹制动灯亮起",
+    "triggerReasons": [
+      "AEB 触发偏晚或未触发",
+      "FCW 与 AEB 仲裁链可追溯",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "MANUAL",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 71.8,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": 0.3
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 62.6,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": 1.0
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 53.4,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -0.4
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 44.2,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": -1.6
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 35.0,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": -1.5
+      },
+      {
+        "tMs": -950,
+        "speedKph": 25.8,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": -0.8
+      },
+      {
+        "tMs": -770,
+        "speedKph": 9.0,
+        "axMS2": -9.84,
+        "brake": 100,
+        "steerDeg": 2.5
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 41,
+      "systemFactor": 47,
+      "environmentFactor": 12,
+      "conclusion": "责任倾向：系统与驾驶员共同责任",
+      "reasons": [
+        "【反应时间】636ms — 处于可接受区间，仍建议复盘人因",
+        "【制动上升时间】535ms（踏板 20%→80%）— 制动果断",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-320ms",
+        "【制动时 TTC 估算】2.43s — 时距尚可",
+        "【事故前 3s 均速】33.5 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "多云",
+      "road": "长下坡接弯",
+      "obstacle": "前车急刹制动灯亮起",
+      "laneMarking": "模糊"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "前车距离与相对速度估计；前车急刹制动灯亮起 风险权重上调",
+      "planning": "规划在长下坡接弯场景下保持车道并请求减速；目标时距1.36s 振荡",
+      "control": "横纵向解耦控制；制动请求爬升速率受舒适性与 AEB 仲裁影响"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 636,
+      "brakeRiseTimeMs": 535,
+      "aebDelayMs": -320,
+      "ttcAtBrakeSeconds": 2.43,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 6.2,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：AEB_DELAY_OR_MISS 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-021",
+    "eventType": "AEB_DELAY_OR_MISS",
+    "scenarioId": "SCH-AEB_DELAY_OR_MISS-021",
+    "scenarioName": "静态目标未识别",
+    "timeMillis": 1740002919000,
+    "location": "北京·亦庄",
+    "summary": "【静态目标未识别】AEB_DELAY_OR_MISS，HIGH等级；发生于城市主干道（冰雪），涉及施工区域未封闭完全",
+    "triggerReasons": [
+      "AEB 触发偏晚或未触发",
+      "FCW 与 AEB 仲裁链可追溯",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "MANUAL",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 75.0,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -0.6
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 65.8,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": 0.5
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 56.6,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": 2.1
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 47.4,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": -1.8
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 38.2,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": -1.3
+      },
+      {
+        "tMs": -950,
+        "speedKph": 29.0,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": 0.7
+      },
+      {
+        "tMs": -770,
+        "speedKph": 10.1,
+        "axMS2": -9.22,
+        "brake": 100,
+        "steerDeg": -0.6
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 43,
+      "systemFactor": 48,
+      "environmentFactor": 9,
+      "conclusion": "责任倾向：系统与驾驶员共同责任",
+      "reasons": [
+        "【反应时间】956ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】358ms（踏板 20%→80%）— 制动果断",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-1450ms",
+        "【制动时 TTC 估算】2.25s — 时距尚可",
+        "【事故前 3s 均速】36.3 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "冰雪",
+      "road": "城市主干道",
+      "obstacle": "施工区域未封闭完全",
+      "laneMarking": "雨天反光"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "前车距离与相对速度估计；施工区域未封闭完全 风险权重上调",
+      "planning": "规划在城市主干道场景下保持车道并请求减速；目标时距1.74s 振荡",
+      "control": "横纵向解耦控制；制动请求爬升速率受舒适性与 AEB 仲裁影响"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 956,
+      "brakeRiseTimeMs": 358,
+      "aebDelayMs": -1450,
+      "ttcAtBrakeSeconds": 2.25,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 8.6,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：AEB_DELAY_OR_MISS 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-022",
+    "eventType": "AEB_DELAY_OR_MISS",
+    "scenarioId": "SCH-AEB_DELAY_OR_MISS-022",
+    "scenarioName": "FCW 报警后 AEB 未跟进",
+    "timeMillis": 1740003058000,
+    "location": "武汉·东湖高新区",
+    "summary": "【FCW 报警后 AEB 未跟进】AEB_DELAY_OR_MISS，MEDIUM等级；发生于长下坡接弯（冰雪），涉及施工锥桶偏移",
+    "triggerReasons": [
+      "AEB 触发偏晚或未触发",
+      "FCW 与 AEB 仲裁链可追溯",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "MEDIUM",
+    "autoDrivingState": "AUTONOMOUS",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 50.5,
+        "axMS2": -1.2,
+        "brake": 30,
+        "steerDeg": 0.8
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 41.3,
+        "axMS2": -2.4,
+        "brake": 41,
+        "steerDeg": -0.2
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 32.1,
+        "axMS2": -4.1,
+        "brake": 56,
+        "steerDeg": 1.3
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 22.9,
+        "axMS2": -6.3,
+        "brake": 76,
+        "steerDeg": -0.2
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 15.0,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -0.4
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 36,
+      "systemFactor": 54,
+      "environmentFactor": 10,
+      "conclusion": "责任倾向：系统与驾驶员共同责任",
+      "reasons": [
+        "【反应时间】626ms — 处于可接受区间，仍建议复盘人因",
+        "【制动上升时间】429ms（踏板 20%→80%）— 制动果断",
+        "强制动",
+        "【AEB/系统介入】-950ms",
+        "【制动时 TTC 估算】1.97s — 时距尚可",
+        "【事故前 3s 均速】32.4 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "冰雪",
+      "road": "长下坡接弯",
+      "obstacle": "施工锥桶偏移",
+      "laneMarking": "雨天反光"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "前车距离与相对速度估计；施工锥桶偏移 风险权重上调",
+      "planning": "规划在长下坡接弯场景下保持车道并请求减速；目标时距1.20s 振荡",
+      "control": "横纵向解耦控制；制动请求爬升速率受舒适性与 AEB 仲裁影响"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 626,
+      "brakeRiseTimeMs": 429,
+      "aebDelayMs": -950,
+      "ttcAtBrakeSeconds": 1.97,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 3.2,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：AEB_DELAY_OR_MISS 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-023",
+    "eventType": "AEB_DELAY_OR_MISS",
+    "scenarioId": "SCH-AEB_DELAY_OR_MISS-023",
+    "scenarioName": "低速行人场景漏检",
+    "timeMillis": 1740003197000,
+    "location": "西安·高新区",
+    "summary": "【低速行人场景漏检】AEB_DELAY_OR_MISS，HIGH等级；发生于城市主干道（多云），涉及外卖非机动车占道",
+    "triggerReasons": [
+      "AEB 触发偏晚或未触发",
+      "FCW 与 AEB 仲裁链可追溯",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "MANUAL",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 87.1,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -0.1
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 77.9,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": 1.6
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 68.7,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": 0.7
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 59.5,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": 2.3
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 50.3,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": 1.1
+      },
+      {
+        "tMs": -950,
+        "speedKph": 41.1,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": 0.8
+      },
+      {
+        "tMs": -770,
+        "speedKph": 14.4,
+        "axMS2": -10.84,
+        "brake": 100,
+        "steerDeg": -0.2
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 36,
+      "systemFactor": 54,
+      "environmentFactor": 10,
+      "conclusion": "责任倾向：系统与驾驶员共同责任",
+      "reasons": [
+        "【反应时间】786ms — 处于可接受区间，仍建议复盘人因",
+        "【制动上升时间】513ms（踏板 20%→80%）— 制动果断",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-680ms",
+        "【制动时 TTC 估算】2.98s — 时距尚可",
+        "【事故前 3s 均速】46.8 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "多云",
+      "road": "城市主干道",
+      "obstacle": "外卖非机动车占道",
+      "laneMarking": "夜间磨损不清"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "前车距离与相对速度估计；外卖非机动车占道 风险权重上调",
+      "planning": "规划在城市主干道场景下保持车道并请求减速；目标时距1.67s 振荡",
+      "control": "横纵向解耦控制；制动请求爬升速率受舒适性与 AEB 仲裁影响"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 786,
+      "brakeRiseTimeMs": 513,
+      "aebDelayMs": -680,
+      "ttcAtBrakeSeconds": 2.98,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 3.6,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：AEB_DELAY_OR_MISS 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-024",
+    "eventType": "AEB_DELAY_OR_MISS",
+    "scenarioId": "SCH-AEB_DELAY_OR_MISS-024",
+    "scenarioName": "施工区域未减速",
+    "timeMillis": 1740003336000,
+    "location": "成都·高新区",
+    "summary": "【施工区域未减速】AEB_DELAY_OR_MISS，HIGH等级；发生于园区内部路（多云），涉及行人突然横穿",
+    "triggerReasons": [
+      "AEB 触发偏晚或未触发",
+      "FCW 与 AEB 仲裁链可追溯",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "AUTONOMOUS",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 67.5,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": 1.3
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 58.3,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": -1.8
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 49.1,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -1.7
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 39.9,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": -0.3
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 30.7,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": 1.0
+      },
+      {
+        "tMs": -950,
+        "speedKph": 21.5,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": 1.1
+      },
+      {
+        "tMs": -770,
+        "speedKph": 7.5,
+        "axMS2": -10.9,
+        "brake": 100,
+        "steerDeg": -0.4
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 43,
+      "systemFactor": 48,
+      "environmentFactor": 9,
+      "conclusion": "责任倾向：系统与驾驶员共同责任",
+      "reasons": [
+        "【反应时间】879ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】456ms（踏板 20%→80%）— 制动果断",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-950ms",
+        "【制动时 TTC 估算】2.16s — 时距尚可",
+        "【事故前 3s 均速】29.7 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "多云",
+      "road": "园区内部路",
+      "obstacle": "行人突然横穿",
+      "laneMarking": "施工临时标线"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "前车距离与相对速度估计；行人突然横穿 风险权重上调",
+      "planning": "规划在园区内部路场景下保持车道并请求减速；目标时距1.55s 振荡",
+      "control": "横纵向解耦控制；制动请求爬升速率受舒适性与 AEB 仲裁影响"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 879,
+      "brakeRiseTimeMs": 456,
+      "aebDelayMs": -950,
+      "ttcAtBrakeSeconds": 2.16,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 8.4,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：AEB_DELAY_OR_MISS 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-025",
+    "eventType": "AEB_DELAY_OR_MISS",
+    "scenarioId": "SCH-AEB_DELAY_OR_MISS-025",
+    "scenarioName": "相邻车道侵入未抑制",
+    "timeMillis": 1740003475000,
+    "location": "武汉·东湖高新区",
+    "summary": "【相邻车道侵入未抑制】AEB_DELAY_OR_MISS，HIGH等级；发生于收费站广场（多云），涉及前车急刹制动灯亮起",
+    "triggerReasons": [
+      "AEB 触发偏晚或未触发",
+      "FCW 与 AEB 仲裁链可追溯",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "AUTONOMOUS",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 55.3,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": 1.1
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 46.1,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": -1.5
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 36.9,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": 2.2
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 27.7,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": -0.9
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 18.5,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": -0.5
+      },
+      {
+        "tMs": -950,
+        "speedKph": 15.0,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": 1.1
+      },
+      {
+        "tMs": -770,
+        "speedKph": 5.2,
+        "axMS2": -9.88,
+        "brake": 100,
+        "steerDeg": 1.3
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 54,
+      "systemFactor": 37,
+      "environmentFactor": 9,
+      "conclusion": "责任倾向：系统与驾驶员共同责任",
+      "reasons": [
+        "【反应时间】897ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】619ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-320ms",
+        "【制动时 TTC 估算】3.15s — 时距尚可",
+        "【事故前 3s 均速】20.7 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "多云",
+      "road": "收费站广场",
+      "obstacle": "前车急刹制动灯亮起",
+      "laneMarking": "模糊"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "前车距离与相对速度估计；前车急刹制动灯亮起 风险权重上调",
+      "planning": "规划在收费站广场场景下保持车道并请求减速；目标时距1.54s 振荡",
+      "control": "横纵向解耦控制；制动请求爬升速率受舒适性与 AEB 仲裁影响"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 897,
+      "brakeRiseTimeMs": 619,
+      "aebDelayMs": -320,
+      "ttcAtBrakeSeconds": 3.15,
+      "brakeEffective": false,
+      "maxSteerLast2sDeg": 5.7,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：AEB_DELAY_OR_MISS 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-026",
+    "eventType": "TTC_LOW_RISK",
+    "scenarioId": "SCH-TTC_LOW_RISK-026",
+    "scenarioName": "拥堵跟车时距 <1.2s",
+    "timeMillis": 1740003614000,
+    "location": "杭州·滨江区",
+    "summary": "【拥堵跟车时距 <1.2s】TTC_LOW_RISK，HIGH等级；发生于城市主干道（多云），涉及前车急刹制动灯亮起",
+    "triggerReasons": [
+      "跟车时距持续低于安全阈值",
+      "相对速度未充分消化",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "MANUAL",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 88.2,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -3.0
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 79.0,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": 3.3
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 69.8,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -2.5
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 60.6,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": -0.9
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 51.4,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": -2.4
+      },
+      {
+        "tMs": -950,
+        "speedKph": 42.2,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": -2.5
+      },
+      {
+        "tMs": -770,
+        "speedKph": 14.8,
+        "axMS2": -10.66,
+        "brake": 100,
+        "steerDeg": 2.0
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 73,
+      "systemFactor": 15,
+      "environmentFactor": 12,
+      "conclusion": "责任倾向：驾驶员与系统共同责任",
+      "reasons": [
+        "【反应时间】778ms — 处于可接受区间，仍建议复盘人因",
+        "【制动上升时间】343ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-152ms",
+        "【制动时 TTC 估算】1.27s — 跟车时距不足，风险极高",
+        "【事故前 3s 均速】47.8 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "多云",
+      "road": "城市主干道",
+      "obstacle": "前车急刹制动灯亮起",
+      "laneMarking": "施工临时标线"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "前车距离与相对速度估计；前车急刹制动灯亮起 风险权重上调",
+      "planning": "规划在城市主干道场景下保持车道并请求减速；目标时距1.23s 振荡",
+      "control": "横纵向解耦控制；制动请求爬升速率受舒适性与 AEB 仲裁影响"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 778,
+      "brakeRiseTimeMs": 343,
+      "aebDelayMs": -152,
+      "ttcAtBrakeSeconds": 1.27,
+      "brakeEffective": false,
+      "maxSteerLast2sDeg": 4.4,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：TTC_LOW_RISK 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-027",
+    "eventType": "TTC_LOW_RISK",
+    "scenarioId": "SCH-TTC_LOW_RISK-027",
+    "scenarioName": "cut-in 后 TTC 骤降",
+    "timeMillis": 1740003753000,
+    "location": "北京·亦庄",
+    "summary": "【cut-in 后 TTC 骤降】TTC_LOW_RISK，LOW等级；发生于快速路（雾），涉及施工锥桶偏移",
+    "triggerReasons": [
+      "跟车时距持续低于安全阈值",
+      "相对速度未充分消化",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "LOW",
+    "autoDrivingState": "AUTONOMOUS",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 48.3,
+        "axMS2": -0.9,
+        "brake": 28,
+        "steerDeg": 3.2
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 39.1,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -0.8
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 29.9,
+        "axMS2": -3.5,
+        "brake": 51,
+        "steerDeg": -0.2
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 20.7,
+        "axMS2": -4.2,
+        "brake": 57,
+        "steerDeg": -0.8
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 63,
+      "systemFactor": 26,
+      "environmentFactor": 11,
+      "conclusion": "责任倾向：驾驶员与系统共同责任",
+      "reasons": [
+        "【反应时间】931ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】598ms（踏板 20%→80%）— 制动果断",
+        "强制动",
+        "【AEB/系统介入】-538ms",
+        "【制动时 TTC 估算】1.21s — 跟车时距不足，风险极高",
+        "【事故前 3s 均速】34.5 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "雾",
+      "road": "快速路",
+      "obstacle": "施工锥桶偏移",
+      "laneMarking": "反光"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "前车距离与相对速度估计；施工锥桶偏移 风险权重上调",
+      "planning": "规划在快速路场景下保持车道并请求减速；目标时距1.73s 振荡",
+      "control": "横纵向解耦控制；制动请求爬升速率受舒适性与 AEB 仲裁影响"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 931,
+      "brakeRiseTimeMs": 598,
+      "aebDelayMs": -538,
+      "ttcAtBrakeSeconds": 1.21,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 8.8,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：TTC_LOW_RISK 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-028",
+    "eventType": "TTC_LOW_RISK",
+    "scenarioId": "SCH-TTC_LOW_RISK-028",
+    "scenarioName": "下坡车速过快导致 TTC 不足",
+    "timeMillis": 1740003892000,
+    "location": "苏州·工业园区",
+    "summary": "【下坡车速过快导致 TTC 不足】TTC_LOW_RISK，HIGH等级；发生于快速路（晴），涉及施工区域未封闭完全",
+    "triggerReasons": [
+      "跟车时距持续低于安全阈值",
+      "相对速度未充分消化",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "MANUAL",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 86.7,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": 3.0
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 77.5,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": 3.3
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 68.3,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": 0.9
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 59.1,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": -2.4
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 49.9,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": 2.0
+      },
+      {
+        "tMs": -950,
+        "speedKph": 40.7,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": 3.8
+      },
+      {
+        "tMs": -770,
+        "speedKph": 14.2,
+        "axMS2": -11.34,
+        "brake": 100,
+        "steerDeg": 0.7
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 63,
+      "systemFactor": 26,
+      "environmentFactor": 11,
+      "conclusion": "责任倾向：驾驶员与系统共同责任",
+      "reasons": [
+        "【反应时间】833ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】523ms（踏板 20%→80%）— 制动果断",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-548ms",
+        "【制动时 TTC 估算】1.43s — 跟车时距不足，风险极高",
+        "【事故前 3s 均速】46.4 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "晴",
+      "road": "快速路",
+      "obstacle": "施工区域未封闭完全",
+      "laneMarking": "反光"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "前车距离与相对速度估计；施工区域未封闭完全 风险权重上调",
+      "planning": "规划在快速路场景下保持车道并请求减速；目标时距1.18s 振荡",
+      "control": "横纵向解耦控制；制动请求爬升速率受舒适性与 AEB 仲裁影响"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 833,
+      "brakeRiseTimeMs": 523,
+      "aebDelayMs": -548,
+      "ttcAtBrakeSeconds": 1.43,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 3.7,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：TTC_LOW_RISK 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-029",
+    "eventType": "TTC_LOW_RISK",
+    "scenarioId": "SCH-TTC_LOW_RISK-029",
+    "scenarioName": "弯道出口前车减速",
+    "timeMillis": 1740004031000,
+    "location": "广州·黄埔区",
+    "summary": "【弯道出口前车减速】TTC_LOW_RISK，MEDIUM等级；发生于高架匝道（小雨），涉及前方车辆减速未打灯",
+    "triggerReasons": [
+      "跟车时距持续低于安全阈值",
+      "相对速度未充分消化",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "MEDIUM",
+    "autoDrivingState": "MANUAL",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 56.3,
+        "axMS2": -1.2,
+        "brake": 30,
+        "steerDeg": -2.5
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 47.1,
+        "axMS2": -2.4,
+        "brake": 41,
+        "steerDeg": -2.8
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 37.9,
+        "axMS2": -4.1,
+        "brake": 56,
+        "steerDeg": -2.5
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 28.7,
+        "axMS2": -6.3,
+        "brake": 76,
+        "steerDeg": 2.0
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 19.5,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -3.5
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 73,
+      "systemFactor": 15,
+      "environmentFactor": 12,
+      "conclusion": "责任倾向：驾驶员与系统共同责任",
+      "reasons": [
+        "【反应时间】877ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】474ms（踏板 20%→80%）— 制动果断",
+        "强制动",
+        "【AEB/系统介入】-364ms",
+        "【制动时 TTC 估算】1.08s — 跟车时距不足，风险极高",
+        "【事故前 3s 均速】37.9 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "小雨",
+      "road": "高架匝道",
+      "obstacle": "前方车辆减速未打灯",
+      "laneMarking": "清晰"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "前车距离与相对速度估计；前方车辆减速未打灯 风险权重上调",
+      "planning": "规划在高架匝道场景下保持车道并请求减速；目标时距1.36s 振荡",
+      "control": "横纵向解耦控制；制动请求爬升速率受舒适性与 AEB 仲裁影响"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 877,
+      "brakeRiseTimeMs": 474,
+      "aebDelayMs": -364,
+      "ttcAtBrakeSeconds": 1.08,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 5.1,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：TTC_LOW_RISK 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-030",
+    "eventType": "TTC_LOW_RISK",
+    "scenarioId": "SCH-TTC_LOW_RISK-030",
+    "scenarioName": "绿灯起步抢行导致 TTC 不足",
+    "timeMillis": 1740004170000,
+    "location": "成都·高新区",
+    "summary": "【绿灯起步抢行导致 TTC 不足】TTC_LOW_RISK，MEDIUM等级；发生于收费站广场（小雨），涉及行人靠近路缘",
+    "triggerReasons": [
+      "跟车时距持续低于安全阈值",
+      "相对速度未充分消化",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "MEDIUM",
+    "autoDrivingState": "AUTONOMOUS",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 90.0,
+        "axMS2": -1.2,
+        "brake": 30,
+        "steerDeg": -1.6
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 80.8,
+        "axMS2": -2.4,
+        "brake": 41,
+        "steerDeg": 4.3
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 71.6,
+        "axMS2": -4.1,
+        "brake": 56,
+        "steerDeg": 1.0
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 62.4,
+        "axMS2": -6.3,
+        "brake": 76,
+        "steerDeg": -1.0
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 53.2,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -3.3
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 68,
+      "systemFactor": 18,
+      "environmentFactor": 14,
+      "conclusion": "责任倾向：驾驶员与系统共同责任",
+      "reasons": [
+        "【反应时间】736ms — 处于可接受区间，仍建议复盘人因",
+        "【制动上升时间】388ms（踏板 20%→80%）— 制动果断",
+        "强制动",
+        "【AEB/系统介入】-247ms",
+        "【制动时 TTC 估算】1.08s — 跟车时距不足，风险极高",
+        "【事故前 3s 均速】71.6 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "小雨",
+      "road": "收费站广场",
+      "obstacle": "行人靠近路缘",
+      "laneMarking": "夜间磨损不清"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "前车距离与相对速度估计；行人靠近路缘 风险权重上调",
+      "planning": "规划在收费站广场场景下保持车道并请求减速；目标时距1.52s 振荡",
+      "control": "横纵向解耦控制；制动请求爬升速率受舒适性与 AEB 仲裁影响"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 736,
+      "brakeRiseTimeMs": 388,
+      "aebDelayMs": -247,
+      "ttcAtBrakeSeconds": 1.08,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 4.8,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：TTC_LOW_RISK 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-031",
+    "eventType": "TTC_LOW_RISK",
+    "scenarioId": "SCH-TTC_LOW_RISK-031",
+    "scenarioName": "大车遮挡后突然出现的慢车",
+    "timeMillis": 1740004309000,
+    "location": "广州·黄埔区",
+    "summary": "【大车遮挡后突然出现的慢车】TTC_LOW_RISK，HIGH等级；发生于高架匝道（小雨），涉及前车急刹制动灯亮起",
+    "triggerReasons": [
+      "跟车时距持续低于安全阈值",
+      "相对速度未充分消化",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "MANUAL",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 67.7,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -0.9
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 58.5,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": -0.3
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 49.3,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": 0.2
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 40.1,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": -1.3
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 30.9,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": -0.7
+      },
+      {
+        "tMs": -950,
+        "speedKph": 21.7,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": -2.0
+      },
+      {
+        "tMs": -770,
+        "speedKph": 7.6,
+        "axMS2": -11.39,
+        "brake": 100,
+        "steerDeg": -0.0
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 63,
+      "systemFactor": 26,
+      "environmentFactor": 11,
+      "conclusion": "责任倾向：驾驶员与系统共同责任",
+      "reasons": [
+        "【反应时间】688ms — 处于可接受区间，仍建议复盘人因",
+        "【制动上升时间】471ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-469ms",
+        "【制动时 TTC 估算】0.75s — 跟车时距不足，风险极高",
+        "【事故前 3s 均速】29.9 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "小雨",
+      "road": "高架匝道",
+      "obstacle": "前车急刹制动灯亮起",
+      "laneMarking": "模糊"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "前车距离与相对速度估计；前车急刹制动灯亮起 风险权重上调",
+      "planning": "规划在高架匝道场景下保持车道并请求减速；目标时距1.32s 振荡",
+      "control": "横纵向解耦控制；制动请求爬升速率受舒适性与 AEB 仲裁影响"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 688,
+      "brakeRiseTimeMs": 471,
+      "aebDelayMs": -469,
+      "ttcAtBrakeSeconds": 0.75,
+      "brakeEffective": false,
+      "maxSteerLast2sDeg": 5.5,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：TTC_LOW_RISK 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-032",
+    "eventType": "DRIVER_TAKEOVER_FAIL",
+    "scenarioId": "SCH-DRIVER_TAKEOVER_FAIL-032",
+    "scenarioName": "系统请求接管后 5s 内未接管",
+    "timeMillis": 1740004448000,
+    "location": "南京·雨花台区",
+    "summary": "【系统请求接管后 5s 内未接管】DRIVER_TAKEOVER_FAIL，HIGH等级；发生于城市主干道（晴），涉及前车急刹制动灯亮起",
+    "triggerReasons": [
+      "系统请求接管后响应不足",
+      "方向盘脱手或接管动作不当",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "AUTONOMOUS",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 56.1,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -1.9
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 46.9,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": 0.0
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 37.7,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": 0.9
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 28.5,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": -1.5
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 19.3,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": -1.7
+      },
+      {
+        "tMs": -950,
+        "speedKph": 15.0,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": -0.6
+      },
+      {
+        "tMs": -770,
+        "speedKph": 5.2,
+        "axMS2": -11.5,
+        "brake": 100,
+        "steerDeg": -1.7
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 39,
+      "systemFactor": 50,
+      "environmentFactor": 11,
+      "conclusion": "责任倾向：驾驶员接管不足为主",
+      "reasons": [
+        "【反应时间】1173ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】309ms（踏板 20%→80%）— 制动果断",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-207ms",
+        "【制动时 TTC 估算】3.08s — 时距尚可",
+        "【事故前 3s 均速】21.1 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "晴",
+      "road": "城市主干道",
+      "obstacle": "前车急刹制动灯亮起",
+      "laneMarking": "模糊"
+    },
+    "decisionTrace": {
+      "sensorInput": "多传感器融合（含侧向雷达/视觉）",
+      "perception": "复杂交互场景下多目标关联；短时遮挡恢复",
+      "planning": "规划请求人工接管并执行风险最小化减速",
+      "control": "制动与转向执行机构响应；接管后控制权重切换"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 1173,
+      "brakeRiseTimeMs": 309,
+      "aebDelayMs": -207,
+      "ttcAtBrakeSeconds": 3.08,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 8.7,
+      "driverTakeoverSummary": "系统发出接管请求后驾驶员未及时握盘",
+      "riskPredictionSummary": "端侧风险模型：DRIVER_TAKEOVER_FAIL 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-033",
+    "eventType": "DRIVER_TAKEOVER_FAIL",
+    "scenarioId": "SCH-DRIVER_TAKEOVER_FAIL-033",
+    "scenarioName": "双手脱离方向盘",
+    "timeMillis": 1740004587000,
+    "location": "南京·雨花台区",
+    "summary": "【双手脱离方向盘】DRIVER_TAKEOVER_FAIL，MEDIUM等级；发生于城市主干道（侧风偏大），涉及相邻车道变道挤压",
+    "triggerReasons": [
+      "系统请求接管后响应不足",
+      "方向盘脱手或接管动作不当",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "MEDIUM",
+    "autoDrivingState": "L2_ASSIST",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 58.2,
+        "axMS2": -1.2,
+        "brake": 30,
+        "steerDeg": 1.0
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 49.0,
+        "axMS2": -2.4,
+        "brake": 41,
+        "steerDeg": 2.3
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 39.8,
+        "axMS2": -4.1,
+        "brake": 56,
+        "steerDeg": 1.5
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 30.6,
+        "axMS2": -6.3,
+        "brake": 76,
+        "steerDeg": -1.8
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 21.4,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -0.6
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 42,
+      "systemFactor": 49,
+      "environmentFactor": 9,
+      "conclusion": "责任倾向：驾驶员接管不足为主",
+      "reasons": [
+        "【反应时间】1454ms — 过长（>1200ms），显著增加碰撞风险",
+        "【制动上升时间】399ms（踏板 20%→80%）— 制动果断",
+        "强制动",
+        "【AEB/系统介入】-586ms",
+        "【制动时 TTC 估算】2.14s — 时距尚可",
+        "【事故前 3s 均速】39.8 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "侧风偏大",
+      "road": "城市主干道",
+      "obstacle": "相邻车道变道挤压",
+      "laneMarking": "夜间磨损不清"
+    },
+    "decisionTrace": {
+      "sensorInput": "多传感器融合（含侧向雷达/视觉）",
+      "perception": "复杂交互场景下多目标关联；短时遮挡恢复",
+      "planning": "规划请求人工接管并执行风险最小化减速",
+      "control": "制动与转向执行机构响应；接管后控制权重切换"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 1454,
+      "brakeRiseTimeMs": 399,
+      "aebDelayMs": -586,
+      "ttcAtBrakeSeconds": 2.14,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 7.8,
+      "driverTakeoverSummary": "系统发出接管请求后驾驶员未及时握盘",
+      "riskPredictionSummary": "端侧风险模型：DRIVER_TAKEOVER_FAIL 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-034",
+    "eventType": "DRIVER_TAKEOVER_FAIL",
+    "scenarioId": "SCH-DRIVER_TAKEOVER_FAIL-034",
+    "scenarioName": "接管后方向修正过量",
+    "timeMillis": 1740004726000,
+    "location": "广州·黄埔区",
+    "summary": "【接管后方向修正过量】DRIVER_TAKEOVER_FAIL，LOW等级；发生于长下坡接弯（雾），涉及路面抛洒物",
+    "triggerReasons": [
+      "系统请求接管后响应不足",
+      "方向盘脱手或接管动作不当",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "LOW",
+    "autoDrivingState": "L2_ASSIST",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 86.2,
+        "axMS2": -0.9,
+        "brake": 28,
+        "steerDeg": 1.7
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 77.0,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": 1.2
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 67.8,
+        "axMS2": -3.5,
+        "brake": 51,
+        "steerDeg": -0.8
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 58.6,
+        "axMS2": -4.2,
+        "brake": 57,
+        "steerDeg": 2.0
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 39,
+      "systemFactor": 50,
+      "environmentFactor": 11,
+      "conclusion": "责任倾向：驾驶员接管不足为主",
+      "reasons": [
+        "【反应时间】920ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】346ms（踏板 20%→80%）— 制动果断",
+        "强制动",
+        "【AEB/系统介入】-214ms",
+        "【制动时 TTC 估算】3.07s — 时距尚可",
+        "【事故前 3s 均速】72.4 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "雾",
+      "road": "长下坡接弯",
+      "obstacle": "路面抛洒物",
+      "laneMarking": "施工临时标线"
+    },
+    "decisionTrace": {
+      "sensorInput": "多传感器融合（含侧向雷达/视觉）",
+      "perception": "复杂交互场景下多目标关联；短时遮挡恢复",
+      "planning": "规划请求人工接管并执行风险最小化减速",
+      "control": "制动与转向执行机构响应；接管后控制权重切换"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 920,
+      "brakeRiseTimeMs": 346,
+      "aebDelayMs": -214,
+      "ttcAtBrakeSeconds": 3.07,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 4.3,
+      "driverTakeoverSummary": "系统发出接管请求后驾驶员未及时握盘",
+      "riskPredictionSummary": "端侧风险模型：DRIVER_TAKEOVER_FAIL 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-035",
+    "eventType": "DRIVER_TAKEOVER_FAIL",
+    "scenarioId": "SCH-DRIVER_TAKEOVER_FAIL-035",
+    "scenarioName": "L3 降级时驾驶员未响应",
+    "timeMillis": 1740004865000,
+    "location": "苏州·工业园区",
+    "summary": "【L3 降级时驾驶员未响应】DRIVER_TAKEOVER_FAIL，LOW等级；发生于城市主干道（侧风偏大），涉及路面抛洒物",
+    "triggerReasons": [
+      "系统请求接管后响应不足",
+      "方向盘脱手或接管动作不当",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "LOW",
+    "autoDrivingState": "L2_ASSIST",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 83.4,
+        "axMS2": -0.9,
+        "brake": 28,
+        "steerDeg": 1.7
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 74.2,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -1.0
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 65.0,
+        "axMS2": -3.5,
+        "brake": 51,
+        "steerDeg": 2.3
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 55.8,
+        "axMS2": -4.2,
+        "brake": 57,
+        "steerDeg": 2.2
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 48,
+      "systemFactor": 42,
+      "environmentFactor": 10,
+      "conclusion": "责任倾向：驾驶员接管不足为主",
+      "reasons": [
+        "【反应时间】1362ms — 过长（>1200ms），显著增加碰撞风险",
+        "【制动上升时间】591ms（踏板 20%→80%）— 制动果断",
+        "强制动",
+        "【AEB/系统介入】-146ms",
+        "【制动时 TTC 估算】2.18s — 时距尚可",
+        "【事故前 3s 均速】69.6 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "侧风偏大",
+      "road": "城市主干道",
+      "obstacle": "路面抛洒物",
+      "laneMarking": "清晰"
+    },
+    "decisionTrace": {
+      "sensorInput": "多传感器融合（含侧向雷达/视觉）",
+      "perception": "复杂交互场景下多目标关联；短时遮挡恢复",
+      "planning": "规划请求人工接管并执行风险最小化减速",
+      "control": "制动与转向执行机构响应；接管后控制权重切换"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 1362,
+      "brakeRiseTimeMs": 591,
+      "aebDelayMs": -146,
+      "ttcAtBrakeSeconds": 2.18,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 4.4,
+      "driverTakeoverSummary": "系统发出接管请求后驾驶员未及时握盘",
+      "riskPredictionSummary": "端侧风险模型：DRIVER_TAKEOVER_FAIL 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-036",
+    "eventType": "DRIVER_TAKEOVER_FAIL",
+    "scenarioId": "SCH-DRIVER_TAKEOVER_FAIL-036",
+    "scenarioName": "拥堵跟车系统退出未制动",
+    "timeMillis": 1740005004000,
+    "location": "上海·浦东新区",
+    "summary": "【拥堵跟车系统退出未制动】DRIVER_TAKEOVER_FAIL，LOW等级；发生于高架匝道（多云），涉及施工锥桶偏移",
+    "triggerReasons": [
+      "系统请求接管后响应不足",
+      "方向盘脱手或接管动作不当",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "LOW",
+    "autoDrivingState": "L2_ASSIST",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 56.8,
+        "axMS2": -0.9,
+        "brake": 28,
+        "steerDeg": -0.0
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 47.6,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -0.3
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 38.4,
+        "axMS2": -3.5,
+        "brake": 51,
+        "steerDeg": 0.9
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 29.2,
+        "axMS2": -4.2,
+        "brake": 57,
+        "steerDeg": -0.7
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 39,
+      "systemFactor": 50,
+      "environmentFactor": 11,
+      "conclusion": "责任倾向：驾驶员接管不足为主",
+      "reasons": [
+        "【反应时间】920ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】286ms（踏板 20%→80%）— 制动果断",
+        "强制动",
+        "【AEB/系统介入】-251ms",
+        "【制动时 TTC 估算】1.85s — 时距尚可",
+        "【事故前 3s 均速】43.0 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "多云",
+      "road": "高架匝道",
+      "obstacle": "施工锥桶偏移",
+      "laneMarking": "反光"
+    },
+    "decisionTrace": {
+      "sensorInput": "多传感器融合（含侧向雷达/视觉）",
+      "perception": "复杂交互场景下多目标关联；短时遮挡恢复",
+      "planning": "规划请求人工接管并执行风险最小化减速",
+      "control": "制动与转向执行机构响应；接管后控制权重切换"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 920,
+      "brakeRiseTimeMs": 286,
+      "aebDelayMs": -251,
+      "ttcAtBrakeSeconds": 1.85,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 5.7,
+      "driverTakeoverSummary": "系统发出接管请求后驾驶员未及时握盘",
+      "riskPredictionSummary": "端侧风险模型：DRIVER_TAKEOVER_FAIL 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-037",
+    "eventType": "DRIVER_TAKEOVER_FAIL",
+    "scenarioId": "SCH-DRIVER_TAKEOVER_FAIL-037",
+    "scenarioName": "驾驶员误踩加速踏板",
+    "timeMillis": 1740005143000,
+    "location": "深圳·南山区",
+    "summary": "【驾驶员误踩加速踏板】DRIVER_TAKEOVER_FAIL，HIGH等级；发生于施工借道段（多云），涉及前车急刹制动灯亮起",
+    "triggerReasons": [
+      "系统请求接管后响应不足",
+      "方向盘脱手或接管动作不当",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "AUTONOMOUS",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 55.4,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": 1.4
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 46.2,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": 1.8
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 37.0,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": 0.4
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 27.8,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": -1.6
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 18.6,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": 1.1
+      },
+      {
+        "tMs": -950,
+        "speedKph": 15.0,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": 1.8
+      },
+      {
+        "tMs": -770,
+        "speedKph": 5.2,
+        "axMS2": -11.34,
+        "brake": 100,
+        "steerDeg": -0.8
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 39,
+      "systemFactor": 50,
+      "environmentFactor": 11,
+      "conclusion": "责任倾向：驾驶员接管不足为主",
+      "reasons": [
+        "【反应时间】965ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】450ms（踏板 20%→80%）— 制动果断",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-394ms",
+        "【制动时 TTC 估算】2.11s — 时距尚可",
+        "【事故前 3s 均速】20.7 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "多云",
+      "road": "施工借道段",
+      "obstacle": "前车急刹制动灯亮起",
+      "laneMarking": "模糊"
+    },
+    "decisionTrace": {
+      "sensorInput": "多传感器融合（含侧向雷达/视觉）",
+      "perception": "复杂交互场景下多目标关联；短时遮挡恢复",
+      "planning": "规划请求人工接管并执行风险最小化减速",
+      "control": "制动与转向执行机构响应；接管后控制权重切换"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 965,
+      "brakeRiseTimeMs": 450,
+      "aebDelayMs": -394,
+      "ttcAtBrakeSeconds": 2.11,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 5.0,
+      "driverTakeoverSummary": "系统发出接管请求后驾驶员未及时握盘",
+      "riskPredictionSummary": "端侧风险模型：DRIVER_TAKEOVER_FAIL 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-038",
+    "eventType": "ENVIRONMENT_DISTURB",
+    "scenarioId": "SCH-ENVIRONMENT_DISTURB-038",
+    "scenarioName": "团雾突发能见度骤降",
+    "timeMillis": 1740005282000,
+    "location": "南京·雨花台区",
+    "summary": "【团雾突发能见度骤降】ENVIRONMENT_DISTURB，HIGH等级；发生于隧道入口（小雨），涉及行人突然横穿",
+    "triggerReasons": [
+      "能见度/附着系数突变",
+      "道路几何或临时交通组织变化",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "L2_ASSIST",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 72.0,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": 1.2
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 62.8,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": 1.6
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 53.6,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -1.2
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 44.4,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": -0.7
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 35.2,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": 0.7
+      },
+      {
+        "tMs": -950,
+        "speedKph": 26.0,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": -0.3
+      },
+      {
+        "tMs": -770,
+        "speedKph": 9.1,
+        "axMS2": -10.41,
+        "brake": 100,
+        "steerDeg": -0.2
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 47,
+      "systemFactor": 24,
+      "environmentFactor": 29,
+      "conclusion": "责任倾向：环境扰动显著，与人因/系统策略交织（多因素）",
+      "reasons": [
+        "【反应时间】798ms — 处于可接受区间，仍建议复盘人因",
+        "【制动上升时间】344ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-482ms",
+        "【制动时 TTC 估算】2.15s — 时距尚可",
+        "【事故前 3s 均速】33.7 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "小雨",
+      "road": "隧道入口",
+      "obstacle": "行人突然横穿",
+      "laneMarking": "清晰"
+    },
+    "decisionTrace": {
+      "sensorInput": "多传感器融合（含侧向雷达/视觉）",
+      "perception": "复杂交互场景下多目标关联；短时遮挡恢复",
+      "planning": "规划请求人工接管并执行风险最小化减速",
+      "control": "制动与转向执行机构响应；接管后控制权重切换"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 798,
+      "brakeRiseTimeMs": 344,
+      "aebDelayMs": -482,
+      "ttcAtBrakeSeconds": 2.15,
+      "brakeEffective": false,
+      "maxSteerLast2sDeg": 7.4,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：ENVIRONMENT_DISTURB 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-039",
+    "eventType": "ENVIRONMENT_DISTURB",
+    "scenarioId": "SCH-ENVIRONMENT_DISTURB-039",
+    "scenarioName": "路面结冰侧滑",
+    "timeMillis": 1740005421000,
+    "location": "武汉·东湖高新区",
+    "summary": "【路面结冰侧滑】ENVIRONMENT_DISTURB，LOW等级；发生于长下坡接弯（雾），涉及慢车占道",
+    "triggerReasons": [
+      "能见度/附着系数突变",
+      "道路几何或临时交通组织变化",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "LOW",
+    "autoDrivingState": "MANUAL",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 77.5,
+        "axMS2": -0.9,
+        "brake": 28,
+        "steerDeg": -0.7
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 68.3,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": 0.0
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 59.1,
+        "axMS2": -3.5,
+        "brake": 51,
+        "steerDeg": -0.4
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 49.9,
+        "axMS2": -4.2,
+        "brake": 57,
+        "steerDeg": 0.9
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 53,
+      "systemFactor": 21,
+      "environmentFactor": 26,
+      "conclusion": "责任倾向：环境扰动显著，与人因/系统策略交织（多因素）",
+      "reasons": [
+        "【反应时间】921ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】503ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+        "强制动",
+        "【AEB/系统介入】-478ms",
+        "【制动时 TTC 估算】1.64s — 时距尚可",
+        "【事故前 3s 均速】63.7 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "雾",
+      "road": "长下坡接弯",
+      "obstacle": "慢车占道",
+      "laneMarking": "施工临时标线"
+    },
+    "decisionTrace": {
+      "sensorInput": "多传感器融合（含侧向雷达/视觉）",
+      "perception": "复杂交互场景下多目标关联；短时遮挡恢复",
+      "planning": "规划请求人工接管并执行风险最小化减速",
+      "control": "制动与转向执行机构响应；接管后控制权重切换"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 921,
+      "brakeRiseTimeMs": 503,
+      "aebDelayMs": -478,
+      "ttcAtBrakeSeconds": 1.64,
+      "brakeEffective": false,
+      "maxSteerLast2sDeg": 8.4,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：ENVIRONMENT_DISTURB 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-040",
+    "eventType": "ENVIRONMENT_DISTURB",
+    "scenarioId": "SCH-ENVIRONMENT_DISTURB-040",
+    "scenarioName": "强光逆光相机失效",
+    "timeMillis": 1740005560000,
+    "location": "成都·高新区",
+    "summary": "【强光逆光相机失效】ENVIRONMENT_DISTURB，HIGH等级；发生于高架匝道（雾），涉及前车急刹制动灯亮起",
+    "triggerReasons": [
+      "能见度/附着系数突变",
+      "道路几何或临时交通组织变化",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "L2_ASSIST",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 53.5,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": 2.3
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 44.3,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": 0.5
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 35.1,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -0.2
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 25.9,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": 1.4
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 16.7,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": 2.3
+      },
+      {
+        "tMs": -950,
+        "speedKph": 15.0,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": 0.8
+      },
+      {
+        "tMs": -770,
+        "speedKph": 5.2,
+        "axMS2": -11.37,
+        "brake": 100,
+        "steerDeg": 0.8
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 47,
+      "systemFactor": 24,
+      "environmentFactor": 29,
+      "conclusion": "责任倾向：环境扰动显著，与人因/系统策略交织（多因素）",
+      "reasons": [
+        "【反应时间】842ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】552ms（踏板 20%→80%）— 制动果断",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-814ms",
+        "【制动时 TTC 估算】2.09s — 时距尚可",
+        "【事故前 3s 均速】19.6 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "雾",
+      "road": "高架匝道",
+      "obstacle": "前车急刹制动灯亮起",
+      "laneMarking": "反光"
+    },
+    "decisionTrace": {
+      "sensorInput": "多传感器融合（含侧向雷达/视觉）",
+      "perception": "复杂交互场景下多目标关联；短时遮挡恢复",
+      "planning": "规划请求人工接管并执行风险最小化减速",
+      "control": "制动与转向执行机构响应；接管后控制权重切换"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 842,
+      "brakeRiseTimeMs": 552,
+      "aebDelayMs": -814,
+      "ttcAtBrakeSeconds": 2.09,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 4.9,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：ENVIRONMENT_DISTURB 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-041",
+    "eventType": "ENVIRONMENT_DISTURB",
+    "scenarioId": "SCH-ENVIRONMENT_DISTURB-041",
+    "scenarioName": "横风高架桥面偏移",
+    "timeMillis": 1740005699000,
+    "location": "上海·浦东新区",
+    "summary": "【横风高架桥面偏移】ENVIRONMENT_DISTURB，MEDIUM等级；发生于快速路（大雨），涉及相邻车道变道挤压",
+    "triggerReasons": [
+      "能见度/附着系数突变",
+      "道路几何或临时交通组织变化",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "MEDIUM",
+    "autoDrivingState": "AUTONOMOUS",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 63.6,
+        "axMS2": -1.2,
+        "brake": 30,
+        "steerDeg": 2.1
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 54.4,
+        "axMS2": -2.4,
+        "brake": 41,
+        "steerDeg": 1.3
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 45.2,
+        "axMS2": -4.1,
+        "brake": 56,
+        "steerDeg": 1.1
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 36.0,
+        "axMS2": -6.3,
+        "brake": 76,
+        "steerDeg": 1.7
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 26.8,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -0.4
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 40,
+      "systemFactor": 28,
+      "environmentFactor": 32,
+      "conclusion": "责任倾向：环境扰动显著，与人因/系统策略交织（多因素）",
+      "reasons": [
+        "【反应时间】726ms — 处于可接受区间，仍建议复盘人因",
+        "【制动上升时间】585ms（踏板 20%→80%）— 制动果断",
+        "强制动",
+        "【AEB/系统介入】-497ms",
+        "【制动时 TTC 估算】1.93s — 时距尚可",
+        "【事故前 3s 均速】45.2 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "大雨",
+      "road": "快速路",
+      "obstacle": "相邻车道变道挤压",
+      "laneMarking": "施工临时标线"
+    },
+    "decisionTrace": {
+      "sensorInput": "多传感器融合（含侧向雷达/视觉）",
+      "perception": "复杂交互场景下多目标关联；短时遮挡恢复",
+      "planning": "规划请求人工接管并执行风险最小化减速",
+      "control": "制动与转向执行机构响应；接管后控制权重切换"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 726,
+      "brakeRiseTimeMs": 585,
+      "aebDelayMs": -497,
+      "ttcAtBrakeSeconds": 1.93,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 9.0,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：ENVIRONMENT_DISTURB 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-042",
+    "eventType": "ENVIRONMENT_DISTURB",
+    "scenarioId": "SCH-ENVIRONMENT_DISTURB-042",
+    "scenarioName": "积水水滑",
+    "timeMillis": 1740005838000,
+    "location": "苏州·工业园区",
+    "summary": "【积水水滑】ENVIRONMENT_DISTURB，HIGH等级；发生于城市主干道（多云），涉及前车急刹制动灯亮起",
+    "triggerReasons": [
+      "能见度/附着系数突变",
+      "道路几何或临时交通组织变化",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "AUTONOMOUS",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 48.1,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": 1.9
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 38.9,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": -0.4
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 29.7,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -1.0
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 20.5,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": -0.6
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 15.0,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": 1.4
+      },
+      {
+        "tMs": -950,
+        "speedKph": 15.0,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": 0.6
+      },
+      {
+        "tMs": -770,
+        "speedKph": 5.2,
+        "axMS2": -10.47,
+        "brake": 100,
+        "steerDeg": 2.8
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 47,
+      "systemFactor": 24,
+      "environmentFactor": 29,
+      "conclusion": "责任倾向：环境扰动显著，与人因/系统策略交织（多因素）",
+      "reasons": [
+        "【反应时间】500ms — 处于可接受区间，仍建议复盘人因",
+        "【制动上升时间】589ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-781ms",
+        "【制动时 TTC 估算】2.7s — 时距尚可",
+        "【事故前 3s 均速】17.1 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "多云",
+      "road": "城市主干道",
+      "obstacle": "前车急刹制动灯亮起",
+      "laneMarking": "施工临时标线"
+    },
+    "decisionTrace": {
+      "sensorInput": "多传感器融合（含侧向雷达/视觉）",
+      "perception": "复杂交互场景下多目标关联；短时遮挡恢复",
+      "planning": "规划请求人工接管并执行风险最小化减速",
+      "control": "制动与转向执行机构响应；接管后控制权重切换"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 500,
+      "brakeRiseTimeMs": 589,
+      "aebDelayMs": -781,
+      "ttcAtBrakeSeconds": 2.7,
+      "brakeEffective": false,
+      "maxSteerLast2sDeg": 8.4,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：ENVIRONMENT_DISTURB 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-043",
+    "eventType": "ENVIRONMENT_DISTURB",
+    "scenarioId": "SCH-ENVIRONMENT_DISTURB-043",
+    "scenarioName": "夜间无照明行人横穿",
+    "timeMillis": 1740005977000,
+    "location": "成都·高新区",
+    "summary": "【夜间无照明行人横穿】ENVIRONMENT_DISTURB，MEDIUM等级；发生于快速路（大雨），涉及前方车辆减速未打灯",
+    "triggerReasons": [
+      "能见度/附着系数突变",
+      "道路几何或临时交通组织变化",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "MEDIUM",
+    "autoDrivingState": "AUTONOMOUS",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 85.5,
+        "axMS2": -1.2,
+        "brake": 30,
+        "steerDeg": 1.6
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 76.3,
+        "axMS2": -2.4,
+        "brake": 41,
+        "steerDeg": 0.1
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 67.1,
+        "axMS2": -4.1,
+        "brake": 56,
+        "steerDeg": 2.1
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 57.9,
+        "axMS2": -6.3,
+        "brake": 76,
+        "steerDeg": 0.3
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 48.7,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -0.1
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 47,
+      "systemFactor": 24,
+      "environmentFactor": 29,
+      "conclusion": "责任倾向：环境扰动显著，与人因/系统策略交织（多因素）",
+      "reasons": [
+        "【反应时间】759ms — 处于可接受区间，仍建议复盘人因",
+        "【制动上升时间】497ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+        "强制动",
+        "【AEB/系统介入】-509ms",
+        "【制动时 TTC 估算】2.99s — 时距尚可",
+        "【事故前 3s 均速】67.1 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "大雨",
+      "road": "快速路",
+      "obstacle": "前方车辆减速未打灯",
+      "laneMarking": "清晰"
+    },
+    "decisionTrace": {
+      "sensorInput": "多传感器融合（含侧向雷达/视觉）",
+      "perception": "复杂交互场景下多目标关联；短时遮挡恢复",
+      "planning": "规划请求人工接管并执行风险最小化减速",
+      "control": "制动与转向执行机构响应；接管后控制权重切换"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 759,
+      "brakeRiseTimeMs": 497,
+      "aebDelayMs": -509,
+      "ttcAtBrakeSeconds": 2.99,
+      "brakeEffective": false,
+      "maxSteerLast2sDeg": 5.1,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：ENVIRONMENT_DISTURB 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-044",
+    "eventType": "MULTI_FACTOR",
+    "scenarioId": "SCH-MULTI_FACTOR-044",
+    "scenarioName": "人-车-路-环境多因素叠加",
+    "timeMillis": 1740006116000,
+    "location": "深圳·南山区",
+    "summary": "【人-车-路-环境多因素叠加】MULTI_FACTOR，MEDIUM等级；发生于高架匝道（多云），涉及匝道汇流冲突",
+    "triggerReasons": [
+      "人因、系统策略与环境因素同时显著",
+      "单一归因不足以解释全链路",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "MEDIUM",
+    "autoDrivingState": "MANUAL",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 64.7,
+        "axMS2": -1.2,
+        "brake": 30,
+        "steerDeg": 1.5
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 55.5,
+        "axMS2": -2.4,
+        "brake": 41,
+        "steerDeg": 3.4
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 46.3,
+        "axMS2": -4.1,
+        "brake": 56,
+        "steerDeg": -1.3
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 37.1,
+        "axMS2": -6.3,
+        "brake": 76,
+        "steerDeg": 0.6
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 27.9,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": 4.1
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 45,
+      "systemFactor": 31,
+      "environmentFactor": 24,
+      "conclusion": "责任倾向：多因素共同作用（需结合更多证据）",
+      "reasons": [
+        "【反应时间】434ms — 处于可接受区间，仍建议复盘人因",
+        "【制动上升时间】583ms（踏板 20%→80%）— 制动果断",
+        "强制动",
+        "【AEB/系统介入】-474ms",
+        "【制动时 TTC 估算】1.51s — 时距尚可",
+        "【事故前 3s 均速】46.3 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "多云",
+      "road": "高架匝道",
+      "obstacle": "匝道汇流冲突",
+      "laneMarking": "施工临时标线"
+    },
+    "decisionTrace": {
+      "sensorInput": "多传感器融合（含侧向雷达/视觉）",
+      "perception": "复杂交互场景下多目标关联；短时遮挡恢复",
+      "planning": "规划请求人工接管并执行风险最小化减速",
+      "control": "制动与转向执行机构响应；接管后控制权重切换"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 434,
+      "brakeRiseTimeMs": 583,
+      "aebDelayMs": -474,
+      "ttcAtBrakeSeconds": 1.51,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 3.0,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：MULTI_FACTOR 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-045",
+    "eventType": "MULTI_FACTOR",
+    "scenarioId": "SCH-MULTI_FACTOR-045",
+    "scenarioName": "施工改道+感知降级+驾驶员分心",
+    "timeMillis": 1740006255000,
+    "location": "广州·黄埔区",
+    "summary": "【施工改道+感知降级+驾驶员分心】MULTI_FACTOR，MEDIUM等级；发生于快速路（冰雪），涉及匝道汇流冲突",
+    "triggerReasons": [
+      "人因、系统策略与环境因素同时显著",
+      "单一归因不足以解释全链路",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "MEDIUM",
+    "autoDrivingState": "MANUAL",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 80.0,
+        "axMS2": -1.2,
+        "brake": 30,
+        "steerDeg": 2.0
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 70.8,
+        "axMS2": -2.4,
+        "brake": 41,
+        "steerDeg": -3.1
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 61.6,
+        "axMS2": -4.1,
+        "brake": 56,
+        "steerDeg": 0.3
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 52.4,
+        "axMS2": -6.3,
+        "brake": 76,
+        "steerDeg": -3.0
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 43.2,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -0.6
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 54,
+      "systemFactor": 18,
+      "environmentFactor": 28,
+      "conclusion": "责任倾向：多因素共同作用（需结合更多证据）",
+      "reasons": [
+        "【反应时间】578ms — 处于可接受区间，仍建议复盘人因",
+        "【制动上升时间】594ms（踏板 20%→80%）— 制动果断",
+        "强制动",
+        "【AEB/系统介入】-209ms",
+        "【制动时 TTC 估算】2.45s — 时距尚可",
+        "【事故前 3s 均速】61.6 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "冰雪",
+      "road": "快速路",
+      "obstacle": "匝道汇流冲突",
+      "laneMarking": "施工临时标线"
+    },
+    "decisionTrace": {
+      "sensorInput": "多传感器融合（含侧向雷达/视觉）",
+      "perception": "复杂交互场景下多目标关联；短时遮挡恢复",
+      "planning": "规划请求人工接管并执行风险最小化减速",
+      "control": "制动与转向执行机构响应；接管后控制权重切换"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 578,
+      "brakeRiseTimeMs": 594,
+      "aebDelayMs": -209,
+      "ttcAtBrakeSeconds": 2.45,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 4.7,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：MULTI_FACTOR 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-046",
+    "eventType": "MULTI_FACTOR",
+    "scenarioId": "SCH-MULTI_FACTOR-046",
+    "scenarioName": "恶劣天气+跟车过近+AEB 保守策略",
+    "timeMillis": 1740006394000,
+    "location": "苏州·工业园区",
+    "summary": "【恶劣天气+跟车过近+AEB 保守策略】MULTI_FACTOR，MEDIUM等级；发生于城市主干道（大雨），涉及慢车占道",
+    "triggerReasons": [
+      "人因、系统策略与环境因素同时显著",
+      "单一归因不足以解释全链路",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "MEDIUM",
+    "autoDrivingState": "MANUAL",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 64.0,
+        "axMS2": -1.2,
+        "brake": 30,
+        "steerDeg": -2.5
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 54.8,
+        "axMS2": -2.4,
+        "brake": 41,
+        "steerDeg": -3.6
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 45.6,
+        "axMS2": -4.1,
+        "brake": 56,
+        "steerDeg": 1.6
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 36.4,
+        "axMS2": -6.3,
+        "brake": 76,
+        "steerDeg": -2.4
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 27.2,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": 0.6
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 54,
+      "systemFactor": 18,
+      "environmentFactor": 28,
+      "conclusion": "责任倾向：多因素共同作用（需结合更多证据）",
+      "reasons": [
+        "【反应时间】433ms — 处于可接受区间，仍建议复盘人因",
+        "【制动上升时间】549ms（踏板 20%→80%）— 制动果断",
+        "强制动",
+        "【AEB/系统介入】-163ms",
+        "【制动时 TTC 估算】2.92s — 时距尚可",
+        "【事故前 3s 均速】45.6 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "大雨",
+      "road": "城市主干道",
+      "obstacle": "慢车占道",
+      "laneMarking": "雨天反光"
+    },
+    "decisionTrace": {
+      "sensorInput": "多传感器融合（含侧向雷达/视觉）",
+      "perception": "复杂交互场景下多目标关联；短时遮挡恢复",
+      "planning": "规划请求人工接管并执行风险最小化减速",
+      "control": "制动与转向执行机构响应；接管后控制权重切换"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 433,
+      "brakeRiseTimeMs": 549,
+      "aebDelayMs": -163,
+      "ttcAtBrakeSeconds": 2.92,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 4.3,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：MULTI_FACTOR 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-047",
+    "eventType": "MULTI_FACTOR",
+    "scenarioId": "SCH-MULTI_FACTOR-047",
+    "scenarioName": "匝道+大车遮挡+前车急刹",
+    "timeMillis": 1740006533000,
+    "location": "深圳·南山区",
+    "summary": "【匝道+大车遮挡+前车急刹】MULTI_FACTOR，HIGH等级；发生于施工借道段（小雨），涉及行人突然横穿",
+    "triggerReasons": [
+      "人因、系统策略与环境因素同时显著",
+      "单一归因不足以解释全链路",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "MANUAL",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 89.2,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -2.9
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 80.0,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": 3.9
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 70.8,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -0.5
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 61.6,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": -3.0
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 52.4,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": 2.9
+      },
+      {
+        "tMs": -950,
+        "speedKph": 43.2,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": 3.5
+      },
+      {
+        "tMs": -770,
+        "speedKph": 15.1,
+        "axMS2": -9.54,
+        "brake": 100,
+        "steerDeg": -2.3
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 61,
+      "systemFactor": 15,
+      "environmentFactor": 24,
+      "conclusion": "责任倾向：多因素共同作用（需结合更多证据）",
+      "reasons": [
+        "【反应时间】827ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】446ms（踏板 20%→80%）— 制动果断",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-237ms",
+        "【制动时 TTC 估算】2.24s — 时距尚可",
+        "【事故前 3s 均速】48.6 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "小雨",
+      "road": "施工借道段",
+      "obstacle": "行人突然横穿",
+      "laneMarking": "雨天反光"
+    },
+    "decisionTrace": {
+      "sensorInput": "多传感器融合（含侧向雷达/视觉）",
+      "perception": "复杂交互场景下多目标关联；短时遮挡恢复",
+      "planning": "规划请求人工接管并执行风险最小化减速",
+      "control": "制动与转向执行机构响应；接管后控制权重切换"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 827,
+      "brakeRiseTimeMs": 446,
+      "aebDelayMs": -237,
+      "ttcAtBrakeSeconds": 2.24,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 6.3,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：MULTI_FACTOR 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-048",
+    "eventType": "MULTI_FACTOR",
+    "scenarioId": "SCH-MULTI_FACTOR-048",
+    "scenarioName": "夜间+眩光+非机动车占道",
+    "timeMillis": 1740006672000,
+    "location": "杭州·滨江区",
+    "summary": "【夜间+眩光+非机动车占道】MULTI_FACTOR，HIGH等级；发生于施工借道段（晴），涉及前车急刹制动灯亮起",
+    "triggerReasons": [
+      "人因、系统策略与环境因素同时显著",
+      "单一归因不足以解释全链路",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "L2_ASSIST",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 50.9,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -2.1
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 41.7,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": 2.1
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 32.5,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -3.3
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 23.3,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": 2.4
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 15.0,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": 1.1
+      },
+      {
+        "tMs": -950,
+        "speedKph": 15.0,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": 0.6
+      },
+      {
+        "tMs": -770,
+        "speedKph": 5.2,
+        "axMS2": -11.49,
+        "brake": 100,
+        "steerDeg": 1.4
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 58,
+      "systemFactor": 24,
+      "environmentFactor": 18,
+      "conclusion": "责任倾向：多因素共同作用（需结合更多证据）",
+      "reasons": [
+        "【反应时间】825ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】409ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-685ms",
+        "【制动时 TTC 估算】2.0s — 时距尚可",
+        "【事故前 3s 均速】18.2 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "晴",
+      "road": "施工借道段",
+      "obstacle": "前车急刹制动灯亮起",
+      "laneMarking": "模糊"
+    },
+    "decisionTrace": {
+      "sensorInput": "多传感器融合（含侧向雷达/视觉）",
+      "perception": "复杂交互场景下多目标关联；短时遮挡恢复",
+      "planning": "规划请求人工接管并执行风险最小化减速",
+      "control": "制动与转向执行机构响应；接管后控制权重切换"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 825,
+      "brakeRiseTimeMs": 409,
+      "aebDelayMs": -685,
+      "ttcAtBrakeSeconds": 2.0,
+      "brakeEffective": false,
+      "maxSteerLast2sDeg": 6.5,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：MULTI_FACTOR 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-049",
+    "eventType": "MULTI_FACTOR",
+    "scenarioId": "SCH-MULTI_FACTOR-049",
+    "scenarioName": "系统提示弱+环境复杂+接管犹豫",
+    "timeMillis": 1740006811000,
+    "location": "南京·雨花台区",
+    "summary": "【系统提示弱+环境复杂+接管犹豫】MULTI_FACTOR，HIGH等级；发生于快速路（多云），涉及施工区域未封闭完全",
+    "triggerReasons": [
+      "人因、系统策略与环境因素同时显著",
+      "单一归因不足以解释全链路",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "L2_ASSIST",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 48.6,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -0.9
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 39.4,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": -1.8
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 30.2,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -3.9
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 21.0,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": 2.9
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 15.0,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": -0.1
+      },
+      {
+        "tMs": -950,
+        "speedKph": 15.0,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": 2.9
+      },
+      {
+        "tMs": -770,
+        "speedKph": 5.2,
+        "axMS2": -10.98,
+        "brake": 100,
+        "steerDeg": -0.6
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 61,
+      "systemFactor": 15,
+      "environmentFactor": 24,
+      "conclusion": "责任倾向：多因素共同作用（需结合更多证据）",
+      "reasons": [
+        "【反应时间】502ms — 处于可接受区间，仍建议复盘人因",
+        "【制动上升时间】404ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-152ms",
+        "【制动时 TTC 估算】2.54s — 时距尚可",
+        "【事故前 3s 均速】17.3 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "多云",
+      "road": "快速路",
+      "obstacle": "施工区域未封闭完全",
+      "laneMarking": "反光"
+    },
+    "decisionTrace": {
+      "sensorInput": "多传感器融合（含侧向雷达/视觉）",
+      "perception": "复杂交互场景下多目标关联；短时遮挡恢复",
+      "planning": "规划请求人工接管并执行风险最小化减速",
+      "control": "制动与转向执行机构响应；接管后控制权重切换"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 502,
+      "brakeRiseTimeMs": 404,
+      "aebDelayMs": -152,
+      "ttcAtBrakeSeconds": 2.54,
+      "brakeEffective": false,
+      "maxSteerLast2sDeg": 3.0,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：MULTI_FACTOR 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "EXP-20260518-050",
+    "eventType": "MULTI_FACTOR",
+    "scenarioId": "SCH-MULTI_FACTOR-050",
+    "scenarioName": "多车交互+信号延迟+制动不足",
+    "timeMillis": 1740006950000,
+    "location": "武汉·东湖高新区",
+    "summary": "【多车交互+信号延迟+制动不足】MULTI_FACTOR，HIGH等级；发生于城市主干道（小雨），涉及前车急刹制动灯亮起",
+    "triggerReasons": [
+      "人因、系统策略与环境因素同时显著",
+      "单一归因不足以解释全链路",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "HIGH",
+    "autoDrivingState": "AUTONOMOUS",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 57.8,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -0.5
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 48.6,
+        "axMS2": -3.2,
+        "brake": 48,
+        "steerDeg": -2.9
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 39.4,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -3.8
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 30.2,
+        "axMS2": -8.9,
+        "brake": 100,
+        "steerDeg": -0.4
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 21.0,
+        "axMS2": -9.7,
+        "brake": 100,
+        "steerDeg": 1.3
+      },
+      {
+        "tMs": -950,
+        "speedKph": 15.0,
+        "axMS2": -7.5,
+        "brake": 87,
+        "steerDeg": 4.3
+      },
+      {
+        "tMs": -770,
+        "speedKph": 5.2,
+        "axMS2": -10.27,
+        "brake": 100,
+        "steerDeg": 3.7
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 61,
+      "systemFactor": 15,
+      "environmentFactor": 24,
+      "conclusion": "责任倾向：多因素共同作用（需结合更多证据）",
+      "reasons": [
+        "【反应时间】935ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】453ms（踏板 20%→80%）— 制动果断",
+        "【峰值减速度】-1.8 m/s² — 极强制动（碰撞级）",
+        "【AEB/系统介入】-363ms",
+        "【制动时 TTC 估算】2.79s — 时距尚可",
+        "【事故前 3s 均速】22.2 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "小雨",
+      "road": "城市主干道",
+      "obstacle": "前车急刹制动灯亮起",
+      "laneMarking": "清晰"
+    },
+    "decisionTrace": {
+      "sensorInput": "多传感器融合（含侧向雷达/视觉）",
+      "perception": "复杂交互场景下多目标关联；短时遮挡恢复",
+      "planning": "规划请求人工接管并执行风险最小化减速",
+      "control": "制动与转向执行机构响应；接管后控制权重切换"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 935,
+      "brakeRiseTimeMs": 453,
+      "aebDelayMs": -363,
+      "ttcAtBrakeSeconds": 2.79,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 6.7,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：MULTI_FACTOR 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  }
+]

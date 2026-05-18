@@ -1,0 +1,86 @@
+﻿{
+  "dataset": {
+    "collision_rows": 100927,
+    "vehicle_rows": 183514,
+    "vehicle_agg_rows": 100927,
+    "train_rows": 4401,
+    "test_rows": 1101,
+    "feature_count": 59,
+    "target_distribution": {
+      "Serious": 2000,
+      "Slight": 2000,
+      "Fatal": 1502
+    }
+  },
+  "baseline": {
+    "accuracy": 0.363306,
+    "macro_f1": 0.177659,
+    "weighted_f1": 0.193634
+  },
+  "model": {
+    "accuracy": 0.514986,
+    "macro_f1": 0.516573,
+    "weighted_f1": 0.51164,
+    "classification_report": {
+      "Fatal": {
+        "precision": 0.509090909090909,
+        "recall": 0.6511627906976745,
+        "f1-score": 0.5714285714285714,
+        "support": 301.0
+      },
+      "Serious": {
+        "precision": 0.4730878186968839,
+        "recall": 0.4175,
+        "f1-score": 0.4435590969455511,
+        "support": 400.0
+      },
+      "Slight": {
+        "precision": 0.5619834710743802,
+        "recall": 0.51,
+        "f1-score": 0.5347313237221494,
+        "support": 400.0
+      },
+      "accuracy": 0.5149863760217984,
+      "macro avg": {
+        "precision": 0.5147207329540576,
+        "recall": 0.5262209302325581,
+        "f1-score": 0.516572997365424,
+        "support": 1101.0
+      },
+      "weighted avg": {
+        "precision": 0.5152269568981556,
+        "recall": 0.5149863760217984,
+        "f1-score": 0.5116404798066124,
+        "support": 1101.0
+      }
+    },
+    "confusion_matrix": {
+      "labels": [
+        "Fatal",
+        "Serious",
+        "Slight"
+      ],
+      "matrix": [
+        [
+          196,
+          64,
+          41
+        ],
+        [
+          115,
+          167,
+          118
+        ],
+        [
+          74,
+          122,
+          204
+        ]
+      ]
+    }
+  },
+  "artifacts": {
+    "model_path": "D:\\Users\\Desktop\\VehTrust-main\\backend\\ml\\artifacts\\collision_severity_pipeline.joblib",
+    "metrics_path": "D:\\Users\\Desktop\\VehTrust-main\\backend\\ml\\artifacts\\collision_severity_metrics.json"
+  }
+}

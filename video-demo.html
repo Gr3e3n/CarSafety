@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>功能演示 - VehTrust</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f0 100%);
+            min-height: 100vh;
+            color: #1E293B;
+        }
+        .header {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background: linear-gradient(135deg, #1E293B, #2563EB);
+            color: white;
+            text-align: center;
+            padding: 40px 20px 30px;
+        }
+        .header h1 { font-size: 32px; margin-bottom: 8px; }
+        .header p { font-size: 16px; opacity: 0.85; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; padding: 24px 16px 48px; }
+        .video-card {
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+            margin-bottom: 28px;
+        }
+        .video-card-header {
+            display: flex;
+            align-items: center;
+            padding: 18px 22px;
+            border-bottom: 1px solid #EEF2F7;
+            gap: 12px;
+        }
+        .video-icon {
+            width: 44px; height: 44px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+        .icon-analysis { background: #EFF6FF; }
+        .icon-chain { background: #ECFDF5; }
+        .icon-pre { background: #FEF3C7; }
+        .video-info h2 { font-size: 18px; font-weight: 600; }
+        .video-info p { font-size: 13px; color: #64748B; margin-top: 2px; }
+        .tag {
+            display: inline-block;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: auto;
+            font-weight: 500;
+        }
+        .tag-blue { background: #DBEAFE; color: #1D4ED8; }
+        .tag-green { background: #D1FAE5; color: #047857; }
+        .tag-yellow { background: #FEF3C7; color: #B45309; }
+        .video-body { padding: 0; }
+        .video-body video {
+            width: 100%;
+            display: block;
+            background: #000;
+            max-height: 520px;
+        }
+        .video-desc {
+            padding: 14px 22px 18px;
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.65;
+            background: #FAFBFC;
+            border-top: 1px solid #EEF2F7;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 32px;
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #2563EB, #1D4ED8);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 15px;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .back-link:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(37,99,235,0.35);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 36px;
+            color: #94A3B8;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🚗 VehTrust 功能演示</h1>
+    <p>车载智能安全监控与事故可信存证系统 — 完整流程演示</p>
+</div>
+
+<div class="container">
+
+    <!-- 视频1：事故溯源分析 -->
+    <div class="video-card">
+        <div class="video-card-header">
+            <div class="video-icon icon-analysis">📹</div>
+            <div class="video-info">
+                <h2>事故溯源分析</h2>
+                <p>事故详情页完整分析流程演示</p>
+            </div>
+            <span class="tag tag-blue">核心流程</span>
+        </div>
+        <div class="video-body">
+            <video controls preload="metadata" poster="">
+                <source src="https://gr3e3n.github.io/VehTrust/demo/analysis.mp4" type="video/mp4">
+                您的浏览器不支持视频播放。
+            </video>
+        </div>
+        <div class="video-desc">
+            本视频展示了<strong>事故溯源分析</strong>的完整链路：从事故事件列表进入详情页后，依次展示遥测数据回放、责任界定三方占比（驾驶员 / 系统 / 环境）、关键指标（反应时间、制动上升时间、TTC 等）、本地严重度推理、AI 结构化报告生成、以及区块链上链操作的全过程。
+        </div>
+    </div>
+
+    <!-- 视频2：数据上链 -->
+    <div class="video-card">
+        <div class="video-card-header">
+            <div class="video-icon icon-chain">⛓️</div>
+            <div class="video-info">
+                <h2>数据上链</h2>
+                <p>Hyperledger Fabric 区块链存证过程</p>
+            </div>
+            <span class="tag tag-green">存证</span>
+        </div>
+        <div class="video-body">
+            <video controls preload="metadata">
+                <source src="https://gr3e3n.github.io/VehTrust/demo/chain.mp4" type="video/mp4">
+                您的浏览器不支持视频播放。
+            </video>
+        </div>
+        <div class="video-desc">
+            本视频专门展示<strong>区块链上链</strong>环节：事故证据数据通过 Go HTTP 网关 API 提交到 Hyperledger Fabric 链码网络，调用 `UploadVehicleData` 完成存证后，通过 `QueryVehicleData` 回查验证上链结果。对应上链成功截图见 README 主页。
+        </div>
+    </div>
+
+    <!-- 视频3：综合功能展示 -->
+    <div class="video-card">
+        <div class="video-card-header">
+            <div class="video-icon icon-pre">🚗</div>
+            <div class="video-info">
+                <h2>综合功能展示</h2>
+                <p>安全中心模块与各页面交互漫游</p>
+            </div>
+            <span class="tag tag-yellow">全景</span>
+        </div>
+        <div class="video-body">
+            <video controls preload="metadata">
+                <source src="https://gr3e3n.github.io/VehTrust/demo/pre.mp4" type="video/mp4">
+                您的浏览器不支持视频播放。
+            </video>
+        </div>
+        <div class="video-desc">
+            本视频为<strong>综合功能漫游</strong>：从主界面安全中心出发，展示驾驶辅助、疲劳监测、车道预警、碰撞预警、雨天安全、乘员安全六大模块卡片状态，进入模块详情查看参数映射，切换至事故列表浏览历史事件，整体呈现 App 的完整交互体验。主界面截图见 README。
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="https://github.com/Gr3e3n/VehTrust" class="back-link">
+            ← 返回项目主页 (README)
+        </a>
+    </div>
+
+    <div class="footer">
+        VehTrust — 车载智能安全监控与事故可信存证工程 &nbsp;|&nbsp; Powered by Android + Hyperledger Fabric + AI
+    </div>
+</div>
+
+</body>
+</html>

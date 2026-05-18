@@ -1,0 +1,14 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+indent_style = space
+indent_size = 4
+
+[*.{kt,kts,java,xml,py,md,txt,properties,gradle,bat,ps1,html,json,yml,yaml,go}]
+charset = utf-8
+
+[*.md]
+trim_trailing_whitespace = false

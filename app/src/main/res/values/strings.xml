@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">VehTrust</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="ai_analysis_title">AI事故原因分析</string>
+    <string name="ai_analysis_desc">结合本地责任指标、事故时序特征与 OpenAI 服务输出事故因果研判。</string>
+    <string name="ai_analysis_button">生成 AI 事故分析</string>
+    <string name="ai_analysis_loading">AI 正在分析事故原因...</string>
+    <string name="ai_analysis_retry">重新生成 AI 分析</string>
+    <string name="ai_analysis_fallback">当前已回退到本地规则分析。</string>
+    <string name="dl_analysis_title">深度学习时序分析</string>
+    <string name="dl_model_prefix">模型</string>
+    <string name="dl_overall_risk_prefix">综合风险</string>
+    <string name="dl_predicted_label_prefix">模式识别</string>
+    <string name="dl_confidence_prefix">事故类型置信度</string>
+    <string name="severity_prediction_title">事故严重度预测</string>
+    <string name="severity_prediction_desc">使用端侧本地严重度模型，离线评估碰撞事件属于轻微、重伤或致命等级，并展示概率、关键因子与结构化研判摘要。</string>
+    <string name="severity_prediction_button">生成本地严重度研判</string>
+    <string name="severity_prediction_loading">本地严重度模型正在计算...</string>
+    <string name="severity_prediction_retry">重新生成本地研判</string>
+    <string name="severity_prediction_fallback">当前结果由端侧本地模型直接生成。</string>
+    <string name="experiment_group_title">云端实验组别（说明文档 §3.2）</string>
+    <string name="experiment_group_a">A 模板生成</string>
+    <string name="experiment_group_b">B 通用大模型</string>
+    <string name="experiment_group_c">C 本项目方法</string>
+    <string name="experiment_ablation_title">消融（说明文档 §9，仅 C 组后端裁剪 Prompt）</string>
+    <string name="experiment_ablation_d0">D0 完整输入</string>
+    <string name="experiment_ablation_d1">D1 去掉责任分析块</string>
+    <string name="experiment_ablation_d2">D2 去掉环境信息</string>
+    <string name="experiment_ablation_d3">D3 去掉决策链</string>
+    <string name="experiment_ablation_d4">D4 弱化结构化提示</string>
+    <string name="experiment_batch_title">实验批处理（50 条）</string>
+    <string name="experiment_batch_hint">在上方选好 A/B/C 与 D0–D4 后，点此自动跑 assets 中 50 条样本并保存 JSON。文件名含组别与消融。</string>
+    <string name="experiment_batch_button">批量跑 50 条并保存结果</string>
+    <string name="experiment_batch_running">正在批量请求云端，请稍候…</string>
+    <string name="experiment_list_settings_title">云端实验（列表统一设置）</string>
+    <string name="experiment_detail_experiment_hint">当前云端实验：%1$s + %2$s。分组与消融已在「事故溯源」列表页顶部设置；修改后返回本页会自动刷新。</string>
+</resources>

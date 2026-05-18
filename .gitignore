@@ -1,0 +1,54 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/app/build/
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+.gradle.properties
+backend/.env
+/mipmap-anydpi-bak
+
+# 崩溃日志
+hs_err_pid*.log
+
+# Go vendor 二进制
+chaincode_and_API/mychaincode/go/asset
+# Go vendor 第三方依赖（含误报的 webhook，可通过 go mod download 恢复）
+chaincode_and_API/mychaincode/go/vendor/
+
+# 备份文件
+*.bak
+*.orig
+
+# 临时文件
+*.tmp
+*.temp
+*~
+*.swp
+*.swo
+
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+
+# Windows 系统文件
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+
+# IDE / 编辑器通用
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
