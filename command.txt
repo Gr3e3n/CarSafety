@@ -1,0 +1,10 @@
+adb shell am start -a android.settings.SETTINGS#车机开网
+uvicorn backend.main:app --host 0.0.0.0 --port 8080#开后端
+##下面是一些示例
+#从虚拟器拉取文件到本地（这个文件运行时候可以设置）
+./adb pull /sdcard/Android/data/com.example.vehtrust/files/ "D:\Users\Desktop\VehTrust0518(1)\VehTrust0518\experiment_lab\results\"
+#在虚拟器跑命令，这是对于存储文件夹的清除 ，及时更新
+.\adb shell "ls -la /sdcard/Android/data/com.example.vehtrust/files/"
+
+操作提示：adb是android studio的sdk支持的一个命令，用于对虚拟器的操作，使用时，看android studio右上角设置sdk manager看具体位置，在终端cd这个目录下面的platform-tools文件夹，由于没有配置环境变量，信任的时候在前面加上./或者.\
+跑的时候可以开两个后端，一个在platforms操作，一个跑后端，后端，用api请求后可以让终端输出提示信息，可以设置试错机制，若是输入不对可以再试一下，我的云端实验就是这样，看看能不能多用用我的代码。
