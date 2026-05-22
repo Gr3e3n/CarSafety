@@ -1,0 +1,21 @@
+{
+  "input_summary": "合成示范（非测试集）：城市快速路跟车，L2辅助，前车急刹，驾驶员反应偏慢，AEB未充分介入。",
+  "output_example": {
+    "summary": "示范：L2辅助状态下跟车距离不足，前车急减速时驾驶员制动偏晚，系统AEB介入有限，形成追尾风险。",
+    "rootCause": "示范主因：驾驶员反应与制动建立偏慢；次因：系统AEB触发偏晚或未充分减速。",
+    "comprehensiveAnalysis": "示范：驾驶侧—感知到前车减速后踏板响应约900ms；系统侧—AEB在碰撞风险窗口内介入不足；环境侧—车流密集但未出现极端天气。",
+    "scenarioReconstruction": "示范：T-3s跟车中速→T-1s前车急减→T-0.5s本车开始制动但减速度不足→接触风险升高。",
+    "confidenceStatement": "示范：置信度中；若缺少EDR完整制动曲线，对反应时间判断存在不确定性。",
+    "evidencePoints": [
+      "示范：反应时间约900ms",
+      "示范：制动上升时间偏长",
+      "示范：TTC在制动时低于安全阈值"
+    ],
+    "suggestions": [
+      "示范：补充EDR与行车记录仪对齐",
+      "示范：复核AEB触发日志"
+    ],
+    "modelHint": "few-shot synthetic demo",
+    "rawText": "示范增量：若驾驶员提前0.5s制动，TTC可能恢复至安全区间；当前缺失对向车道视频，无法排除第三方切入。"
+  }
+}

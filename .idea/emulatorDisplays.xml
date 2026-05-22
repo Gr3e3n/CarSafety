@@ -23,8 +23,45 @@
                 <PanelState>
                   <option name="splitPanel">
                     <SplitPanelState>
-                      <option name="proportion" value="0.8745387196540833" />
-                      <option name="splitType" value="VERTICAL" />
+                      <option name="proportion" value="0.6000000238418579" />
+                      <option name="firstComponent">
+                        <PanelState>
+                          <option name="displayId" value="0" />
+                        </PanelState>
+                      </option>
+                      <option name="secondComponent">
+                        <PanelState>
+                          <option name="displayId" value="6" />
+                        </PanelState>
+                      </option>
+                    </SplitPanelState>
+                  </option>
+                </PanelState>
+              </option>
+            </MultiDisplayState>
+          </value>
+        </entry>
+        <entry key="C:\Users\coco\.android\avd\car2.avd">
+          <value>
+            <MultiDisplayState>
+              <option name="displayDescriptors">
+                <list>
+                  <DisplayDescriptor>
+                    <option name="height" value="2560" />
+                    <option name="width" value="1600" />
+                  </DisplayDescriptor>
+                  <DisplayDescriptor>
+                    <option name="displayId" value="6" />
+                    <option name="height" value="792" />
+                    <option name="width" value="528" />
+                  </DisplayDescriptor>
+                </list>
+              </option>
+              <option name="panelState">
+                <PanelState>
+                  <option name="splitPanel">
+                    <SplitPanelState>
+                      <option name="proportion" value="0.7518796920776367" />
                       <option name="firstComponent">
                         <PanelState>
                           <option name="displayId" value="0" />

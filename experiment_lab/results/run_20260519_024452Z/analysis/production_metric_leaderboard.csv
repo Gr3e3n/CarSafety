@@ -1,0 +1,11 @@
+﻿category,metric_key,metric_label,best_condition,best_value,prompt_type
+生产评估,PQI_mean,生产质量指数 PQI,C_D0,97.13,结构化全量（生产版）
+生产评估,Re_disciplined_micro,校准证据召回 Re*,P3_D0,0.9601,CoT Prompt
+生产评估,Re_assist_micro,证据召回率 Re,BASELINE_D0,0.9933,普通Prompt
+生产评估,structured_compliance_mean,结构化规范符合度,C_D0,1.0,结构化全量（生产版）
+生产评估,field_completeness_rate,九字段齐全率,C_D0,1.0,结构化全量（生产版）
+生产评估,readability_mean,可读性/5,C_D0,5.0,结构化全量（生产版）
+生产评估,evidence_calibration_mean,证据条数校准分,P4_D0,1.0,Few-shot Prompt
+生产评估,confidence_present_rate,置信度说明覆盖率,C_D0,1.0,结构化全量（生产版）
+综合,QI_mean,综合质量指数 QI,BASELINE_D0,98.2494,普通Prompt
+综合,VQI_mean,性价比 VQI,B_D0,82.8,通用大模型（系统方法）

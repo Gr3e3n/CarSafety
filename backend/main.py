@@ -10,6 +10,13 @@ import logging
 import os
 import re
 import threading
+import time
+
+from prompt_ladder import (
+    build_production_user_prompt,
+    build_prompt_variant,
+    is_ladder_variant,
+)
 
 BASE_DIR = Path(__file__).resolve().parent
 load_dotenv(BASE_DIR / ".env")
@@ -130,7 +137,10 @@ class AccidentAnalyzeRequest(BaseModel):
     environment: EnvironmentPayload | None = None
     decisionTrace: DecisionTracePayload | None = None
     derivedSignals: DerivedSignalsPayload | None = None
-    experimentGroup: str = Field(default="C", description="实验分组: A=模板生成, B=通用大模型, C=本项目结构化方法")
+    experimentGroup: str = Field(
+        default="C",
+        description="A/B/C=系统方法对比; BASELINE/P1～P6/FINAL=提示词工程阶梯（固定全量输入）",
+    )
     ablationMode: str = Field(
         default="D0",
         description="消融 D0=完整 D1=去掉责任块 D2=去掉环境 D3=去掉决策链 D4=弱化结构化提示（仅 C 组）",
@@ -145,29 +155,9 @@ def _telemetry_lines(payload: AccidentAnalyzeRequest) -> str:
 
 
 def _structured_output_rules() -> str:
-    return """
-请基于以下事故数据生成“结构化专家报告”JSON，字段固定为：
-summary, rootCause, comprehensiveAnalysis, scenarioReconstruction, confidenceStatement, evidencePoints, suggestions, modelHint, rawText。
+    from prompt_ladder import full_output_rules
 
-输出要求：
-1) 只输出 JSON，不要 markdown，不要代码块。
-2) 严格基于输入数据，不得虚构未提供的证据或结论。
-3) summary：1 段，80~160 字，概括事件本质与主要风险。
-4) rootCause：1 段，60~120 字，明确“主因 + 次因”。
-5) comprehensiveAnalysis：2~3 段，分别从驾驶、系统、环境角度解释因果链。
-6) scenarioReconstruction：1~2 段，按时间顺序复盘风险形成与碰撞过程。
-7) confidenceStatement：1 段，说明置信度（高/中/低）及不确定性来源。
-8) evidencePoints：3~6 条，简短证据点列表。
-9) suggestions：3~5 条，可执行改进建议或补充取证建议。
-10) rawText：3~5 段“增量叙述”，每段都必须提供前文未出现的新信息。
-11) rawText 必须优先覆盖以下维度中未被前文覆盖的项：
-   - 时间线细节（具体到阶段/先后关系）
-   - 证据链闭环（某证据如何支持某结论）
-   - 反事实或替代解释（若关键条件变化，结果可能如何变化）
-   - 待补充取证点（缺失什么数据会影响结论）
-12) rawText 严禁复述 summary/rootCause/comprehensiveAnalysis/scenarioReconstruction 的句子或近义改写。
-13) 若输入证据不足，rawText 只写“信息不足点 + 建议补采数据”等内容，不要重复已有判断。
-""".strip()
+    return full_output_rules()
 
 
 def build_prompt_c(payload: AccidentAnalyzeRequest) -> str:
@@ -190,6 +180,24 @@ severity={payload.severity}
 autoDrivingState={payload.autoDrivingState}
 """.strip()
 
+    if ablation == "D4":
+        return f"""
+请根据以下「普通描述 + 遥测摘要 + 派生指标」生成复盘 JSON（字段仍为 summary, rootCause, comprehensiveAnalysis, scenarioReconstruction, confidenceStatement, evidencePoints, suggestions, modelHint, rawText）。
+说明：本题为消融实验 D4，不提供完整结构化提示词；请仍严格基于下列已给信息，不要编造未出现的数据。
+
+{event_block}
+
+【事故前关键遥测】
+{telemetry_summary}
+
+【端侧派生信号（TTC/AEB/制动/接管/严重度摘要）】
+{derived_json}
+只输出 JSON。
+""".strip()
+
+    if ablation == "D0":
+        return build_production_user_prompt(payload)
+
     resp_block = f"""
 【责任分析】
 conclusion={payload.responsibility.conclusion}
@@ -203,19 +211,6 @@ reasons={' | '.join(payload.responsibility.reasons)}
     trace_block = f"【决策链】\n{payload.decisionTrace.model_dump_json() if payload.decisionTrace else 'null'}"
     tele_block = f"【事故前关键遥测】\n{telemetry_summary}"
     derived_block = f"【端侧派生信号（TTC/AEB/制动/接管/严重度摘要）】\n{derived_json}"
-
-    if ablation == "D4":
-        return f"""
-请根据以下「普通描述 + 遥测摘要 + 派生指标」生成复盘 JSON（字段仍为 summary, rootCause, comprehensiveAnalysis, scenarioReconstruction, confidenceStatement, evidencePoints, suggestions, modelHint, rawText）。
-说明：本题为消融实验 D4，不提供完整结构化提示词；请仍严格基于下列已给信息，不要编造未出现的数据。
-
-{event_block}
-
-{tele_block}
-
-{derived_block}
-只输出 JSON。
-""".strip()
 
     parts_rules = [_structured_output_rules(), event_block]
     if ablation != "D1":
@@ -328,16 +323,25 @@ def _parse_llm_json_object(content: str) -> dict:
 
 
 def _analyze_payload(payload: AccidentAnalyzeRequest, openai_client: OpenAI) -> dict:
-    group = payload.experimentGroup.upper()
+    group = payload.experimentGroup.upper().strip()
+    prompt_variant = group if is_ladder_variant(group) else None
+
     if group == "A":
         prompt = build_prompt_a(payload)
         system_content = "你是一个固定模板填充助手，只按规则生成结构化JSON，不要添加额外推理。"
     elif group == "B":
         prompt = build_prompt_b(payload)
         system_content = "你是通用大模型助手，仅基于简要描述生成事故复盘，不要使用结构化输入。"
-    else:  # C
+    elif is_ladder_variant(group):
+        prompt, system_content = build_prompt_variant(group, payload)
+    else:  # C 及默认
+        group = "C"
         prompt = build_prompt_c(payload)
-        system_content = "你是资深车载事故分析专家。请严格基于输入数据进行专业、谨慎、可解释的因果分析，不要虚构事实，输出结构化 JSON。若发现后文与前文语义重复，必须优先改写为新增证据、新增视角或新增不确定性说明。"
+        system_content = (
+            "你是资深车载事故分析专家。请严格基于输入数据进行专业、谨慎、可解释的因果分析，"
+            "不要虚构事实，输出结构化 JSON。若发现后文与前文语义重复，"
+            "必须优先改写为新增证据、新增视角或新增不确定性说明。"
+        )
 
     strict_suffix = (
         "\n\n[硬性要求] 只输出一个 JSON 对象；键名与字符串一律用 ASCII 双引号；"
@@ -352,6 +356,11 @@ def _analyze_payload(payload: AccidentAnalyzeRequest, openai_client: OpenAI) -> 
 
     last_content = "{}"
     data: dict | None = None
+    retry_count = 0
+    total_latency_ms = 0.0
+    prompt_tokens: int | None = None
+    completion_tokens: int | None = None
+    total_tokens: int | None = None
 
     for attempt in range(2):
         if attempt == 0:
@@ -373,17 +382,25 @@ def _analyze_payload(payload: AccidentAnalyzeRequest, openai_client: OpenAI) -> 
             ]
             temp = 0.0
 
+        t0 = time.perf_counter()
         completion = openai_client.chat.completions.create(
             model=MODEL,
             temperature=temp,
             response_format={"type": "json_object"},
             messages=messages,
         )
+        total_latency_ms += (time.perf_counter() - t0) * 1000.0
+        usage = getattr(completion, "usage", None)
+        if usage is not None:
+            prompt_tokens = (prompt_tokens or 0) + int(getattr(usage, "prompt_tokens", 0) or 0)
+            completion_tokens = (completion_tokens or 0) + int(getattr(usage, "completion_tokens", 0) or 0)
+            total_tokens = (total_tokens or 0) + int(getattr(usage, "total_tokens", 0) or 0)
         last_content = completion.choices[0].message.content or "{}"
         try:
             data = _parse_llm_json_object(last_content)
         except ValueError as exc:
             if attempt == 0:
+                retry_count += 1
                 logger.warning(
                     "JSON 解析失败，将重试 1 次 API: eventId=%s | %s",
                     payload.eventId,
@@ -402,6 +419,16 @@ def _analyze_payload(payload: AccidentAnalyzeRequest, openai_client: OpenAI) -> 
         "success": True,
         "experimentGroup": group,
         "ablationMode": payload.ablationMode.upper().strip() or "D0",
+        "meta": {
+            "latency_ms": round(total_latency_ms, 1),
+            "prompt_tokens": prompt_tokens,
+            "completion_tokens": completion_tokens,
+            "total_tokens": total_tokens,
+            "retry_count": retry_count,
+            "prompt_chars": len(prompt),
+            "model": MODEL,
+            "promptVariant": prompt_variant,
+        },
         "data": {
             "summary": data.get("summary", "未返回事故摘要"),
             "rootCause": data.get("rootCause", "未返回根因判断"),

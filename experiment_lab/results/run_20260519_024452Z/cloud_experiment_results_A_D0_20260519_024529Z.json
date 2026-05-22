@@ -1,0 +1,1672 @@
+[
+  {
+    "requestIndex": 0,
+    "eventId": "EXP-20260518-001",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 0,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 2850.3,
+        "prompt_tokens": 128,
+        "completion_tokens": 172,
+        "total_tokens": 300,
+        "retry_count": 0,
+        "prompt_chars": 264,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故COLLISION发生于苏州·工业园区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员61%，系统25%，环境14%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 1,
+    "eventId": "EXP-20260518-002",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 1,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 5135.5,
+        "prompt_tokens": 128,
+        "completion_tokens": 303,
+        "total_tokens": 431,
+        "retry_count": 0,
+        "prompt_chars": 264,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故COLLISION发生于苏州·工业园区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员71%，系统14%，环境15%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": [],
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 2,
+    "eventId": "EXP-20260518-003",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 2,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 1784.7,
+        "prompt_tokens": 129,
+        "completion_tokens": 118,
+        "total_tokens": 247,
+        "retry_count": 0,
+        "prompt_chars": 262,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故COLLISION发生于西安·高新区，严重程度LOW。",
+        "rootCause": "主要责任驾驶员69%，系统17%，环境14%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": [],
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 3,
+    "eventId": "EXP-20260518-004",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 3,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 5034.0,
+        "prompt_tokens": 129,
+        "completion_tokens": 281,
+        "total_tokens": 410,
+        "retry_count": 0,
+        "prompt_chars": 262,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故COLLISION发生于成都·高新区，严重程度LOW。",
+        "rootCause": "主要责任驾驶员58%，系统30%，环境12%。",
+        "comprehensiveAnalysis": "基于证据分析，驾驶员操作失误为主要原因，系统辅助功能未完全介入，环境因素影响较小。",
+        "scenarioReconstruction": "事故发生在高新区主干道，天气晴朗，能见度良好。驾驶员未保持安全车距，系统预警后未及时响应。",
+        "confidenceStatement": "分析结论置信度为85%，证据链完整。",
+        "evidencePoints": [
+          "驾驶员视线偏离前方2秒",
+          "系统碰撞预警激活但未制动",
+          "天气状况良好无降雨"
+        ],
+        "suggestions": [
+          "加强驾驶员注意力培训",
+          "优化系统制动介入逻辑",
+          "增加环境感知传感器"
+        ],
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": "事故原始文本：2023年8月15日，成都高新区某路口发生追尾事故，因前车急刹，后车驾驶员分神导致碰撞，无人员伤亡。"
+      }
+    }
+  },
+  {
+    "requestIndex": 4,
+    "eventId": "EXP-20260518-005",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 4,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 7707.2,
+        "prompt_tokens": 132,
+        "completion_tokens": 590,
+        "total_tokens": 722,
+        "retry_count": 0,
+        "prompt_chars": 266,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故COLLISION发生于南京·雨花台区，严重程度MEDIUM。",
+        "rootCause": "主要责任驾驶员68%，系统22%，环境10%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 5,
+    "eventId": "EXP-20260518-006",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 0,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 2238.4,
+        "prompt_tokens": 130,
+        "completion_tokens": 143,
+        "total_tokens": 273,
+        "retry_count": 0,
+        "prompt_chars": 266,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故COLLISION发生于上海·浦东新区，严重程度MEDIUM。",
+        "rootCause": "主要责任驾驶员64%，系统25%，环境11%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 6,
+    "eventId": "EXP-20260518-007",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 1,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 2328.7,
+        "prompt_tokens": 130,
+        "completion_tokens": 157,
+        "total_tokens": 287,
+        "retry_count": 0,
+        "prompt_chars": 266,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故COLLISION发生于上海·浦东新区，严重程度MEDIUM。",
+        "rootCause": "主要责任驾驶员68%，系统22%，环境10%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": [],
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 7,
+    "eventId": "EXP-20260518-008",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 2,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 3795.2,
+        "prompt_tokens": 134,
+        "completion_tokens": 254,
+        "total_tokens": 388,
+        "retry_count": 0,
+        "prompt_chars": 269,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故AUTOPILOT_FAULT发生于深圳·南山区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员20%，系统70%，环境10%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": "事故AUTOPILOT_FAULT发生于深圳·南山区，严重程度HIGH。"
+      }
+    }
+  },
+  {
+    "requestIndex": 8,
+    "eventId": "EXP-20260518-009",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 3,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 3285.6,
+        "prompt_tokens": 134,
+        "completion_tokens": 232,
+        "total_tokens": 366,
+        "retry_count": 0,
+        "prompt_chars": 268,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故AUTOPILOT_FAULT发生于西安·高新区，严重程度LOW。",
+        "rootCause": "主要责任驾驶员22%，系统66%，环境12%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 9,
+    "eventId": "EXP-20260518-010",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 4,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 11198.4,
+        "prompt_tokens": 135,
+        "completion_tokens": 735,
+        "total_tokens": 870,
+        "retry_count": 0,
+        "prompt_chars": 271,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故AUTOPILOT_FAULT发生于武汉·东湖高新区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员32%，系统58%，环境10%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": [],
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 10,
+    "eventId": "EXP-20260518-011",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 0,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 4292.0,
+        "prompt_tokens": 134,
+        "completion_tokens": 340,
+        "total_tokens": 474,
+        "retry_count": 0,
+        "prompt_chars": 269,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故AUTOPILOT_FAULT发生于上海·浦东新区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员29%，系统62%，环境9%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 11,
+    "eventId": "EXP-20260518-012",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 1,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 6832.3,
+        "prompt_tokens": 133,
+        "completion_tokens": 401,
+        "total_tokens": 534,
+        "retry_count": 0,
+        "prompt_chars": 270,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故AUTOPILOT_FAULT发生于苏州·工业园区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员20%，系统70%，环境10%。",
+        "comprehensiveAnalysis": "无",
+        "scenarioReconstruction": "无",
+        "confidenceStatement": "无",
+        "evidencePoints": [],
+        "suggestions": "无",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 12,
+    "eventId": "EXP-20260518-013",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 2,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 4068.3,
+        "prompt_tokens": 134,
+        "completion_tokens": 199,
+        "total_tokens": 333,
+        "retry_count": 0,
+        "prompt_chars": 268,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故AUTOPILOT_FAULT发生于深圳·南山区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员29%，系统62%，环境9%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 13,
+    "eventId": "EXP-20260518-014",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 3,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 4993.2,
+        "prompt_tokens": 134,
+        "completion_tokens": 403,
+        "total_tokens": 537,
+        "retry_count": 0,
+        "prompt_chars": 272,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故DRIVER_SLOW_REACTION发生于北京·亦庄，严重程度LOW。",
+        "rootCause": "主要责任驾驶员58%，系统30%，环境12%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": "事故DRIVER_SLOW_REACTION发生于北京·亦庄，严重程度LOW。主要责任驾驶员58%，系统30%，环境12%。"
+      }
+    }
+  },
+  {
+    "requestIndex": 14,
+    "eventId": "EXP-20260518-015",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 4,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 10725.6,
+        "prompt_tokens": 134,
+        "completion_tokens": 848,
+        "total_tokens": 982,
+        "retry_count": 0,
+        "prompt_chars": 276,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故DRIVER_SLOW_REACTION发生于武汉·东湖高新区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员68%，系统22%，环境10%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": "事故DRIVER_SLOW_REACTION发生于武汉·东湖高新区，严重程度HIGH。 主要责任驾驶员68%，系统22%，环境10%。"
+      }
+    }
+  },
+  {
+    "requestIndex": 15,
+    "eventId": "EXP-20260518-016",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 0,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 12706.2,
+        "prompt_tokens": 133,
+        "completion_tokens": 896,
+        "total_tokens": 1029,
+        "retry_count": 0,
+        "prompt_chars": 274,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故DRIVER_SLOW_REACTION发生于苏州·工业园区，严重程度LOW。",
+        "rootCause": "主要责任驾驶员68%，系统22%，环境10%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 16,
+    "eventId": "EXP-20260518-017",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 1,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 3954.2,
+        "prompt_tokens": 134,
+        "completion_tokens": 230,
+        "total_tokens": 364,
+        "retry_count": 0,
+        "prompt_chars": 276,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故DRIVER_SLOW_REACTION发生于杭州·滨江区，严重程度MEDIUM。",
+        "rootCause": "主要责任驾驶员58%，系统30%，环境12%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 17,
+    "eventId": "EXP-20260518-018",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 2,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 3997.9,
+        "prompt_tokens": 136,
+        "completion_tokens": 256,
+        "total_tokens": 392,
+        "retry_count": 0,
+        "prompt_chars": 277,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故DRIVER_SLOW_REACTION发生于南京·雨花台区，严重程度MEDIUM。",
+        "rootCause": "主要责任驾驶员77%，系统12%，环境11%。",
+        "comprehensiveAnalysis": "驾驶员反应滞后是主因，系统预警和道路环境为次要因素。",
+        "scenarioReconstruction": "事故发生时，车辆以正常速度行驶，前方出现突发障碍物，驾驶员未能及时刹车，系统预警未触发有效干预。",
+        "confidenceStatement": "本分析基于证据点综合判断，置信度较高。",
+        "evidencePoints": "证据点从输入直接提取。",
+        "suggestions": "加强驾驶员反应训练，优化系统预警灵敏度。",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": "事故DRIVER_SLOW_REACTION发生于南京·雨花台区，严重程度MEDIUM。"
+      }
+    }
+  },
+  {
+    "requestIndex": 18,
+    "eventId": "EXP-20260518-019",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 3,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 4310.4,
+        "prompt_tokens": 132,
+        "completion_tokens": 281,
+        "total_tokens": 413,
+        "retry_count": 0,
+        "prompt_chars": 274,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故DRIVER_SLOW_REACTION发生于西安·高新区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员64%，系统26%，环境10%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 19,
+    "eventId": "EXP-20260518-020",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 4,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 4104.3,
+        "prompt_tokens": 135,
+        "completion_tokens": 244,
+        "total_tokens": 379,
+        "retry_count": 0,
+        "prompt_chars": 272,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故AEB_DELAY_OR_MISS发生于上海·浦东新区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员41%，系统47%，环境12%。",
+        "comprehensiveAnalysis": "分析内容",
+        "scenarioReconstruction": "重建内容",
+        "confidenceStatement": "置信度说明",
+        "evidencePoints": [],
+        "suggestions": "建议内容",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": "原始文本"
+      }
+    }
+  },
+  {
+    "requestIndex": 20,
+    "eventId": "EXP-20260518-021",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 0,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 2581.1,
+        "prompt_tokens": 135,
+        "completion_tokens": 161,
+        "total_tokens": 296,
+        "retry_count": 0,
+        "prompt_chars": 269,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故AEB_DELAY_OR_MISS发生于北京·亦庄，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员43%，系统48%，环境9%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 21,
+    "eventId": "EXP-20260518-022",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 1,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 7610.3,
+        "prompt_tokens": 137,
+        "completion_tokens": 627,
+        "total_tokens": 764,
+        "retry_count": 0,
+        "prompt_chars": 275,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故AEB_DELAY_OR_MISS发生于武汉·东湖高新区，严重程度MEDIUM。",
+        "rootCause": "主要责任驾驶员36%，系统54%，环境10%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 22,
+    "eventId": "EXP-20260518-023",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 2,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 8531.7,
+        "prompt_tokens": 134,
+        "completion_tokens": 458,
+        "total_tokens": 592,
+        "retry_count": 0,
+        "prompt_chars": 271,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故AEB_DELAY_OR_MISS发生于西安·高新区，严重程度HIGH",
+        "rootCause": "主要责任驾驶员36%，系统54%，环境10%",
+        "comprehensiveAnalysis": "系统对前方静止车辆识别延迟，驾驶员未及时接管，导致碰撞",
+        "scenarioReconstruction": "车辆以60km/h行驶，前方静止货车，AEB未及时触发，驾驶员反应时间1.2秒，制动不足",
+        "confidenceStatement": "基于日志和场景还原，分析置信度较高",
+        "evidencePoints": [
+          "日志显示目标识别延迟0.8秒",
+          "AEB触发时车速50km/h",
+          "驾驶员未采取刹车的证据"
+        ],
+        "suggestions": "优化雷达和摄像头融合算法，增加驾驶员注意力监测",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": "事故日志及视频分析"
+      }
+    }
+  },
+  {
+    "requestIndex": 23,
+    "eventId": "EXP-20260518-024",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 3,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 5093.6,
+        "prompt_tokens": 134,
+        "completion_tokens": 354,
+        "total_tokens": 488,
+        "retry_count": 0,
+        "prompt_chars": 270,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故AEB_DELAY_OR_MISS发生于成都·高新区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员43%，系统48%，环境9%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 24,
+    "eventId": "EXP-20260518-025",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 4,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 3542.9,
+        "prompt_tokens": 136,
+        "completion_tokens": 212,
+        "total_tokens": 348,
+        "retry_count": 0,
+        "prompt_chars": 272,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故AEB_DELAY_OR_MISS发生于武汉·东湖高新区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员54%，系统37%，环境9%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 25,
+    "eventId": "EXP-20260518-026",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 0,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 3377.4,
+        "prompt_tokens": 133,
+        "completion_tokens": 229,
+        "total_tokens": 362,
+        "retry_count": 0,
+        "prompt_chars": 266,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故TTC_LOW_RISK发生于杭州·滨江区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员73%，系统15%，环境12%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": "事故TTC_LOW_RISK发生于杭州·滨江区，严重程度HIGH。"
+      }
+    }
+  },
+  {
+    "requestIndex": 26,
+    "eventId": "EXP-20260518-027",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 1,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 9615.1,
+        "prompt_tokens": 134,
+        "completion_tokens": 624,
+        "total_tokens": 758,
+        "retry_count": 0,
+        "prompt_chars": 264,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故TTC_LOW_RISK发生于北京·亦庄，严重程度LOW。",
+        "rootCause": "主要责任驾驶员63%，系统26%，环境11%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": "事故TTC_LOW_RISK发生于北京·亦庄，严重程度LOW。"
+      }
+    }
+  },
+  {
+    "requestIndex": 27,
+    "eventId": "EXP-20260518-028",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 2,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 4754.1,
+        "prompt_tokens": 132,
+        "completion_tokens": 414,
+        "total_tokens": 546,
+        "retry_count": 0,
+        "prompt_chars": 267,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故TTC_LOW_RISK发生于苏州·工业园区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员63%，系统26%，环境11%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": "事故TTC_LOW_RISK发生于苏州·工业园区，严重程度HIGH。主要责任驾驶员63%，系统26%，环境11%。"
+      }
+    }
+  },
+  {
+    "requestIndex": 28,
+    "eventId": "EXP-20260518-029",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 3,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 3549.5,
+        "prompt_tokens": 134,
+        "completion_tokens": 263,
+        "total_tokens": 397,
+        "retry_count": 0,
+        "prompt_chars": 268,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故TTC_LOW_RISK发生于广州·黄埔区，严重程度MEDIUM。",
+        "rootCause": "主要责任驾驶员73%，系统15%，环境12%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 29,
+    "eventId": "EXP-20260518-030",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 4,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 5145.1,
+        "prompt_tokens": 133,
+        "completion_tokens": 341,
+        "total_tokens": 474,
+        "retry_count": 0,
+        "prompt_chars": 268,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故TTC_LOW_RISK发生于成都·高新区，严重程度MEDIUM。",
+        "rootCause": "主要责任驾驶员68%，系统18%，环境14%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 30,
+    "eventId": "EXP-20260518-031",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 0,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 5919.6,
+        "prompt_tokens": 133,
+        "completion_tokens": 389,
+        "total_tokens": 522,
+        "retry_count": 0,
+        "prompt_chars": 266,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故TTC_LOW_RISK发生于广州·黄埔区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员63%，系统26%，环境11%。",
+        "comprehensiveAnalysis": "事故综合原因分析：驾驶员操作失误占主要因素，系统响应延迟和局限性为辅，环境因素影响较小。",
+        "scenarioReconstruction": "事故场景重建：车辆在行驶过程中，驾驶员未能及时识别前方风险，系统预警但未完全避免碰撞。",
+        "confidenceStatement": "基于现有证据，分析结果可信度较高。",
+        "evidencePoints": [
+          "驾驶员分心记录",
+          "系统报警日志",
+          "环境光照条件"
+        ],
+        "suggestions": [
+          "加强驾驶员培训",
+          "优化系统预警算法",
+          "改善环境感知能力"
+        ],
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": "事故TTC_LOW_RISK发生于广州·黄埔区，严重程度HIGH。主要责任驾驶员63%，系统26%，环境11%。"
+      }
+    }
+  },
+  {
+    "requestIndex": 31,
+    "eventId": "EXP-20260518-032",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 1,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 3992.7,
+        "prompt_tokens": 136,
+        "completion_tokens": 274,
+        "total_tokens": 410,
+        "retry_count": 0,
+        "prompt_chars": 275,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故DRIVER_TAKEOVER_FAIL发生于南京·雨花台区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员39%，系统50%，环境11%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": [],
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 32,
+    "eventId": "EXP-20260518-033",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 2,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 2025.0,
+        "prompt_tokens": 137,
+        "completion_tokens": 122,
+        "total_tokens": 259,
+        "retry_count": 0,
+        "prompt_chars": 276,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故DRIVER_TAKEOVER_FAIL发生于南京·雨花台区，严重程度MEDIUM。",
+        "rootCause": "主要责任驾驶员42%，系统49%，环境9%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 33,
+    "eventId": "EXP-20260518-034",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 3,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 11953.9,
+        "prompt_tokens": 135,
+        "completion_tokens": 869,
+        "total_tokens": 1004,
+        "retry_count": 0,
+        "prompt_chars": 273,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故DRIVER_TAKEOVER_FAIL发生于广州·黄埔区，严重程度LOW。",
+        "rootCause": "主要责任驾驶员39%，系统50%，环境11%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 34,
+    "eventId": "EXP-20260518-035",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 4,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 7507.6,
+        "prompt_tokens": 134,
+        "completion_tokens": 469,
+        "total_tokens": 603,
+        "retry_count": 0,
+        "prompt_chars": 274,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故DRIVER_TAKEOVER_FAIL发生于苏州·工业园区，严重程度LOW。",
+        "rootCause": "主要责任驾驶员48%，系统42%，环境10%。",
+        "comprehensiveAnalysis": "事故由于驾驶员未能及时接管、系统检测失败及环境因素共同作用。",
+        "scenarioReconstruction": "车辆在工业园区路段行驶，系统发出接管请求后驾驶员未响应，导致碰撞。",
+        "confidenceStatement": "基于模拟数据和现场记录，分析结果可信度中高。",
+        "evidencePoints": [],
+        "suggestions": "建议优化系统接管提示方式，加强驾驶员培训。",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 35,
+    "eventId": "EXP-20260518-036",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 0,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 1969.9,
+        "prompt_tokens": 135,
+        "completion_tokens": 124,
+        "total_tokens": 259,
+        "retry_count": 0,
+        "prompt_chars": 274,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故DRIVER_TAKEOVER_FAIL发生于上海·浦东新区，严重程度LOW。",
+        "rootCause": "主要责任驾驶员39%，系统50%，环境11%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": [],
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 36,
+    "eventId": "EXP-20260518-037",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 1,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 4230.3,
+        "prompt_tokens": 134,
+        "completion_tokens": 239,
+        "total_tokens": 373,
+        "retry_count": 0,
+        "prompt_chars": 274,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故DRIVER_TAKEOVER_FAIL发生于深圳·南山区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员39%，系统50%，环境11%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 37,
+    "eventId": "EXP-20260518-038",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 2,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 3896.5,
+        "prompt_tokens": 134,
+        "completion_tokens": 239,
+        "total_tokens": 373,
+        "retry_count": 0,
+        "prompt_chars": 274,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故ENVIRONMENT_DISTURB发生于南京·雨花台区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员47%，系统24%，环境29%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 38,
+    "eventId": "EXP-20260518-039",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 3,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 6770.3,
+        "prompt_tokens": 134,
+        "completion_tokens": 448,
+        "total_tokens": 582,
+        "retry_count": 0,
+        "prompt_chars": 274,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故ENVIRONMENT_DISTURB发生于武汉·东湖高新区，严重程度LOW。",
+        "rootCause": "主要责任驾驶员53%，系统21%，环境26%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 39,
+    "eventId": "EXP-20260518-040",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 4,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 6986.8,
+        "prompt_tokens": 131,
+        "completion_tokens": 467,
+        "total_tokens": 598,
+        "retry_count": 0,
+        "prompt_chars": 273,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故ENVIRONMENT_DISTURB发生于成都·高新区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员47%，系统24%，环境29%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": [],
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 40,
+    "eventId": "EXP-20260518-041",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 0,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 2626.5,
+        "prompt_tokens": 133,
+        "completion_tokens": 142,
+        "total_tokens": 275,
+        "retry_count": 0,
+        "prompt_chars": 276,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故ENVIRONMENT_DISTURB发生于上海·浦东新区，严重程度MEDIUM。",
+        "rootCause": "主要责任驾驶员40%，系统28%，环境32%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 41,
+    "eventId": "EXP-20260518-042",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 1,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 9551.9,
+        "prompt_tokens": 131,
+        "completion_tokens": 703,
+        "total_tokens": 834,
+        "retry_count": 0,
+        "prompt_chars": 274,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故ENVIRONMENT_DISTURB发生于苏州·工业园区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员47%，系统24%，环境29%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": "事故ENVIRONMENT_DISTURB发生于苏州·工业园区，严重程度HIGH。主要责任驾驶员47%，系统24%，环境29%。证据点从输入直接提取。"
+      }
+    }
+  },
+  {
+    "requestIndex": 42,
+    "eventId": "EXP-20260518-043",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 2,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 15887.2,
+        "prompt_tokens": 132,
+        "completion_tokens": 1006,
+        "total_tokens": 1138,
+        "retry_count": 0,
+        "prompt_chars": 275,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故ENVIRONMENT_DISTURB发生于成都·高新区，严重程度MEDIUM。",
+        "rootCause": "主要责任驾驶员47%，系统24%，环境29%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": [],
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": "事故ENVIRONMENT_DISTURB发生于成都·高新区，严重程度MEDIUM。主要责任驾驶员47%，系统24%，环境29%。"
+      }
+    }
+  },
+  {
+    "requestIndex": 43,
+    "eventId": "EXP-20260518-044",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 3,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 2814.1,
+        "prompt_tokens": 133,
+        "completion_tokens": 197,
+        "total_tokens": 330,
+        "retry_count": 0,
+        "prompt_chars": 268,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故MULTI_FACTOR发生于深圳·南山区，严重程度MEDIUM。",
+        "rootCause": "主要责任驾驶员45%，系统31%，环境24%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": "事故MULTI_FACTOR发生于深圳·南山区，严重程度MEDIUM。"
+      }
+    }
+  },
+  {
+    "requestIndex": 44,
+    "eventId": "EXP-20260518-045",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 4,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 6346.9,
+        "prompt_tokens": 133,
+        "completion_tokens": 398,
+        "total_tokens": 531,
+        "retry_count": 0,
+        "prompt_chars": 268,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故MULTI_FACTOR发生于广州·黄埔区，严重程度MEDIUM。",
+        "rootCause": "主要责任驾驶员54%，系统18%，环境28%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": "事故MULTI_FACTOR发生于广州·黄埔区，严重程度MEDIUM。主要责任驾驶员54%，系统18%，环境28%。"
+      }
+    }
+  },
+  {
+    "requestIndex": 45,
+    "eventId": "EXP-20260518-046",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 0,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 5872.4,
+        "prompt_tokens": 132,
+        "completion_tokens": 352,
+        "total_tokens": 484,
+        "retry_count": 0,
+        "prompt_chars": 269,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故MULTI_FACTOR发生于苏州·工业园区，严重程度MEDIUM。",
+        "rootCause": "主要责任驾驶员54%，系统18%，环境28%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 46,
+    "eventId": "EXP-20260518-047",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 1,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 11927.4,
+        "prompt_tokens": 132,
+        "completion_tokens": 814,
+        "total_tokens": 946,
+        "retry_count": 0,
+        "prompt_chars": 266,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故MULTI_FACTOR发生于深圳·南山区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员61%，系统15%，环境24%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 47,
+    "eventId": "EXP-20260518-048",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 2,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 6725.1,
+        "prompt_tokens": 132,
+        "completion_tokens": 445,
+        "total_tokens": 577,
+        "retry_count": 0,
+        "prompt_chars": 266,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故MULTI_FACTOR发生于杭州·滨江区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员58%，系统24%，环境18%。",
+        "comprehensiveAnalysis": "待补充",
+        "scenarioReconstruction": "待补充",
+        "confidenceStatement": "待补充",
+        "evidencePoints": [],
+        "suggestions": [],
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 48,
+    "eventId": "EXP-20260518-049",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 3,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 8120.1,
+        "prompt_tokens": 134,
+        "completion_tokens": 465,
+        "total_tokens": 599,
+        "retry_count": 0,
+        "prompt_chars": 267,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故MULTI_FACTOR发生于南京·雨花台区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员61%，系统15%，环境24%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": "",
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  },
+  {
+    "requestIndex": 49,
+    "eventId": "EXP-20260518-050",
+    "experimentGroup": "A",
+    "ablationMode": "D0",
+    "apiKeySlot": 4,
+    "rawResponse": {
+      "success": true,
+      "experimentGroup": "A",
+      "ablationMode": "D0",
+      "meta": {
+        "latency_ms": 5686.1,
+        "prompt_tokens": 133,
+        "completion_tokens": 335,
+        "total_tokens": 468,
+        "retry_count": 0,
+        "prompt_chars": 268,
+        "model": "deepseek-v4-flash",
+        "promptVariant": null
+      },
+      "data": {
+        "summary": "事故MULTI_FACTOR发生于武汉·东湖高新区，严重程度HIGH。",
+        "rootCause": "主要责任驾驶员61%，系统15%，环境24%。",
+        "comprehensiveAnalysis": "",
+        "scenarioReconstruction": "",
+        "confidenceStatement": "",
+        "evidencePoints": [],
+        "suggestions": [],
+        "modelHint": "模型说明：deepseek-v4-flash (Group A)",
+        "rawText": ""
+      }
+    }
+  }
+]
