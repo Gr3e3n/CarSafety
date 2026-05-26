@@ -1,4 +1,4 @@
-# CarScreen — 车载智能安全监控系统
+# 溯安行：面向智能汽车事故溯源追责的区块链可信存证系统
 
 > **平台**：Android 车载（AAOS）· minSdk 31 / targetSdk 36
 > **语言**：Kotlin
