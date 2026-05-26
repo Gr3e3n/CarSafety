@@ -6,15 +6,15 @@ plugins {
 }
 
 android {
-    namespace = "com.example.vehtrust"
+    namespace = "com.csa.chesuan"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.vehtrust"
+        applicationId = "com.csa.chesuan"
         minSdk = 30
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

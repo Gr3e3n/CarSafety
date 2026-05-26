@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- 右侧车辆轮廓 -->
+    <path
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000"
+        android:fillColor="#00000000"
+        android:pathData="M19,6 L14,6 L14,18 L19,18 Q21,12 19,6 Z" />
+    <!-- 本车轮廓 -->
+    <path
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000"
+        android:fillColor="#00000000"
+        android:pathData="M10,9 L6,9 L6,15 L10,15 Q12,12 10,9 Z" />
+    <!-- 盲区圆点 -->
+    <path
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000"
+        android:fillColor="#00000000"
+        android:pathData="M20,12 m-2,0 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0" />
+</vector>

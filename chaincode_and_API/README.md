@@ -66,6 +66,11 @@ go run main.go
 
 ---
 
+## Web 查询页（Hash 溯源）
+
+浏览器打开同目录下的 **`chaincode.html`**，输入 App 上链返回的 **hash**，即可调用 `GET /query?hash=...` 查看账本中的完整 JSON 记录（含 `txId`、`deviceId`、`dataPayload` 等）。  
+部署网关后请将页面内 `API_BASE_URL` 改为实际地址（默认 `http://localhost:8080`）。
+
 ## 接口测试
 
 服务启动后，可以通过 HTTP 请求测试数据上链功能。

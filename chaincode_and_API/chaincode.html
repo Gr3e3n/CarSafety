@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>车机区块链数据查询系统</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei", Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #e5e7eb;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 0;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .header h1 {
+      font-size: 36px;
+      margin-bottom: 12px;
+      color: #38bdf8;
+    }
+
+    .header p {
+      color: #cbd5e1;
+      font-size: 16px;
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      margin-bottom: 24px;
+    }
+
+    .form-title {
+      font-size: 22px;
+      margin-bottom: 18px;
+      color: #f8fafc;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    input {
+      flex: 1;
+      height: 46px;
+      border-radius: 10px;
+      border: 1px solid #334155;
+      background: #020617;
+      color: #f8fafc;
+      padding: 0 14px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+    }
+
+    button {
+      height: 46px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #0284c7, #0ea5e9);
+      color: white;
+      padding: 0 24px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #0369a1, #0284c7);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .tip {
+      margin-top: 12px;
+      color: #94a3b8;
+      font-size: 14px;
+    }
+
+    .status {
+      margin-top: 20px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      display: none;
+      font-size: 14px;
+    }
+
+    .status.success {
+      display: block;
+      background: rgba(22, 163, 74, 0.12);
+      color: #86efac;
+      border: 1px solid rgba(34, 197, 94, 0.35);
+    }
+
+    .status.error {
+      display: block;
+      background: rgba(220, 38, 38, 0.12);
+      color: #fca5a5;
+      border: 1px solid rgba(248, 113, 113, 0.35);
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .info-box {
+      background: #020617;
+      border: 1px solid #334155;
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .info-label {
+      color: #94a3b8;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .info-value {
+      color: #f8fafc;
+      word-break: break-all;
+      font-size: 15px;
+    }
+
+    .json-view {
+      background: #020617;
+      border: 1px solid #334155;
+      border-radius: 14px;
+      padding: 18px;
+      margin-top: 22px;
+      overflow-x: auto;
+    }
+
+    pre {
+      margin: 0;
+      color: #a7f3d0;
+      font-size: 14px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .footer {
+      text-align: center;
+      color: #64748b;
+      margin-top: 32px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .input-row {
+        flex-direction: column;
+      }
+
+      button {
+        width: 100%;
+      }
+
+      .result-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>车溯安 · 链上数据查询</h1>
+      <p>基于 Hyperledger Fabric 的事故存证 Hash 核验页面（配合车溯安 App 上链结果使用）</p>
+    </div>
+
+    <div class="card">
+      <div class="form-title">输入 Hash 查询链上数据</div>
+
+      <div class="input-row">
+        <input
+          id="hashInput"
+          type="text"
+          placeholder="请输入上传数据后返回的 hash 值，例如：0dbfafca76aa..."
+        />
+        <button id="queryBtn" onclick="queryData()">查询数据</button>
+      </div>
+
+      <div class="tip">
+        示例接口：GET http://localhost:8080/query?hash=你的hash
+      </div>
+
+      <div id="statusBox" class="status"></div>
+    </div>
+
+    <div id="resultCard" class="card" style="display: none;">
+      <div class="form-title">查询结果</div>
+
+      <div class="result-grid">
+        <div class="info-box">
+          <div class="info-label">查询状态</div>
+          <div id="successValue" class="info-value">-</div>
+        </div>
+
+        <div class="info-box">
+          <div class="info-label">Hash</div>
+          <div id="hashValue" class="info-value">-</div>
+        </div>
+      </div>
+
+      <div class="json-view">
+        <pre id="jsonResult"></pre>
+      </div>
+    </div>
+
+    <div class="footer">
+      车溯安 · carscreen-api · Hyperledger Fabric
+    </div>
+  </div>
+
+  <script>
+    const API_BASE_URL = "http://localhost:8080";
+
+    async function queryData() {
+      const hashInput = document.getElementById("hashInput");
+      const queryBtn = document.getElementById("queryBtn");
+      const statusBox = document.getElementById("statusBox");
+      const resultCard = document.getElementById("resultCard");
+      const jsonResult = document.getElementById("jsonResult");
+      const successValue = document.getElementById("successValue");
+      const hashValue = document.getElementById("hashValue");
+
+      const hash = hashInput.value.trim();
+
+      statusBox.className = "status";
+      statusBox.innerText = "";
+      resultCard.style.display = "none";
+
+      if (!hash) {
+        statusBox.className = "status error";
+        statusBox.innerText = "请输入 hash 值后再查询。";
+        return;
+      }
+
+      queryBtn.disabled = true;
+      queryBtn.innerText = "查询中...";
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/query?hash=${encodeURIComponent(hash)}`);
+        const data = await response.json();
+
+        resultCard.style.display = "block";
+        jsonResult.textContent = JSON.stringify(data, null, 2);
+        successValue.innerText = data.success === true ? "查询成功" : "查询失败";
+        hashValue.innerText = hash;
+
+        if (data.success === true) {
+          statusBox.className = "status success";
+          statusBox.innerText = "查询成功，已从区块链返回对应数据。";
+        } else {
+          statusBox.className = "status error";
+          statusBox.innerText = data.error || "查询失败，请检查 hash 是否正确。";
+        }
+      } catch (error) {
+        statusBox.className = "status error";
+        statusBox.innerText = "请求失败，请确认 Go API 服务是否已启动，且地址为 http://localhost:8080。";
+        console.error(error);
+      } finally {
+        queryBtn.disabled = false;
+        queryBtn.innerText = "查询数据";
+      }
+    }
+
+    document.getElementById("hashInput").addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        queryData();
+      }
+    });
+  </script>
+</body>
+</html>

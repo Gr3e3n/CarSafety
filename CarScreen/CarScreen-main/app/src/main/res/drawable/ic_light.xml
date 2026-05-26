@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- 大灯轮廓 -->
+    <path
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000"
+        android:fillColor="#00000000"
+        android:pathData="M4,10 L10,10 L10,14 L4,14 Q2,12 4,10" />
+    <!-- 光线 -->
+    <path
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000"
+        android:pathData="M10,12 L14,8 M10,12 L14,16 M10,12 L16,12" />
+    <!-- 尾灯 -->
+    <path
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000"
+        android:fillColor="#00000000"
+        android:pathData="M20,10 L14,10 L14,14 L20,14 Q22,12 20,10" />
+    <!-- 自动模式标识 -->
+    <path
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000"
+        android:pathData="M18,6 L20,4 L22,6 L20,8 L18,6" />
+</vector>

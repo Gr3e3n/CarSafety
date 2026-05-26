@@ -1,317 +1,346 @@
-﻿1# VehTrust——基于端侧智能分析与区块链可信存证的车载事故智证平台
+<div align="center">
 
-- 📱 **模拟平台**：Android 手机 / 平板 / Android Automotive OS（AAOS）模拟器，无特殊 SDK 依赖
-- 🚗 **车机平台**：车载中控大屏，依赖亿咖通车载扩展框架
-- 💻 **客户端语言**：Kotlin
-- ⚙️ **服务与训练**：Python（FastAPI + scikit-learn）
-- ⛓️ **链上能力**：Hyperledger Fabric Chaincode + Go API
-- 🔍 **参数提取**：Java+ HTML+ Python
+![车溯安](csa.png)
 
----
+# 🚗 车溯安
 
-## 目录
+**面向智能汽车事故溯源追责的区块链可信存证系统**
+
+*端侧不遗漏 · 云侧能解释 · 链侧可核验*
+
+`20Hz 取证` · `可解释责任` · `LLM 复盘` · `Fabric 存证`
 
 
-- [项目概览](#项目概览)
-- [功能演示](#功能演示)
-- [核心能力](#核心能力)
-- [端到端流程](#端到端流程)
-- [仓库结构](#仓库结构)
-- [Android 客户端说明（`app/`）](#android-客户端说明app)
-- [AI 后端与模型说明（`backend/`）](#ai-后端与模型说明backend)
-- [区块链子工程说明（`chaincode_and_api/`）](#区块链子工程说明chaincode_and_api)
-- [CarExt SDK 资料目录说明（`ecarx-carext-sdk/`）](#carext-sdk-资料目录说明ecarx-carext-sdk)
-- [数据信息](#数据信息)
-- [快速启动](#快速启动)
-- [联调配置说明](#联调配置说明)
-- [当前工程边界](#当前工程边界)
-- [APK 下载与车机适配](#apk-下载与车机适配)
-- [车机 UI 适配说明](#车机-ui-适配说明)
+
+</div>
 
 ---
 
-## 项目概览
+## 📖 目录
 
-`VehTrust` 是一个面向车载场景的综合安全工程，目标是打通“**安全状态感知 → 事故触发取证 → 责任分析解释 → 可信存证**”的完整链路。  
-当前仓库由四个核心部分组成：
-
-- **⚡ Android App（`app/`）**：安全中心、事故列表、事故详情、责任分析、AI 文本分析、本地严重度推理与上链接口调用。
-- **🧠 AI Backend（`backend/`）**：事故分析 API（OpenAI 驱动）及严重度模型训练/导出工具链。
-- **🔗 链码与网关 API（`chaincode_and_API/`）**：Fabric 链码与 Go HTTP 网关，负责数据上链与查询。
-- **📚 CarExt SDK 资料集（`EcarX-CarExt-SDK/`）**：ECARX 能力接口源码、Javadoc 与参数资产，用于参数映射与后续真实车机接入参考。
-
-## 功能演示
-
-> 💡 视频演示请访问：<a href="https://gr3e3n.github.io/VehTrust/video-demo.html" target="_blank">**click me**</a>
-
-
-- **📹 事故溯源分析** — 详情页完整分析流程（责任界定、关键指标、AI报告、严重度推理、上链）
-- **⛓️ 数据上链** — Hyperledger Fabric 链码存证全过程
-- **🚗 综合功能展示** — 安全中心模块、事故列表、页面交互漫游
-
-> 🖼 界面截图
-
-| 截图 | 说明 |
-|------|------|
-| ![主界面](demo/pre.png) | 安全中心主页概览 |
-| ![上链成功](demo/chain.png) | 区块链上链操作成功确认 |
-| ![车机大屏界面](demo/CarScreen.jpg) | 车机版 UI — 字号/间距/触控区域全面放大，适配车载中控屏 |
----
-
-## 核心能力
-
-
-| 能力 | 说明 |
-| --- | --- |
-| 🖥️ 安全中心可视化 | 模块卡片展示驾驶辅助、疲劳监测、车道与碰撞预警、雨天与乘员安全等状态 |
-| 📼 EDR 事故取证链路 | 前台服务常驻 + 20Hz 采样 + 环形缓冲 + 触发冻结事故前后窗口 |
-| ⚖️ 责任界定（可解释） | 输出驾驶员 / 系统 / 环境三方占比，并展示反应时间、TTC、制动上升时间等关键指标 |
-| 📉 本地严重度推理 | 端侧离线推理 `Fatal / Serious / Slight`，不依赖在线服务 |
-| 🤖 AI 结构化报告 | 调用后端生成事故摘要、根因、证据点和改进建议（失败时支持本地回退） |
-| ⛓️ 链上可信存证 | 通过链码网关提交数据摘要并回查结果 |
+- [💡 这是什么](#-这是什么)
+- [⚡ 一分钟看懂](#-一分钟看懂)
+- [📱 界面预览](#-界面预览)
+- [📂 仓库结构](#-仓库结构)
+- [🏗️ 系统架构](#️-系统架构)
+- [🔧 核心模块](#-核心模块)
+  - [① 20Hz 滑动窗口取证](#-20hz-滑动窗口取证)
+  - [② 结构化证据包 E](#-结构化证据包-e)
+  - [③ 可解释责任初判](#-可解释责任初判)
+  - [④ 端侧轻量 MLP](#-端侧轻量-mlp16-维--8-隐藏--双头)
+  - [⑤ 云端 AI 事故重建](#-云端-ai-事故重建)
+  - [⑥ 区块链轻量化存证](#-区块链轻量化存证)
+- [🚀 快速上手](#-快速上手)
+- [🌐 应用场景](#-应用场景)
 
 ---
 
-## 端到端流程
+## 💡 这是什么
 
-安全监测触发 → 事故数据冻结与回放 → 责任分析与证据整理 → AI 文本报告生成 → 链上存证与查询。
+智能汽车出事故后，责任怎么定？行车记录仪只能拍画面，拍不到 AEB 有没有触发、驾驶员什么时候踩的刹车、转向角怎么变的。车厂后台有日志，但数据在车厂自己手里，车主和保险敢信吗？
 
-该流程同时支持：
+**车溯安**是一套端—云—链三方协同的事故追责系统：
 
-- **在线增强**：调用后端生成更完整的事故分析报告。
-- **离线可用**：即使后端不可用，仍可完成本地严重度推理与核心取证链路。
+- 📱 **车端 App**（Android Automotive）— 20Hz 实时采样，事故触发瞬间冻结前后 10s 数据，本地完成责任初判和风险研判
+- ☁️ **云端服务**（FastAPI + LLM）— 把专业行车数据翻译成任何人能读懂的九字段事故复盘报告
+- ⛓️ **链上存证**（Hyperledger Fabric）— 完整数据留本地保护隐私，Hash 摘要进联盟链，任何时候拿 Hash 能验
+
+三端可独立运行，也可以协同完成从事故取证到链上核验的完整闭环。
 
 ---
 
-## 仓库结构
+## ⚡ 一分钟看懂
+
+> 事故往往只给系统 **十几秒** 说话——车溯安在这十几秒里把数据冻住、算清、写进链，事后任何人拿 **Hash** 都能验。
+
+![用户闭环流程](demo/figures/fig01.png)
+
+| 阶段 | 做什么 | 系统表现 |
+|:----:|--------|----------|
+| 📡 ① 监控 | 20Hz 持续采样，环形缓冲滚动 | 安全中心 · 前台服务常驻 |
+| 🧊 ② 冻结 | 碰撞/AEB 触发后锁定前 10s + 后 10s | 事故列表 · 时间轴回放 |
+| ⚖️ ③ 初判 | 人/机/环境三维归因 + MLP 研判 | 详情页可解释责任指标 |
+| 🤖 ④ 复盘 | 结构化 Prompt → LLM 九字段报告 | 详情页 AI 分析区 |
+| 🔗 ⑤ 存证 | SHA-256 摘要上链 | 上链按钮 → Hash / TxId |
+| ✅ ⑥ 核验 | 本地重算 vs 链上账本 | `chaincode.html` 浏览器查 Hash |
+
+---
+![用户流程与闭环](demo/figures/fig02.png)
+## 📱 界面预览
+
+<p align="center"><b>安全中心</b> — 事故监测与安全模块总览</p>
+<p align="center"><img src="demo/figures/图片13.png" width="520"></p>
+
+<p align="center"><b>上链成功</b> — Hash 存证结果与交易凭证</p>
+<p align="center"><img src="demo/chain.png" width="520"></p>
+
+<p align="center"><b>车机大屏</b> — 车载实机联调环境</p>
+<p align="center"><img src="demo/CarScreen.jpg" width="520"></p>
+
+
+
+---
+
+## 📂 仓库结构
 
 ```text
-VehTrust/
-├── app/                         # Android 客户端
-├── backend/                     # FastAPI + ML 训练/导出
-├── chaincode_and_API/           # Fabric 链码与 Go API
-├── EcarX-CarExt-SDK/            # CarExt SDK 资料与参数资产
-├── data/                        # 数据集
-│   └── uk-dft-2024/             #   DfT 2024 道路安全训练数据
-├── demo/                        # 演示素材（视频+截图）
-│   ├── analysis.mp4             #   事故溯源分析演示视频
-│   ├── chain.mp4                #   区块链上链演示视频
-│   ├── pre.mp4                  #   综合功能展示视频
-│   ├── pre.png                  #   主界面截图
-│   ├── chain.png                #   上链成功截图
-│   └── CarScreen.jpg            #   车机大屏界面截图
-├── VehTrust_Carui/              # 车机大屏 UI 适配资源
-│   ├── VehTrust_CarScreen.apk   #   车机版安装包
-│   ├── change.md                #   UI 逐项变更说明文档（代码级）
-│   └── vehtrust_carui_changes.zip # 改动资源压缩包(解压覆盖即用)
-├── VehTrust.apk                 # 标准版 Android 安装包
-├── video-demo.html              # 在线视频演示播放页
-├── info.txt                     # 车机参数映射资产
-└── README.md
+车溯安/
+│
+├── app/                          # 📱 Android 车端应用（com.csa.chesuan）
+│   └── src/main/java/com/example/vehtrust/
+│       ├── MainActivity.kt               # 安全中心主界面
+│       ├── AccidentTraceActivity.kt      # 事故列表页
+│       ├── AccidentTraceDetailActivity.kt # 事故复盘详情页
+│       ├── SafetyViewModel.kt            # 安全中心数据层
+│       │
+│       ├── service/
+│       │   └── AccidentMonitorService.kt # ⚡ 20Hz 后台监测服务，环形缓冲+触发冻结
+│       │
+│       ├── trace/                        # 🔍 事故取证与溯源
+│       │   ├── ResponsibilityAnalyzer.kt # 可解释责任初判（5项指标→三维归因）
+│       │   ├── BlockchainApi.kt          # 链上存证接口（POST /upload）
+│       │   ├── OpenAiAnalysisApi.kt      # 云端 AI 复盘接口
+│       │   ├── AccidentContextGenerator.kt # 结构化证据包 E 生成
+│       │   ├── AccidentReplayView.kt     # 事故时间轴回放组件
+│       │   └── AccidentSiteCoordinates.kt # 事故坐标定位
+│       │
+│       ├── data/                         # 📊 数据模型与解析
+│       │   ├── CarExtPropertyIds.kt      # 车机属性 ID 映射（17+ 字段）
+│       │   ├── ModuleCatalog.kt          # 安全模块枚举
+│       │   ├── ModuleMetric.kt           # 模块指标定义
+│       │   └── ModuleParamValueResolver.kt # 车辆参数值解析
+│       │
+│       ├── db/                           # 💾 Room 本地数据库
+│       │   ├── AccidentDatabase.kt       # 事故数据库定义
+│       │   ├── AccidentDao.kt            # 事故数据访问层
+│       │   └── AccidentEntities.kt       # 事故实体类
+│       │
+│       ├── mock/
+│       │   └── MockDataProvider.kt       # 🧪 模拟车机数据（预留真实信号替换入口）
+│       │
+│       └── assets/
+│           └── collision_severity_model.json # 🧠 MLP 端侧模型（离线推理）
+│
+├── backend/                      # ☁️ FastAPI 云端 AI 服务
+│   ├── main.py                   # POST /api/accident/analyze — 三层输入+五层Prompt
+│   └── requirements.txt          # Python 依赖
+│
+├── chaincode_and_API/            # ⛓️ Hyperledger Fabric 联盟链
+│   ├── chaincode/                # Go 智能合约（asset.go — Hash 存证+回查）
+│   ├── main.go                   # Go API 网关（:8080 — 封装链码调用）
+│   ├── chaincode.html            # 浏览器链上核验页（输入Hash→返回存证JSON）
+│   └── README.md                 # 链端部署说明
+│
+├── EcarX-CarExt-SDK/             # 🚘 亿咖通车载扩展 SDK 参考文档
+│
+├── VehTrust_Carui/               # 🖥️ 车机大屏 UI 可选包
+│
+├── demo/                         # 📸 演示素材
+│   ├── figures/                  # 架构图（fig01~fig12.png）
+│   ├── 图片13.png              # 安全中心 截图
+│   ├── chain.png / chain.mp4    # 上链成功 截图/录屏
+│   ├── analysis.mp4             # 事故分析 录屏
+│   └── CarScreen.jpg            # 车机大屏 实拍
+│
+├── csa.png                       # Logo
+└── README.md                     # 本文件
 ```
 
 ---
 
-## Android 客户端说明（`app/`）
+## 🏗️ 系统架构
 
-### 📌 关键页面
+车溯安采用 **端—云—链** 三端协同架构：端侧靠近事故现场做低时延取证，云端承担 LLM 推理做因果复盘，链上提供不可篡改的存证凭证。
 
-
-- **`MainActivity`**：安全中心首页，展示模块状态并启动监控服务。
-- **`ModuleDetailActivity`**：模块参数详情页，按 `ModuleCatalog` 展示只读参数映射。
-- **`AccidentTraceActivity`**：事故事件列表。
-- **`AccidentTraceDetailActivity`**：事故详情（遥测、责任分析、AI 结果、本地严重度、上链操作）。
-
-### 🧩 关键链路
-
-- **监控服务**：`service/AccidentMonitorService.kt`
-- **采样与触发**：`trace/AccidentMonitor.kt`
-- **数据仓库**：`trace/AccidentRepository.kt`
-- **责任分析**：`trace/ResponsibilityAnalyzer.kt`
-- **AI 分析接口**：`trace/OpenAiAnalysisApi.kt`
-- **本地严重度推理**：`trace/CollisionSeverityApi.kt`
-- **链上提交接口**：`trace/BlockchainApi.kt`
-
-### 💾 数据持久化
+![纵向分层架构](demo/figures/fig03.png)
 
 
-使用 Room 保存事故链路数据：
 
-- `db/AccidentEventEntity`
-- `db/TelemetryEntity`
-- `db/ResponsibilityEntity`
-- `db/EvidenceEntity`
+![端云链协同](demo/figures/fig04.png)
+
+
+
+**三端各司其职，可独立可协同：**
+
+| 端 | 部署位置 | 核心职责 | 离线可用？ |
+|---|---------|---------|:--------:|
+| 📱 **车端** | Android Automotive 车机 | 20Hz 采样、窗口冻结、责任初判、MLP 推理 | ✅ 独立完成取证 |
+| ☁️ **云端** | FastAPI 服务器 | 接收结构化证据、五层 Prompt 调 LLM、生成复盘报告 | ✅ 车端可暂存后补传 |
+| ⛓️ **链端** | Fabric 联盟链 + Go 网关 | 哈希摘要上链、多组织背书、`chaincode.html` 核验 | ✅ 车端本地缓存后批量上链 |
 
 ---
 
-## AI 后端与模型说明（`backend/`）
+## 🔧 核心模块
 
-### FastAPI 服务
+系统由六个模块串联，形成从"数据怎么采"到"证据怎么验"的完整管线。
 
-- 入口：`backend/main.py`
-- 主要接口：
-  - `GET /health`
-  - `POST /api/accident/analyze`
-- 配置来源：`backend/.env`（`OPENAI_API_KEY`、`OPENAI_MODEL`）
+### ① 20Hz 滑动窗口取证
 
-### 严重度模型训练与导出
+![滑动窗口](demo/figures/fig05.png)
 
-- 训练脚本：`backend/ml/train_collision_severity.py`
-- 导出脚本：`backend/ml/export_collision_severity_runtime.py`
-- 默认训练数据路径：
-  - `data/uk-dft-2024/dft-road-casualty-statistics-collision-2024.csv`
-  - `data/uk-dft-2024/dft-road-casualty-statistics-vehicle-2024.csv`
-- 训练产物：`backend/ml/artifacts/`
-- 端侧运行时模型：`app/src/main/assets/collision_severity_model.json`
+车端在行驶中持续以 **20 Hz** 采样，数据写入约 **25 s** 环形缓冲。当 `IMPACT_DETECTED` 或 AEB 触发时，立即冻结事故前后关键片段：
 
-详细流程见：`backend/严重度模型与深度学习流程说明.md`
+```
+W_pre  = [ t₀ − 10s ,  t₀ )        ← 事故前驾驶演化
+W_post = [ t₀ ,  t₀ + 10s ]        ← 事故后系统响应
+W_event = W_pre ∪ W_post           ← 完整事件窗口
+```
+
+| 关键实现 | 文件 |
+|----------|------|
+| 后台监测 | `AccidentMonitorService.kt` |
+| 触发逻辑 | `AccidentMonitor.kt` |
+| 持久化 | Room 本地数据库 |
+
+### ② 结构化证据包 E
+
+![证据包](demo/figures/fig06.png)
+
+原始遥测不直接传递，而是封装为结构化六元组：
+
+```
+E = { M, T, R, C, D, A }
+```
+
+| 块 | 内容 | 作用 |
+|----|------|------|
+| **M** 元信息 | 编号·时刻·设备·事故类型·严重度 | 索引与链上查询键 |
+| **T** 遥测窗口 | 速度·加速度·制动·转向 时序 | 还原事故动态曲线 |
+| **R** 责任初判 | 人/机/环境三维归因 + 置信度 | 为云端 LLM 提供归因边界 |
+| **C** 环境上下文 | 天气·路况·光照·障碍物 | 限定外部条件 |
+| **D** 决策链 | 感知→规划→控制→执行 全链路 | 追查系统行为依据 |
+| **A** AI 报告 | LLM 九字段复盘（后补） | 面向人类阅读的事故说明 |
+
+### ③ 可解释责任初判
+
+![责任初判](demo/figures/fig07.png)
+
+端侧**不下最终判决书**，只输出带来源线索的初判结果。每条归因都能回溯到具体指标：
+
+| 指标 | 测量方式 | 指向 |
+|------|----------|------|
+| 反应时间 | 危险减速出现 → 制动踏板达 20% | 驾驶员响应 |
+| 制动建立时间 | 踏板 20% → 80% | 驾驶员果断性 |
+| 峰值减速度 | 窗口内最大制动强度 | 车辆制动能力 |
+| AEB 延迟 | 系统介入时刻 vs t₀ | 主动安全响应 |
+| 制动初始 TTC | 制动开始时的碰撞时间 | 整体避险窗口 |
+
+### ④ 端侧轻量 MLP（16 维 → 8 隐藏 → 双头）
+
+![MLP 结构](demo/figures/fig08.png)
+
+
+- 输入已是 16 维结构化特征，不是高维原始数据，单隐藏层 8 神经元即可捕获复合模式
+- 与责任初判**分工**：初判保留"证据→结论"链路，MLP 学习规则难覆盖的复合风险
+- 模型文件：`app/src/main/assets/collision_severity_model.json`，离线推理，分类 Fatal / Serious / Slight
+
+### ⑤ 云端 AI 事故重建
+
+![云端AI](demo/figures/fig09.png)
+
+端侧输出仍是专业数据，普通用户读不懂。云端将"机器的语言"翻译成"人的理解"——**但不以大模型替代证据，而是在证据约束下重建因果**。
+
+**三层结构化输入：**
+
+```
+I_cloud = { F_anchor,  T_evolution,  C_explain }
+           事实锚点      时序演化        解释约束
+```
+
+- **事实锚点层** — 事件类型、时刻、地点、触发原因、严重度、辅助驾驶状态
+- **时序演化层** — 速度、加速度、制动强度、转向角 遥测序列
+- **解释约束层** — 端侧责任初判、环境快照、决策链
+
+**五层 Prompt 约束生成边界：**
+
+```
+P_prompt = { P_role, P_evidence, P_causal, P_format, P_verify }
+```
+
+| 层次 | 内容 | 防止的问题 |
+|------|------|-----------|
+| 🎭 角色层 | 车载事故分析专家身份 | 模型做泛化回答 |
+| 📦 证据层 | 多源证据按复盘逻辑分块 | 忽略关键字段 |
+| 🔗 因果层 | 摘要→根因→过程→证据→建议 | 输出缺乏逻辑 |
+| 📐 格式层 | 九字段固定 JSON | 前端解析失败 |
+| 🛡️ 可信层 | 禁止虚构、置信标注、缺失标记 | 编造不存在的事实 |
+
+输出九字段 JSON：事故摘要 · 根因判断 · 过程重建 · 关键证据 · 处置建议。
+
+| 接口 | `POST /api/accident/analyze` | 实现 | `backend/main.py` |
+| 车端调用 | `OpenAiAnalysisApi.kt` | | |
+
+### ⑥ 区块链轻量化存证
+
+![轻量化上链](demo/figures/fig10.png)
+
+Hyperledger Fabric 联盟链提供多组织背书，但**不存全量数据**——只存不可篡改的哈希锚点：
+
+
+
+`H_data = SHA256(deviceId + dataJson + txID)` — 确定性哈希，任何人拿原始数据重算即可核验。
+
+![Fabric 流水线](demo/figures/fig11.png)
+
+```
+App ──POST /upload──▶ Go :8080 ──▶ Fabric 链码（执行→排序→验证）
+                         │
+                         ├── 返回 { hash, txId }
+chaincode.html ──GET /query?hash=...──▶ 链上回查 → 核验 JSON
+```
+
+**车机联调**：`adb reverse tcp:8080 tcp:8080` → App 直接访问 `127.0.0.1:8080` 上链。
 
 ---
 
-## 区块链子工程说明（`chaincode_and_API/`）
-
-该目录是独立链上子工程，包含：
-
-- **Fabric 链码**：`mychaincode/go/asset.go`
-- **Go 网关 API**：`carscreen-api/main.go`
-
-网关提供 `/upload` 与 `/query` 接口；链码提供 `UploadVehicleData` 与 `QueryVehicleData`。  
-运行依赖 Docker、Fabric 网络、Go 环境和 `peer` CLI，请按该目录内 `README.md` 进行部署。
-
-> 注意：该子工程中仍保留历史命名（如 `carscreen-api`）和示例路径（Linux 本地路径），属于其独立运行配置范畴。
-
----
-
-## CarExt SDK 资料目录说明（`EcarX-CarExt-SDK/`）
-
-该目录用于提供 ECARX 能力参考，不作为当前 `app` 的直接编译依赖源。主要包含：
-
-- `sources/`：接口源码（`ecarx.carext.*`）
-- `docs/`：Javadoc
-- `OVERVIEW.md`：能力总览文档
-- `info.txt`：提取参数信息
-
-当前 Android 端通过 `ModuleCatalog` 与 `MockDataProvider` 做参数映射展示，后续可按该目录能力逐步接入真实车机数据源。
-
----
-
-## 数据信息
-
-### 训练数据
-
-目录：`data/uk-dft-2024/`
-
-- `dft-road-casualty-statistics-collision-2024.csv`
-- `dft-road-casualty-statistics-vehicle-2024.csv`
-- `dft-road-casualty-statistics-road-safety-open-dataset-data-guide-2024.xlsx`
-
-### 演示资源
-
-| 文件 | 说明 |
-|------|------|
-| `demo/analysis.mp4` | 事故溯源分析演示视频 |
-| `demo/chain.mp4` | 区块链上链演示视频 |
-| `demo/pre.mp4` | 综合功能展示视频 |
-| `demo/pre.png` | 主界面截图 |
-| `demo/chain.png` | 上链成功截图 |
-| `demo/CarScreen.jpg` | 车机大屏界面截图 |
-| `video-demo.html` | 在线视频播放页（GitHub Pages 部署） |
----
-
-## APK 下载与车机适配
-
-### 📱 安装包
-
-| 版本 | 说明 | 下载 |
-|------|------|------|
-| **标准版** | 适配模拟设备的 Android 安装包 | [VehTrust.apk](VehTrust.apk) |
-| **车机版** | 车载中控大屏优化版（字号/间距/触控区域全面放大） | [VehTrust_CarScreen.apk](VehTrust_Carui/VehTrust_CarScreen.apk) |
-
-> 💡 **车机版与标准版功能完全一致**，仅 UI 层面按车载场景做了全面视觉放大。详见下方「车机 UI 适配说明」。
-
----
-
-## 快速启动
-
-### 1) Android App
+## 🚀 快速上手
 
 ```bash
-# 在项目根目录
+# 构建
 .\gradlew.bat :app:assembleDebug
+
+# 安装到车机
+adb install -r app\build\outputs\apk\debug\app-debug.apk
 ```
 
-或直接使用 Android Studio 打开工程运行 `app` 模块。
-
-### 2) 后端服务（可选）
+**启动区块链服务**（详见 [`chaincode_and_API/README.md`](chaincode_and_API/README.md)）：
 
 ```bash
-cd backend
-pip install -r requirements.txt
+adb reverse tcp:8080 tcp:8080   # 车机 → 本机 Fabric
+# 浏览器打开 chaincode.html 即可查询核验
+```
+
+**启动 AI 后端**（可选）：
+
+```bash
+cd backend && pip install -r requirements.txt
 python -m uvicorn main:app --host 0.0.0.0 --port 8080 --reload
 ```
 
-健康检查：`http://127.0.0.1:8080/health`
-
-### 3) 重新训练并导出本地严重度模型（可选）
-
-```bash
-pip install -r backend/requirements-train.txt
-python backend/ml/train_collision_severity.py
-python backend/ml/export_collision_severity_runtime.py
-```
+| 配置项 | 文件 | 值 |
+|--------|------|----|
+| 链上接口 | `BlockchainApi.kt` | `127.0.0.1:8080` |
+| AI 接口 | `OpenAiAnalysisApi.kt` | `10.0.2.2:8080`（模拟器） |
+| 应用包名 | `build.gradle.kts` | `com.csa.chesuan` |
 
 ---
 
-## 联调配置说明
+## 🌐 应用场景
 
-- **OpenAI 分析 API 地址**：`app/src/main/java/com/example/vehtrust/trace/OpenAiAnalysisApi.kt`（默认 `10.0.2.2:8080`）
-- **区块链接口地址**：`app/src/main/java/com/example/vehtrust/trace/BlockchainApi.kt`（默认局域网地址）
-- **后端密钥配置**：`backend/.env`（已在 `.gitignore` 中忽略）
-
----
-
-## 当前工程边界
-
-- 安全中心模块状态目前主要来自 `MockDataProvider`，用于演示 UI 和风险规则。
-- 事故监控触发逻辑已具备完整链路结构，但真实车机属性接入仍需替换采样来源。
-- 区块链子工程依赖外部 Fabric 网络与本地环境配置，需单独部署后再联调。
+| 场景 | 价值 |
+|------|------|
+| ⚖️ 事故责任辅助认定 | 车主举证 · 车企技术说明 · 事故技术分析 |
+| 🏦 车险理赔 | 快速 Hash 核验 · 结构化复盘报告 · 降低争议 |
+| 🔬 第三方检测鉴定 | 跨主体可追溯 · Hash 防篡改 · 电子证据固化 |
+| 🏭 车企质量改进 | AEB 延迟分析 · 接管提醒优化 · 辅助驾驶迭代 |
+| 🏙️ 车路云监管 | 区域异常统计 · 事故溯源 · 城市交通安全治理 |
 
 ---
 
-## 车机 UI 适配说明
+<div align="center">
 
-> **适配目标**车载中控大屏设计规范，将原手机端 UI 升级为**车机屏幕可读、可触控**的大屏版本。  
-> **核心原则**：功能逻辑完全不变，仅调整视觉尺寸与布局结构。
+**🚗 车溯安**
 
-### 改动概览
+端侧把证据留住 · 云端把过程讲清 · 链上把凭证钉死
 
-| 维度 | 手机端原值 | 车机适配后 |
-|------|-----------|-----------|
-| 视距 | 手持 25~50cm | 座椅距离 50~100cm |
-| 最小触控区 | 44dp | ≥66dp |
-| 字号基准 | 正文 11~14sp | 17~27sp |
-| 间距节奏 | 4/8/12dp | 8/14/18~26dp |
-| 圆角风格 | 中等圆润 16~18dp | 大圆角 24~28dp |
-| 阴影层次 | 轻 2~3dp | 中等 5~8dp |
-| 颜色管理 | 硬编码为主 | 统一 `@color` 引用 |
-
-### 使用方式
-
-**方式一（推荐）— 直接替换**：
-
-下载 [vehtrust_carui_changes.zip](VehTrust_Carui/vehtrust_carui_changes.zip)，解压后覆盖 `app/src/main/res/` 对应子目录即可编译使用。
-
-**方式二 — 手动修改**：详见变更文档 [change.md](VehTrust_Carui/change.md)（包含每个文件的逐行代码对照与全文可复制代码块）。
-
-### 涉及文件（共 14 个）
-
-- **Layout（6个）**：`activity_main.xml`、`activity_accident_trace.xml`、`activity_accident_trace_detail.xml`、`activity_module_detail.xml`、`item_safety_module.xml`、`item_accident_event.xml`
-- **资源（2个）**：`values/colors.xml`、`values/strings.xml`
-- **Drawable（6个）**：`bg_header_accent_strip.xml`、`bg_header_status_pill.xml`、`bg_header_chip.xml`、`bg_header_ornament_circle.xml`、`bg_mid_bridge.xml`、`bg_param_panel.xml`
-
-> 以上所有改动仅涉及 **UI 资源层**（XML 布局 + 颜色 + 字符串 + shape drawable），**Kotlin/Java 业务代码无需任何修改**。
-
-
----
-
-
+</div>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- 电池主体 -->
+    <path
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000"
+        android:fillColor="#00000000"
+        android:pathData="M6,7 L18,7 L18,17 L6,17 Z" />
+    <!-- 电池头 -->
+    <path
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000"
+        android:pathData="M19,10 L21,10 L21,14 L19,14" />
+    <!-- 电量指示（50%） -->
+    <path
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000"
+        android:pathData="M8,10 L12,10 L12,14 L8,14 Z" />
+</vector>

@@ -1,26 +1,32 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>功能演示 - VehTrust</title>
+    <title>功能演示 - 车溯安</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f0 100%);
             min-height: 100vh;
             color: #1E293B;
         }
         .header {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             background: linear-gradient(135deg, #1E293B, #2563EB);
             color: white;
             text-align: center;
             padding: 40px 20px 30px;
         }
+        .header img {
+            width: 88px;
+            height: 88px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+        }
         .header h1 { font-size: 32px; margin-bottom: 8px; }
-        .header p { font-size: 16px; opacity: 0.85; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+        .header p { font-size: 16px; opacity: 0.9; max-width: 640px; margin: 0 auto; line-height: 1.6; }
         .container { max-width: 900px; margin: 0 auto; padding: 24px 16px 48px; }
         .video-card {
             background: white;
@@ -103,13 +109,13 @@
 <body>
 
 <div class="header">
-    <h1>🚗 VehTrust 功能演示</h1>
-    <p>车载智能安全监控与事故可信存证系统 — 完整流程演示</p>
+    <img src="csa.png" alt="车溯安 Logo">
+    <h1>车溯安 · 功能演示</h1>
+    <p>基于端侧智能分析与区块链可信存证的车载事故智证平台 — 完整流程演示</p>
 </div>
 
 <div class="container">
 
-    <!-- 视频1：事故溯源分析 -->
     <div class="video-card">
         <div class="video-card-header">
             <div class="video-icon icon-analysis">📹</div>
@@ -120,17 +126,16 @@
             <span class="tag tag-blue">核心流程</span>
         </div>
         <div class="video-body">
-            <video controls preload="metadata" poster="">
-                <source src="https://gr3e3n.github.io/VehTrust/demo/analysis.mp4" type="video/mp4">
+            <video controls preload="metadata">
+                <source src="demo/analysis.mp4" type="video/mp4">
                 您的浏览器不支持视频播放。
             </video>
         </div>
         <div class="video-desc">
-            本视频展示了<strong>事故溯源分析</strong>的完整链路：从事故事件列表进入详情页后，依次展示遥测数据回放、责任界定三方占比（驾驶员 / 系统 / 环境）、关键指标（反应时间、制动上升时间、TTC 等）、本地严重度推理、AI 结构化报告生成、以及区块链上链操作的全过程。
+            展示<strong>事故溯源详情</strong>完整链路：遥测回放、责任界定（驾驶员 / 系统 / 环境）、关键指标、本地严重度推理、AI 结构化报告与上链操作。
         </div>
     </div>
 
-    <!-- 视频2：数据上链 -->
     <div class="video-card">
         <div class="video-card-header">
             <div class="video-icon icon-chain">⛓️</div>
@@ -142,16 +147,15 @@
         </div>
         <div class="video-body">
             <video controls preload="metadata">
-                <source src="https://gr3e3n.github.io/VehTrust/demo/chain.mp4" type="video/mp4">
+                <source src="demo/chain.mp4" type="video/mp4">
                 您的浏览器不支持视频播放。
             </video>
         </div>
         <div class="video-desc">
-            本视频专门展示<strong>区块链上链</strong>环节：事故证据数据通过 Go HTTP 网关 API 提交到 Hyperledger Fabric 链码网络，调用 `UploadVehicleData` 完成存证后，通过 `QueryVehicleData` 回查验证上链结果。对应上链成功截图见 README 主页。
+            展示<strong>区块链上链</strong>：事故摘要经 Go HTTP 网关提交 Fabric 链码，返回交易 Hash / TxId；对应 README 中的上链成功截图。
         </div>
     </div>
 
-    <!-- 视频3：综合功能展示 -->
     <div class="video-card">
         <div class="video-card-header">
             <div class="video-icon icon-pre">🚗</div>
@@ -163,23 +167,21 @@
         </div>
         <div class="video-body">
             <video controls preload="metadata">
-                <source src="https://gr3e3n.github.io/VehTrust/demo/pre.mp4" type="video/mp4">
+                <source src="demo/pre.mp4" type="video/mp4">
                 您的浏览器不支持视频播放。
             </video>
         </div>
         <div class="video-desc">
-            本视频为<strong>综合功能漫游</strong>：从主界面安全中心出发，展示驾驶辅助、疲劳监测、车道预警、碰撞预警、雨天安全、乘员安全六大模块卡片状态，进入模块详情查看参数映射，切换至事故列表浏览历史事件，整体呈现 App 的完整交互体验。主界面截图见 README。
+            从<strong>安全中心</strong>出发，浏览各安全模块卡片、模块参数详情、事故列表与页面交互；主界面截图见 README。
         </div>
     </div>
 
     <div style="text-align: center;">
-        <a href="https://github.com/Gr3e3n/VehTrust" class="back-link">
-            ← 返回项目主页 (README)
-        </a>
+        <a href="README.md" class="back-link">← 返回项目主页 (README)</a>
     </div>
 
     <div class="footer">
-        VehTrust — 车载智能安全监控与事故可信存证工程 &nbsp;|&nbsp; Powered by Android + Hyperledger Fabric + AI
+        车溯安 — 车载智能安全监控与事故可信存证 &nbsp;|&nbsp; Android + Hyperledger Fabric + AI
     </div>
 </div>
 

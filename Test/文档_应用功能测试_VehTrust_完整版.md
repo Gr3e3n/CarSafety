@@ -438,7 +438,7 @@ adb shell screencap /sdcard/screen.png
 adb pull /sdcard/screen.png docs/screenshots/01_home.png
 
 # 数据库导出（AS Device File Explorer）
-# data/data/com.example.vehtrust/databases/AccidentDatabase
+# data/data/com.csa.chesuan/databases/AccidentDatabase
 ```
 
 ---
