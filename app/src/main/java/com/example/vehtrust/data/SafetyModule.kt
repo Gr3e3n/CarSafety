@@ -1,4 +1,4 @@
-﻿package com.example.vehtrust.data
+package com.example.vehtrust.data
 
 /**
  * 安全功能模块数据类
@@ -20,5 +20,13 @@ data class SafetyModule(
     val colorRes: Int,
     val propertyId: Int,        // 车辆属性ID，用于读取/写入
     val areaType: Int = 0,       // 区域类型（默认为全局）
-    val valueType: String = "boolean" // 值类型：boolean, int, float, string
+    val valueType: String = "boolean", // 值类型：boolean, int, float, string
+    val subtitle: String = "",   // 卡片副标题/能力说明
+    val metrics: List<ModuleMetric> = emptyList(), // 卡片内 2～3 个关键指标
+    val highlights: List<String> = emptyList(),    // 核心模块能力标签（事故溯源大卡）
+    val isFeatured: Boolean = false, // 首页通栏大卡
+    /** CarExt 模块分组，如 IADAS / IBcm，展示在卡片副标题 */
+    val sdkGroup: String = "",
+    /** 本卡片绑定的可提取参数数量（详情页参数条数） */
+    val extractableParamCount: Int = 0,
 )

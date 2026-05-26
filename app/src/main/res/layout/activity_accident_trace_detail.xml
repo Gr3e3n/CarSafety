@@ -10,18 +10,62 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- 详情页顶部概览 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_trace_detail_hero"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/trace_detail_hero_title"
+                android:textColor="@color/brand_on_container"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.05" />
+
+            <TextView
+                android:id="@+id/tvDetailHeroTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDetailHeroMeta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:lineSpacingMultiplier="1.35" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/trace_detail_flow_hint"
+                android:textColor="@color/text_tertiary"
+                android:textSize="11sp" />
+        </LinearLayout>
+
         <!-- 事件基本信息 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#FFFFFF"
+            android:background="@color/surface"
             android:padding="16dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="事故信息"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_tertiary"
                 android:textSize="11sp"
                 android:textAllCaps="true"
                 android:letterSpacing="0.08" />
@@ -30,20 +74,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textColor="#1E293B"
+                android:textColor="@color/text_primary"
                 android:textSize="13sp"
                 android:lineSpacingMultiplier="1.5" />
         </LinearLayout>
 
         <View android:layout_width="match_parent" android:layout_height="1dp"
-            android:background="#E8ECF2" android:layout_marginTop="12dp" />
+            android:background="@color/outline" android:layout_marginTop="12dp" />
 
         <!-- 事发位置：Web 地图预览（Leaflet + OSM 瓦片，需网络） -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#FFFFFF"
+            android:background="@color/surface"
             android:padding="16dp"
             android:layout_marginTop="12dp">
 
@@ -51,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="事发位置（地图）"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_tertiary"
                 android:textSize="11sp"
                 android:textAllCaps="true"
                 android:letterSpacing="0.08" />
@@ -61,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:textColor="#64748B"
+                android:textColor="@color/text_secondary"
                 android:textSize="10sp"
                 android:lineSpacingMultiplier="1.35"
                 android:text="由地点文本推断经纬度（演示）；实车请写入 GNSS 并换合规图商/离线瓦片。" />
@@ -78,7 +122,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:textColor="#475569"
+                android:textColor="@color/text_secondary"
                 android:textSize="11sp"
                 android:fontFamily="monospace" />
 
@@ -90,7 +134,7 @@
                 android:paddingVertical="8dp"
                 android:paddingHorizontal="4dp"
                 android:text="在外部地图应用中打开…"
-                android:textColor="#2563EB"
+                android:textColor="@color/brand_primary"
                 android:textSize="12sp"
                 android:clickable="true"
                 android:focusable="true"
@@ -98,14 +142,14 @@
         </LinearLayout>
 
         <View android:layout_width="match_parent" android:layout_height="1dp"
-            android:background="#E8ECF2" android:layout_marginTop="12dp" />
+            android:background="@color/outline" android:layout_marginTop="12dp" />
 
         <!-- 可解释责任指标 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#FFFFFF"
+            android:background="@color/surface"
             android:padding="16dp"
             android:layout_marginTop="12dp">
 
@@ -113,7 +157,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="责任分析指标"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_tertiary"
                 android:textSize="11sp"
                 android:textAllCaps="true"
                 android:letterSpacing="0.08" />
@@ -124,7 +168,7 @@
                     android:layout_weight="1" android:orientation="vertical" android:gravity="center"
                     android:background="#FFF8F2" android:layout_marginEnd="5dp">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="反应时间" android:textColor="#94A3B8" android:textSize="10sp" />
+                        android:text="反应时间" android:textColor="@color/text_tertiary" android:textSize="10sp" />
                     <TextView android:id="@+id/tvReactionTime" android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:textColor="#F5A623"
                         android:textStyle="bold" android:textSize="18sp" />
@@ -135,9 +179,9 @@
                     android:layout_weight="1" android:orientation="vertical" android:gravity="center"
                     android:background="#F0F5FF" android:layout_marginEnd="5dp">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="制动上升" android:textColor="#94A3B8" android:textSize="10sp" />
+                        android:text="制动上升" android:textColor="@color/text_tertiary" android:textSize="10sp" />
                     <TextView android:id="@+id/tvBrakeRiseTime" android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:textColor="#4A90E2"
+                        android:layout_height="wrap_content" android:textColor="@color/brand_primary"
                         android:textStyle="bold" android:textSize="18sp" />
                     <TextView android:id="@+id/tvBrakeRiseLabel" android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:textSize="9sp" />
@@ -146,7 +190,7 @@
                     android:layout_weight="1" android:orientation="vertical" android:gravity="center"
                     android:background="#F5F0FF">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="峰值减速" android:textColor="#94A3B8" android:textSize="10sp" />
+                        android:text="峰值减速" android:textColor="@color/text_tertiary" android:textSize="10sp" />
                     <TextView android:id="@+id/tvMaxDecel" android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:textColor="#9B51E0"
                         android:textStyle="bold" android:textSize="18sp" />
@@ -161,7 +205,7 @@
                     android:layout_weight="1" android:orientation="vertical" android:gravity="center"
                     android:background="#EDFFF8" android:layout_marginEnd="5dp">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="AEB 介入" android:textColor="#94A3B8" android:textSize="10sp" />
+                        android:text="AEB 介入" android:textColor="@color/text_tertiary" android:textSize="10sp" />
                     <TextView android:id="@+id/tvAebDelay" android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:textColor="#2DC7A0"
                         android:textStyle="bold" android:textSize="16sp" />
@@ -172,7 +216,7 @@
                     android:layout_weight="1" android:orientation="vertical" android:gravity="center"
                     android:background="#FFF2F2" android:layout_marginEnd="5dp">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="制动时 TTC" android:textColor="#94A3B8" android:textSize="10sp" />
+                        android:text="制动时 TTC" android:textColor="@color/text_tertiary" android:textSize="10sp" />
                     <TextView android:id="@+id/tvTtc" android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:textColor="#E53935"
                         android:textStyle="bold" android:textSize="16sp" />
@@ -181,9 +225,9 @@
                 </LinearLayout>
                 <LinearLayout android:layout_width="0dp" android:layout_height="76dp"
                     android:layout_weight="1" android:orientation="vertical" android:gravity="center"
-                    android:background="#F8F9FA">
+                    android:background="@color/surface_variant">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="制动有效性" android:textColor="#94A3B8" android:textSize="10sp" />
+                        android:text="制动有效性" android:textColor="@color/text_tertiary" android:textSize="10sp" />
                     <TextView android:id="@+id/tvBrakeEffective" android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:textStyle="bold"
                         android:textSize="16sp" />
@@ -194,19 +238,19 @@
 
             <TextView android:id="@+id/tvDriverAnalysis"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:layout_marginTop="12dp" android:textColor="#64748B"
+                android:layout_marginTop="12dp" android:textColor="@color/text_secondary"
                 android:textSize="12sp" android:lineSpacingMultiplier="1.6" />
         </LinearLayout>
 
         <View android:layout_width="match_parent" android:layout_height="1dp"
-            android:background="#E8ECF2" android:layout_marginTop="12dp" />
+            android:background="@color/outline" android:layout_marginTop="12dp" />
 
         <!-- 责任界定 + 进度条 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#FFFFFF"
+            android:background="@color/surface"
             android:padding="16dp"
             android:layout_marginTop="12dp">
 
@@ -214,14 +258,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="责任界定"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_tertiary"
                 android:textSize="11sp"
                 android:textAllCaps="true"
                 android:letterSpacing="0.08" />
 
             <TextView android:id="@+id/tvAiInference"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:layout_marginTop="8dp" android:textColor="#1E293B"
+                android:layout_marginTop="8dp" android:textColor="@color/text_primary"
                 android:textSize="13sp" android:textStyle="bold" />
 
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -233,7 +277,7 @@
                 <TextView android:id="@+id/tvBarSystemLabel"
                     android:layout_width="0dp" android:layout_height="wrap_content"
                     android:layout_weight="1" android:text="系统"
-                    android:textColor="#4A90E2" android:textSize="11sp" android:gravity="center" />
+                    android:textColor="@color/brand_primary" android:textSize="11sp" android:gravity="center" />
                 <TextView android:id="@+id/tvBarEnvLabel"
                     android:layout_width="0dp" android:layout_height="wrap_content"
                     android:layout_weight="1" android:text="环境"
@@ -247,7 +291,7 @@
                     android:background="#F5A623" />
                 <View android:id="@+id/barSystem" android:layout_width="0dp"
                     android:layout_height="match_parent" android:layout_weight="30"
-                    android:background="#4A90E2" />
+                    android:background="@color/brand_primary" />
                 <View android:id="@+id/barEnv" android:layout_width="0dp"
                     android:layout_height="match_parent" android:layout_weight="20"
                     android:background="#2DC7A0" />
@@ -261,7 +305,7 @@
                     android:textSize="12sp" android:gravity="center" />
                 <TextView android:id="@+id/tvBarSystemPct" android:layout_width="0dp"
                     android:layout_height="wrap_content" android:layout_weight="1"
-                    android:textColor="#4A90E2" android:textStyle="bold"
+                    android:textColor="@color/brand_primary" android:textStyle="bold"
                     android:textSize="12sp" android:gravity="center" />
                 <TextView android:id="@+id/tvBarEnvPct" android:layout_width="0dp"
                     android:layout_height="wrap_content" android:layout_weight="1"
@@ -271,14 +315,14 @@
         </LinearLayout>
 
         <View android:layout_width="match_parent" android:layout_height="1dp"
-            android:background="#E8ECF2" android:layout_marginTop="12dp" />
+            android:background="@color/outline" android:layout_marginTop="12dp" />
 
         <!-- 深度学习时序分析 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#FFFFFF"
+            android:background="@color/surface"
             android:padding="16dp"
             android:layout_marginTop="12dp">
 
@@ -286,7 +330,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/dl_analysis_title"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_tertiary"
                 android:textSize="11sp"
                 android:textAllCaps="true"
                 android:letterSpacing="0.08" />
@@ -296,7 +340,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textColor="#1E293B"
+                android:textColor="@color/text_primary"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 
@@ -318,7 +362,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="驾驶风险"
-                        android:textColor="#94A3B8"
+                        android:textColor="@color/text_tertiary"
                         android:textSize="10sp" />
                     <TextView
                         android:id="@+id/tvDlDriverRisk"
@@ -341,13 +385,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="系统风险"
-                        android:textColor="#94A3B8"
+                        android:textColor="@color/text_tertiary"
                         android:textSize="10sp" />
                     <TextView
                         android:id="@+id/tvDlSystemRisk"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#4A90E2"
+                        android:textColor="@color/brand_primary"
                         android:textStyle="bold"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -363,7 +407,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="环境风险"
-                        android:textColor="#94A3B8"
+                        android:textColor="@color/text_tertiary"
                         android:textSize="10sp" />
                     <TextView
                         android:id="@+id/tvDlEnvRisk"
@@ -380,13 +424,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:textColor="#64748B"
+                android:textColor="@color/text_secondary"
                 android:textSize="12sp"
                 android:lineSpacingMultiplier="1.6" />
         </LinearLayout>
 
         <View android:layout_width="match_parent" android:layout_height="1dp"
-            android:background="#E8ECF2" android:layout_marginTop="12dp" />
+            android:background="@color/outline" android:layout_marginTop="12dp" />
 
         <!-- 事故严重度预测 -->
         <LinearLayout
@@ -394,7 +438,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#FFFFFF"
+            android:background="@color/surface"
             android:padding="16dp"
             android:layout_marginTop="12dp">
 
@@ -415,7 +459,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/severity_prediction_title"
-                    android:textColor="#1E293B"
+                    android:textColor="@color/text_primary"
                     android:textSize="13sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -425,7 +469,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/severity_prediction_desc"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_tertiary"
                 android:textSize="11sp"
                 android:lineSpacingMultiplier="1.5" />
 
@@ -436,7 +480,7 @@
                 android:layout_marginTop="12dp"
                 android:text="@string/severity_prediction_button"
                 android:backgroundTint="#DC2626"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -471,7 +515,7 @@
                 android:layout_marginTop="10dp"
                 android:background="#FFF7ED"
                 android:padding="12dp"
-                android:textColor="#475569"
+                android:textColor="@color/text_secondary"
                 android:textSize="12sp"
                 android:lineSpacingMultiplier="1.7"
                 android:visibility="gone" />
@@ -483,7 +527,7 @@
                 android:layout_marginTop="10dp"
                 android:background="#FEF2F2"
                 android:padding="12dp"
-                android:textColor="#475569"
+                android:textColor="@color/text_secondary"
                 android:textSize="11sp"
                 android:typeface="monospace"
                 android:lineSpacingMultiplier="1.5"
@@ -509,21 +553,21 @@
                 android:layout_marginTop="10dp"
                 android:background="#FFF7ED"
                 android:padding="12dp"
-                android:textColor="#475569"
+                android:textColor="@color/text_secondary"
                 android:textSize="12sp"
                 android:lineSpacingMultiplier="1.6"
                 android:visibility="gone" />
         </LinearLayout>
 
         <View android:layout_width="match_parent" android:layout_height="1dp"
-            android:background="#E8ECF2" android:layout_marginTop="12dp" />
+            android:background="@color/outline" android:layout_marginTop="12dp" />
 
         <!-- AI事故分析 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#FFFFFF"
+            android:background="@color/surface"
             android:padding="16dp"
             android:layout_marginTop="12dp">
 
@@ -537,14 +581,14 @@
                     android:layout_width="4dp"
                     android:layout_height="16dp"
                     android:layout_marginEnd="8dp"
-                    android:background="#7C3AED" />
+                    android:background="@color/brand_primary" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/ai_analysis_title"
-                    android:textColor="#1E293B"
+                    android:textColor="@color/text_primary"
                     android:textSize="13sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -554,7 +598,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/ai_analysis_desc"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_tertiary"
                 android:textSize="11sp"
                 android:lineSpacingMultiplier="1.5" />
 
@@ -565,7 +609,8 @@
                 android:layout_marginTop="10dp"
                 android:textColor="#0F766E"
                 android:textSize="11sp"
-                android:lineSpacingMultiplier="1.35" />
+                android:lineSpacingMultiplier="1.35"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btnAnalyzeAi"
@@ -573,8 +618,8 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="12dp"
                 android:text="@string/ai_analysis_button"
-                android:backgroundTint="#7C3AED"
-                android:textColor="#FFFFFF"
+                android:backgroundTint="@color/brand_primary"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -584,7 +629,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="@string/ai_analysis_loading"
-                android:textColor="#7C3AED"
+                android:textColor="@color/brand_primary"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:visibility="gone" />
@@ -596,14 +641,14 @@
                 android:layout_marginTop="10dp"
                 android:background="#F6F1FF"
                 android:padding="12dp"
-                android:textColor="#475569"
+                android:textColor="@color/text_secondary"
                 android:textSize="12sp"
                 android:lineSpacingMultiplier="1.6"
                 android:visibility="gone" />
         </LinearLayout>
 
         <View android:layout_width="match_parent" android:layout_height="1dp"
-            android:background="#E8ECF2" android:layout_marginTop="12dp" />
+            android:background="@color/outline" android:layout_marginTop="12dp" />
 
         <!-- 事故动画放映：场景示意 + HUD + 时序曲线 -->
         <LinearLayout
@@ -611,7 +656,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#FFFFFF"
+            android:background="@color/surface"
             android:padding="16dp"
             android:layout_marginTop="12dp">
 
@@ -625,14 +670,14 @@
                     android:layout_width="4dp"
                     android:layout_height="16dp"
                     android:layout_marginEnd="8dp"
-                    android:background="#2563EB" />
+                    android:background="@color/brand_primary" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="事故动画放映"
-                    android:textColor="#1E293B"
+                    android:textColor="@color/text_primary"
                     android:textSize="13sp"
                     android:textStyle="bold" />
 
@@ -641,7 +686,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="T-10.0s"
-                    android:textColor="#2563EB"
+                    android:textColor="@color/brand_primary"
                     android:textSize="12sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -652,7 +697,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="同一时间轴同步驱动道路场景、仪表读数与三条遥测曲线。"
-                android:textColor="#64748B"
+                android:textColor="@color/text_secondary"
                 android:textSize="11sp"
                 android:lineSpacingMultiplier="1.5" />
 
@@ -682,8 +727,8 @@
                     android:layout_width="104dp"
                     android:layout_height="42dp"
                     android:text="播放"
-                    android:backgroundTint="#2563EB"
-                    android:textColor="#FFFFFF"
+                    android:backgroundTint="@color/brand_primary"
+                    android:textColor="@color/white"
                     android:textSize="13sp"
                     android:textStyle="bold" />
 
@@ -693,28 +738,28 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_weight="1"
-                    android:textColor="#475569"
+                    android:textColor="@color/text_secondary"
                     android:textSize="11sp"
                     android:lineSpacingMultiplier="1.4" />
             </LinearLayout>
         </LinearLayout>
 
         <View android:layout_width="match_parent" android:layout_height="1dp"
-            android:background="#E8ECF2" android:layout_marginTop="12dp" />
+            android:background="@color/outline" android:layout_marginTop="12dp" />
 
         <!-- 关键数据（遥测） -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#FFFFFF"
+            android:background="@color/surface"
             android:padding="16dp"
             android:layout_marginTop="12dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="关键数据（事故前 10 秒 · 20Hz）"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_tertiary"
                 android:textSize="11sp"
                 android:textAllCaps="true"
                 android:letterSpacing="0.06" />
@@ -723,7 +768,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textColor="#475569"
+                android:textColor="@color/text_secondary"
                 android:textSize="11sp"
                 android:lineSpacingMultiplier="1.5" />
 
@@ -744,21 +789,21 @@
         </LinearLayout>
 
         <View android:layout_width="match_parent" android:layout_height="1dp"
-            android:background="#E8ECF2" android:layout_marginTop="12dp" />
+            android:background="@color/outline" android:layout_marginTop="12dp" />
 
         <!-- 决策链路 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#FFFFFF"
+            android:background="@color/surface"
             android:padding="16dp"
             android:layout_marginTop="12dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="系统决策链路与环境"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_tertiary"
                 android:textSize="11sp"
                 android:textAllCaps="true"
                 android:letterSpacing="0.08" />
@@ -767,7 +812,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textColor="#475569"
+                android:textColor="@color/text_secondary"
                 android:textSize="12sp"
                 android:lineSpacingMultiplier="1.6" />
         </LinearLayout>
@@ -777,7 +822,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#FFFFFF"
+            android:background="@color/surface"
             android:padding="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp">
@@ -799,7 +844,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="区块链存证"
-                    android:textColor="#1E293B"
+                    android:textColor="@color/text_primary"
                     android:textSize="13sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -809,7 +854,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:text="将事故数据哈希写入区块链，生成不可篡改的链上存证。"
-                android:textColor="#94A3B8"
+                android:textColor="@color/text_tertiary"
                 android:textSize="11sp"
                 android:lineSpacingMultiplier="1.5" />
 
@@ -820,7 +865,7 @@
                 android:layout_height="48dp"
                 android:text="上传至区块链存证"
                 android:backgroundTint="#009688"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 

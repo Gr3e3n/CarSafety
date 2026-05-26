@@ -1,254 +1,221 @@
-﻿package com.example.vehtrust.mock
+package com.example.vehtrust.mock
 
 import com.example.vehtrust.R
+import com.example.vehtrust.data.CarExtPropertyIds
+import com.example.vehtrust.data.ModuleMetric
 import com.example.vehtrust.data.SafetyModule
 import kotlin.random.Random
 
+/**
+ * 首页安全模块 Mock 数据：字段与 [com.example.vehtrust.data.CarExtPropertyIds]、
+ * [com.example.vehtrust.data.ModuleCatalog] 对齐，仅展示/风险判断，不做车机控制。
+ */
 object MockDataProvider {
-
-    // 从 info.txt 中提取的常量映射（实际开发中可直接引用这些常量）
-    private const val FORWARD_COLLISION_WARN_SNVT = 29184      // 前碰撞预警
-    private const val LANE_DEPARTURE_WARNING = 43776          // 车道偏离预警
-    private const val LANE_KEEPING_AID = 60928                // 车道保持辅助
-    private const val AUTONOMOUS_EMERGENCY_BRAKING = 24320    // 自动紧急制动
-    private const val LANE_CHANGE_WARNING_MODE = 61696        // 变道警示（盲区监测）
-    private const val RCTA_WARNING_LEFT = 206592              // RCTA左报警
-    private const val RCTA_WARNING_RIGHT = 206848             // RCTA右报警
-    private const val DMS_DRIVER_FATIGUE_STATUS = 93952       // 驾驶员疲劳状态
-    // 胎压：在 info.txt 中未检索到明确 propertyId（当前仍用模拟数据展示）
-    // private const val TIRE_PRESSURE = ...
-    private const val DOOR_OPEN_WARN_ACTIVE = 29696           // 车门开启提醒
-    private const val LAMP_EXTERIOR_LIGHT_CONTROL = 39680     // 外灯控制
-    private const val LAMP_DAYTIME_LIGHT = 101376             // 日间行车灯状态
-    private const val LAMP_FRONT_POSITION = 100864            // 前位置灯状态
-    private const val LAMP_REAR_POSITION = 101120             // 后位置灯状态
-
-    // 新增：限速提醒/雨天安全/乘员安全（只读展示）
-    private const val SPEED_LIMIT_WARNING_MODE = 115456       // 限速提醒模式
-    private const val SPEED_LIMIT_WARNING_OFFSET_VALUE = 122112 // 限速偏差值
-    private const val AUTO_CLOSE_WINDOW_RAINY = 23296         // 下雨自动关窗
-    private const val AUTO_REAR_WIPING = 122880               // 倒车自动后雨刮
-    private const val LOCK_AUTO_CLOSE_WINDOW = 23040          // 锁车自动关窗
-    private const val CHILD_SAFETY_LOCK = 35328               // 儿童锁（Deprecated）
-    private const val PAB_SWITCH = 143872                     // 副驾安全气囊使能
 
     fun generateModules(): List<SafetyModule> {
         val modules = listOf(
-            // 事故溯源（事故责任界定/系统故障溯源入口）
-            SafetyModule(
-                id = "trace",
-                title = "事故溯源",
-                iconRes = R.drawable.ic_collision,
-                status = "碰撞/故障一键取证",
-                riskLevel = 0,
-                riskReason = "用于取证与追溯",
-                colorRes = R.color.warning_red,
-                propertyId = 0,
-                valueType = "action"
-            ),
-
-            // 驾驶辅助（包含车道保持和自动刹车）
-            SafetyModule(
-                id = "adas",
-                title = "驾驶辅助",
-                iconRes = R.drawable.ic_auto_brake,
-                status = buildAdasStatus(),
-                riskLevel = 0,
-                riskReason = "",
-                colorRes = R.color.module_blue,
-                propertyId = AUTONOMOUS_EMERGENCY_BRAKING,
-                valueType = "boolean"
-            ),
-
-            // 盲区监测（关联 LANE_CHANGE_WARNING_MODE 和 RCTA_*）
-            SafetyModule(
-                id = "blindspot",
-                title = "盲区监测",
-                iconRes = R.drawable.ic_blind_spot,
-                status = buildBlindSpotStatus(),
-                riskLevel = 0,
-                riskReason = "",
-                colorRes = R.color.module_green,
-                propertyId = LANE_CHANGE_WARNING_MODE,
-                valueType = "int"  // 因为 LANE_CHANGE_WARNING_MODE 有多个模式值
-            ),
-
-            // 疲劳监测（关联 DMS_DRIVER_FATIGUE_STATUS）
-            SafetyModule(
-                id = "fatigue",
-                title = "疲劳监测",
-                iconRes = R.drawable.ic_fatigue_monitor,
-                status = buildFatigueStatus(),
-                riskLevel = 0,
-                riskReason = "",
-                colorRes = R.color.module_orange,
-                propertyId = DMS_DRIVER_FATIGUE_STATUS,
-                valueType = "int"  // 疲劳状态有多个枚举值
-            ),
-
-            // 碰撞预警（关联 FORWARD_COLLISION_WARN_SNVT）
-            SafetyModule(
-                id = "collision",
-                title = "碰撞预警",
-                iconRes = R.drawable.ic_collision,
-                status = if (Random.nextBoolean()) "前向预警 开" else "前向预警 关",
-                riskLevel = 0,
-                riskReason = "",
-                colorRes = R.color.module_purple,
-                propertyId = FORWARD_COLLISION_WARN_SNVT,
-                valueType = "int"  // 有 OFF/LOW/NORMAL/HIGH 等级
-            ),
-
-            // 车道偏离（关联 LANE_DEPARTURE_WARNING）
-            SafetyModule(
-                id = "lane",
-                title = "车道偏离",
-                iconRes = R.drawable.ic_lane_departure,
-                status = if (Random.nextBoolean()) "偏离预警 开" else "偏离预警 关",
-                riskLevel = 0,
-                riskReason = "",
-                colorRes = R.color.module_teal,
-                propertyId = LANE_DEPARTURE_WARNING,
-                valueType = "boolean"
-            ),
-
-            // 车道保持（关联 LANE_KEEPING_AID）
-            SafetyModule(
-                id = "lane_keep",
-                title = "车道保持",
-                iconRes = R.drawable.ic_lane_keep,
-                status = if (Random.nextBoolean()) "辅助开启" else "辅助关闭",
-                riskLevel = 0,
-                riskReason = "",
-                colorRes = R.color.module_pink,
-                propertyId = LANE_KEEPING_AID,
-                valueType = "boolean"
-            ),
-
-            // 胎压监测（关联 Tire Pressure 相关）
-            SafetyModule(
-                id = "tpms",
-                title = "胎压监测",
-                iconRes = R.drawable.ic_tpms,
-                status = buildTirePressureStatus(),
-                riskLevel = 0,
-                riskReason = "",
-                colorRes = R.color.module_blue_light,
-                propertyId = 0,  // 需要实际的胎压属性ID
-                valueType = "float[]"
-            ),
-
-            // 车门状态（关联 DOOR_OPEN_WARN_ACTIVE 和相关车门状态）
-            SafetyModule(
-                id = "door",
-                title = "车门状态",
-                iconRes = R.drawable.ic_door,
-                status = buildDoorStatus(),
-                riskLevel = 0,
-                riskReason = "",
-                colorRes = R.color.module_yellow,
-                propertyId = DOOR_OPEN_WARN_ACTIVE,
-                valueType = "int[]"  // 多个车门状态
-            ),
-
-            // 灯光控制（关联 LAMP_EXTERIOR_LIGHT_CONTROL）
-            SafetyModule(
-                id = "light",
-                title = "灯光控制",
-                iconRes = R.drawable.ic_light,
-                status = buildLightStatus(),
-                riskLevel = 0,
-                riskReason = "",
-                colorRes = R.color.module_purple,
-                propertyId = LAMP_EXTERIOR_LIGHT_CONTROL,
-                valueType = "int"
-            ),
-
-            // 限速提醒（展示模式与偏差值）
-            SafetyModule(
-                id = "speed_limit",
-                title = "限速提醒",
-                iconRes = R.drawable.ic_speed_limit,
-                status = buildSpeedLimitStatus(),
-                riskLevel = 0,
-                riskReason = "",
-                colorRes = R.color.module_teal,
-                propertyId = SPEED_LIMIT_WARNING_MODE,
-                valueType = "int"
-            ),
-
-            // 雨天安全（关窗/雨刮等）
-            SafetyModule(
-                id = "rain_safety",
-                title = "雨天安全",
-                iconRes = R.drawable.ic_rain,
-                status = buildRainSafetyStatus(),
-                riskLevel = 0,
-                riskReason = "",
-                colorRes = R.color.module_blue_light,
-                propertyId = AUTO_CLOSE_WINDOW_RAINY,
-                valueType = "boolean"
-            ),
-
-            // 乘员安全（儿童锁/副驾气囊）
-            SafetyModule(
-                id = "child_safety",
-                title = "乘员安全",
-                iconRes = R.drawable.ic_child_lock,
-                status = buildOccupantSafetyStatus(),
-                riskLevel = 0,
-                riskReason = "",
-                colorRes = R.color.module_orange,
-                propertyId = CHILD_SAFETY_LOCK,
-                valueType = "boolean"
-            )
+            traceModule(),
+            adasModule(),
+            blindspotModule(),
+            rearSafetyModule(),
+            fatigueModule(),
+            speedLimitModule(),
+            rainSafetyModule(),
+            doorWarnModule(),
+            lightModule(),
+            occupantModule(),
         )
-
-        // 基于“只读状态”计算风险标签（不做控制）
-        return modules.map { it.withRiskComputed() }
+        return modules.map { it.withRiskComputed().withRichCardMeta() }
     }
 
-    // 辅助方法：构建复合状态字符串
-    private fun buildAdasStatus(): String {
-        val laneKeep = if (Random.nextBoolean()) "车道保持开" else "车道保持关"
-        val autoBrake = if (Random.nextBoolean()) "自动刹车开" else "自动刹车关"
-        return "$laneKeep · $autoBrake"
-    }
+    private fun traceModule() = SafetyModule(
+        id = "trace",
+        title = "事故溯源",
+        iconRes = R.drawable.ic_collision,
+        status = "20Hz 监控运行中 · 触发后自动冻结前后 10 秒",
+        colorRes = R.color.trace_primary,
+        propertyId = 0,
+        valueType = "action",
+        subtitle = "EDR 取证 · 责任界定 · AI 研判 · 区块链存证",
+        metrics = listOf(
+            ModuleMetric("已存证", "—"),
+            ModuleMetric("采样率", "20Hz"),
+            ModuleMetric("最近", "—"),
+        ),
+        highlights = listOf("前后10s回放", "责任占比", "AI报告", "严重度", "上链存证"),
+        isFeatured = true,
+        sdkGroup = "EDR",
+        extractableParamCount = 0,
+    )
 
-    private fun buildBlindSpotStatus(): String {
-        val left = if (Random.nextBoolean()) "左盲区有车" else ""
-        val right = if (Random.nextBoolean()) "右盲区有车" else ""
-        return when {
-            left.isNotEmpty() && right.isNotEmpty() -> "两侧有车"
-            left.isNotEmpty() -> left
-            right.isNotEmpty() -> right
-            else -> "无盲区车辆"
+    /** 合并原「碰撞预警 / 车道偏离 / 车道保持」为统一 ADAS 卡片 */
+    private fun adasModule(): SafetyModule {
+        val aeb = Random.nextBoolean()
+        val fcwLevel = Random.nextInt(0, 4) // 0关 1低 2中 3高
+        val ldw = Random.nextBoolean()
+        val lka = Random.nextBoolean()
+        val elk = Random.nextBoolean()
+        val fcwLabel = when (fcwLevel) {
+            0 -> "关闭"
+            1 -> "低"
+            2 -> "中"
+            else -> "高"
         }
+        return SafetyModule(
+            id = "adas",
+            title = "驾驶辅助",
+            iconRes = R.drawable.ic_auto_brake,
+            status = buildString {
+                append(if (aeb) "AEB 开" else "AEB 关")
+                append(" · FCW ").append(fcwLabel)
+                append(" · LDW ").append(if (ldw) "开" else "关")
+                append(" · LKA ").append(if (lka) "开" else "关")
+                if (elk) append(" · ELK 开")
+            },
+            colorRes = R.color.module_blue,
+            propertyId = CarExtPropertyIds.AUTONOMOUS_EMERGENCY_BRAKING,
+            valueType = "mixed",
+            sdkGroup = "IADAS",
+            extractableParamCount = 5,
+        )
     }
 
-    private fun buildFatigueStatus(): String {
-        return when (Random.nextInt(1, 5)) {
-            1 -> "状态正常"
-            2 -> "分心驾驶"
-            3 -> "疲劳驾驶"
-            4 -> "未知状态"
-            else -> "正常"
+    private fun blindspotModule(): SafetyModule {
+        val mode = Random.nextInt(0, 4)
+        val modeLabel = when (mode) {
+            0 -> "关闭"
+            1 -> "视觉"
+            2 -> "声音"
+            3 -> "视觉+声音"
+            else -> "—"
         }
+        val leftAlert = Random.nextBoolean()
+        val rightAlert = Random.nextBoolean()
+        return SafetyModule(
+            id = "blindspot",
+            title = "侧向与变道",
+            iconRes = R.drawable.ic_blind_spot,
+            status = buildString {
+                append("变道警示 ").append(modeLabel)
+                append(" · RCTA ")
+                append(
+                    when {
+                        leftAlert && rightAlert -> "双侧报警"
+                        leftAlert -> "左侧报警"
+                        rightAlert -> "右侧报警"
+                        else -> "无报警"
+                    },
+                )
+            },
+            colorRes = R.color.module_green,
+            propertyId = CarExtPropertyIds.LANE_CHANGE_WARNING_MODE,
+            valueType = "int",
+            sdkGroup = "IADAS",
+            extractableParamCount = 4,
+        )
     }
 
-    private fun buildTirePressureStatus(): String {
-        val pressures = List(4) { 2.2f + Random.nextFloat() * 0.6f }
-        return String.format("左前 %.1f · 右前 %.1f\n左后 %.1f · 右后 %.1f",
-            pressures[0], pressures[1], pressures[2], pressures[3])
+    private fun rearSafetyModule(): SafetyModule {
+        val rcw = Random.nextBoolean()
+        val rcta = Random.nextBoolean()
+        return SafetyModule(
+            id = "rear_safety",
+            title = "后侧安全",
+            iconRes = R.drawable.ic_collision,
+            status = buildString {
+                append("RCW ").append(if (rcw) "开" else "关")
+                append(" · RCTA ").append(if (rcta) "开" else "关")
+            },
+            colorRes = R.color.module_teal,
+            propertyId = CarExtPropertyIds.REAR_COLLISION_WARNING,
+            valueType = "boolean",
+            sdkGroup = "IADAS",
+            extractableParamCount = 2,
+        )
     }
 
-    private fun buildDoorStatus(): String {
-        val doors = listOf("主驾", "副驾", "左后", "右后")
-        val openDoors = doors.filter { Random.nextBoolean() }
-        return if (openDoors.isEmpty()) "全部关闭" else "${openDoors.joinToString()} 开启"
+    private fun fatigueModule(): SafetyModule {
+        val fatigue = Random.nextInt(1, 5)
+        val expression = Random.nextInt(1, 4)
+        val statusText = when (fatigue) {
+            2 -> "状态正常"
+            3 -> "分心驾驶"
+            4 -> "疲劳驾驶"
+            else -> "未知状态"
+        }
+        val exprText = when (expression) {
+            1 -> "表情未知"
+            2 -> "表情平静"
+            else -> "表情异常"
+        }
+        return SafetyModule(
+            id = "fatigue",
+            title = "驾驶员监测",
+            iconRes = R.drawable.ic_fatigue_monitor,
+            status = "$statusText · $exprText",
+            colorRes = R.color.module_orange,
+            propertyId = CarExtPropertyIds.DMS_DRIVER_FATIGUE_STATUS,
+            valueType = "int",
+            sdkGroup = "IBiometric",
+            extractableParamCount = 2,
+        )
     }
 
-    private fun buildLightStatus(): String {
+    private fun speedLimitModule(): SafetyModule {
+        val mode = Random.nextInt(0, 4)
+        val offset = listOf(-10, -5, 0, 5, 10, 15).random()
+        return SafetyModule(
+            id = "speed_limit",
+            title = "限速提醒",
+            iconRes = R.drawable.ic_speed_limit,
+            status = "模式 $mode · 偏差 ${if (offset >= 0) "+$offset" else "$offset"} km/h",
+            colorRes = R.color.module_teal,
+            propertyId = CarExtPropertyIds.SPEED_LIMIT_WARNING_MODE,
+            valueType = "int",
+            sdkGroup = "IADAS",
+            extractableParamCount = 2,
+        )
+    }
+
+    private fun rainSafetyModule(): SafetyModule {
+        val rainy = Random.nextBoolean()
+        val rearWipe = Random.nextBoolean()
+        val lockClose = Random.nextBoolean()
+        return SafetyModule(
+            id = "rain_safety",
+            title = "雨天车身",
+            iconRes = R.drawable.ic_rain,
+            status = buildString {
+                append(if (rainy) "雨天关窗开" else "雨天关窗关")
+                append(" · ")
+                append(if (rearWipe) "后雨刮联动开" else "后雨刮联动关")
+                append(" · ")
+                append(if (lockClose) "锁车关窗开" else "锁车关窗关")
+            },
+            colorRes = R.color.module_blue_light,
+            propertyId = CarExtPropertyIds.AUTO_CLOSE_WINDOW_RAINY,
+            valueType = "boolean",
+            sdkGroup = "IBcm",
+            extractableParamCount = 3,
+        )
+    }
+
+    private fun doorWarnModule(): SafetyModule {
+        val dow = Random.nextBoolean()
+        return SafetyModule(
+            id = "door",
+            title = "开门预警",
+            iconRes = R.drawable.ic_door,
+            status = if (dow) "DOW 开门预警 已开启" else "DOW 开门预警 已关闭",
+            colorRes = R.color.module_yellow,
+            propertyId = CarExtPropertyIds.DOOR_OPEN_WARN_ACTIVE,
+            valueType = "boolean",
+            sdkGroup = "IADAS",
+            extractableParamCount = 1,
+        )
+    }
+
+    private fun lightModule(): SafetyModule {
         val control = when (Random.nextInt(0, 5)) {
             0 -> "OFF"
             1 -> "AUTO"
@@ -259,89 +226,230 @@ object MockDataProvider {
         val drl = Random.nextBoolean()
         val frontPos = Random.nextBoolean()
         val rearPos = Random.nextBoolean()
-        return "外灯:$control · DRL:${if (drl) "开" else "关"} · 前位:${if (frontPos) "开" else "关"} · 后位:${if (rearPos) "开" else "关"}"
+        return SafetyModule(
+            id = "light",
+            title = "车外灯光",
+            iconRes = R.drawable.ic_light,
+            status = buildString {
+                append("外灯 ").append(control)
+                append(" · DRL ").append(if (drl) "开" else "关")
+                append(" · 前位灯 ").append(if (frontPos) "开" else "关")
+                append(" · 后位灯 ").append(if (rearPos) "开" else "关")
+            },
+            colorRes = R.color.module_purple,
+            propertyId = CarExtPropertyIds.LAMP_EXTERIOR_LIGHT_CONTROL,
+            valueType = "int",
+            sdkGroup = "ILamp",
+            extractableParamCount = 4,
+        )
     }
 
-    private fun buildSpeedLimitStatus(): String {
-        // 这里不假设具体枚举语义，仅给出“模式值 + 偏差值”用于展示/判断
-        val mode = Random.nextInt(0, 4)
-        val offset = listOf(-10, -5, 0, 5, 10, 15).random()
-        return "模式 $mode · 偏差 ${if (offset >= 0) "+$offset" else "$offset"}"
-    }
-
-    private fun buildRainSafetyStatus(): String {
-        val autoClose = Random.nextBoolean()
-        val rearWipe = Random.nextBoolean()
-        val lockClose = Random.nextBoolean()
-        val tags = mutableListOf<String>()
-        tags += if (autoClose) "雨天关窗开" else "雨天关窗关"
-        tags += if (rearWipe) "后雨刮开" else "后雨刮关"
-        tags += if (lockClose) "锁车关窗开" else "锁车关窗关"
-        return tags.joinToString(" · ")
-    }
-
-    private fun buildOccupantSafetyStatus(): String {
+    private fun occupantModule(): SafetyModule {
         val childLock = Random.nextBoolean()
-        val airbagEnabled = Random.nextBoolean()
-        val a = if (childLock) "儿童锁开" else "儿童锁关"
-        val b = if (airbagEnabled) "副驾气囊启用" else "副驾气囊禁用"
-        return "$a · $b"
+        val airbag = Random.nextBoolean()
+        val occupied = Random.nextBoolean()
+        return SafetyModule(
+            id = "occupant",
+            title = "乘员安全",
+            iconRes = R.drawable.ic_child_lock,
+            status = buildString {
+                append(if (childLock) "儿童锁开" else "儿童锁关")
+                append(" · 副驾气囊").append(if (airbag) "启用" else "禁用")
+                append(" · 副驾占位").append(if (occupied) "有人" else "空")
+            },
+            colorRes = R.color.module_orange,
+            propertyId = CarExtPropertyIds.CHILD_SAFETY_LOCK,
+            valueType = "boolean",
+            sdkGroup = "IBcm+ISeat",
+            extractableParamCount = 3,
+        )
+    }
+
+    private fun SafetyModule.withRichCardMeta(): SafetyModule {
+        if (id == "trace") return this
+        val groupHint = if (sdkGroup.isNotBlank()) "$sdkGroup · ${extractableParamCount}项可提取" else ""
+        return when (id) {
+            "adas" -> {
+                val aeb = if (status.contains("AEB 开")) "开启" else "关闭"
+                val fcw = status.substringAfter("FCW ").substringBefore(" ·").trim()
+                val ldw = if (status.contains("LDW 开")) "开启" else "关闭"
+                copy(
+                    subtitle = groupHint.ifBlank { "AEB · FCW · LDW · LKA · ELK" },
+                    metrics = listOf(
+                        ModuleMetric("AEB", aeb),
+                        ModuleMetric("FCW", fcw),
+                        ModuleMetric("LDW", ldw),
+                    ),
+                )
+            }
+
+            "blindspot" -> {
+                val mode = status.substringAfter("变道警示 ").substringBefore(" ·").trim()
+                val rcta = status.substringAfter("RCTA ").trim()
+                copy(
+                    subtitle = groupHint.ifBlank { "变道警示 · RCTA 左右侧" },
+                    metrics = listOf(
+                        ModuleMetric("变道", mode),
+                        ModuleMetric("RCTA", rcta),
+                        ModuleMetric("属性", CarExtPropertyIds.hex(propertyId)),
+                    ),
+                )
+            }
+
+            "rear_safety" -> {
+                val rcw = if (status.contains("RCW 开")) "开启" else "关闭"
+                val rcta = if (status.contains("RCTA 开")) "开启" else "关闭"
+                copy(
+                    subtitle = groupHint.ifBlank { "后碰撞预警 · 倒车横向来车" },
+                    metrics = listOf(
+                        ModuleMetric("RCW", rcw),
+                        ModuleMetric("RCTA", rcta),
+                        ModuleMetric("ID", CarExtPropertyIds.hex(CarExtPropertyIds.REAR_COLLISION_WARNING)),
+                    ),
+                )
+            }
+
+            "fatigue" -> {
+                val level = when {
+                    status.contains("疲劳") -> "疲劳"
+                    status.contains("分心") -> "分心"
+                    status.contains("未知") -> "未知"
+                    else -> "正常"
+                }
+                copy(
+                    subtitle = groupHint.ifBlank { "DMS 疲劳 · 面部表情" },
+                    metrics = listOf(
+                        ModuleMetric("疲劳", level),
+                        ModuleMetric("表情", status.substringAfter("· ").trim()),
+                        ModuleMetric("ID", CarExtPropertyIds.hex(propertyId)),
+                    ),
+                )
+            }
+
+            "speed_limit" -> {
+                val mode = Regex("模式\\s*(\\d+)").find(status)?.groupValues?.getOrNull(1) ?: "—"
+                val offset = Regex("偏差\\s*([+-]?\\d+)").find(status)?.groupValues?.getOrNull(1) ?: "0"
+                copy(
+                    subtitle = groupHint.ifBlank { "限速模式 · 超速偏差" },
+                    metrics = listOf(
+                        ModuleMetric("模式", mode),
+                        ModuleMetric("偏差", "${offset}km/h"),
+                        ModuleMetric("偏移ID", CarExtPropertyIds.hex(CarExtPropertyIds.SPEED_LIMIT_WARNING_OFFSET_VALUE)),
+                    ),
+                )
+            }
+
+            "rain_safety" -> copy(
+                subtitle = groupHint.ifBlank { "雨天关窗 · 后雨刮 · 锁车关窗" },
+                metrics = listOf(
+                    ModuleMetric("雨天关窗", if (status.contains("雨天关窗开")) "开" else "关"),
+                    ModuleMetric("后雨刮", if (status.contains("后雨刮联动开")) "开" else "关"),
+                    ModuleMetric("锁车关窗", if (status.contains("锁车关窗开")) "开" else "关"),
+                ),
+            )
+
+            "door" -> copy(
+                subtitle = groupHint.ifBlank { "DOW 车门开启预警" },
+                metrics = listOf(
+                    ModuleMetric("DOW", if (status.contains("已开启")) "开启" else "关闭"),
+                    ModuleMetric("属性ID", CarExtPropertyIds.hex(propertyId)),
+                    ModuleMetric("分区", "GLOBAL"),
+                ),
+            )
+
+            "light" -> {
+                val ext = status.substringAfter("外灯 ").substringBefore(" ·").trim()
+                copy(
+                    subtitle = groupHint.ifBlank { "外灯模式 · DRL · 位置灯" },
+                    metrics = listOf(
+                        ModuleMetric("外灯", ext),
+                        ModuleMetric("DRL", if (status.contains("DRL 开")) "开" else "关"),
+                        ModuleMetric("后位灯", if (status.contains("后位灯 开")) "开" else "关"),
+                    ),
+                )
+            }
+
+            "occupant" -> copy(
+                subtitle = groupHint.ifBlank { "儿童锁 · 副驾气囊 · 座椅占位" },
+                metrics = listOf(
+                    ModuleMetric("儿童锁", if (status.contains("儿童锁开")) "开" else "关"),
+                    ModuleMetric("副驾气囊", if (status.contains("启用")) "启用" else "禁用"),
+                    ModuleMetric("副驾占位", if (status.contains("有人")) "有人" else "空"),
+                ),
+            )
+
+            else -> copy(subtitle = groupHint)
+        }
     }
 
     private fun SafetyModule.withRiskComputed(): SafetyModule {
         if (id == "trace") return this
 
-        fun normal() = copy(riskLevel = 0, riskReason = "状态正常")
+        fun normal() = copy(riskLevel = 0, riskReason = "")
         fun attention(reason: String) = copy(riskLevel = 1, riskReason = reason)
         fun high(reason: String) = copy(riskLevel = 2, riskReason = reason)
 
         return when (id) {
+            "adas" -> when {
+                status.contains("AEB 关") -> attention("自动紧急制动(AEB)未开启")
+                status.contains("FCW 关闭") -> attention("前向碰撞预警关闭")
+                status.contains("LDW 关") -> attention("车道偏离预警关闭")
+                status.contains("LKA 关") -> attention("车道保持辅助关闭")
+                else -> normal()
+            }
+
+            "blindspot" -> when {
+                status.contains("变道警示 关闭") -> attention("变道警示已关闭")
+                status.contains("双侧报警") || status.contains("左侧报警") || status.contains("右侧报警")
+                -> attention("侧后方来车报警中")
+                else -> normal()
+            }
+
+            "rear_safety" -> when {
+                status.contains("RCW 关") && status.contains("RCTA 关") ->
+                    attention("后侧碰撞与横向来车预警均未开启")
+                status.contains("RCW 关") -> attention("后碰撞预警(RCW)关闭")
+                else -> normal()
+            }
+
             "fatigue" -> when {
-                status.contains("疲劳") -> high("检测到疲劳驾驶")
-                status.contains("分心") -> attention("检测到分心驾驶")
-                status.contains("未知") -> attention("状态未知，建议关注")
+                status.contains("疲劳") -> high("DMS 检测到疲劳驾驶")
+                status.contains("分心") -> attention("DMS 检测到分心驾驶")
+                status.contains("未知") -> attention("驾驶员状态未知")
                 else -> normal()
             }
 
-            "door" -> when {
-                status.contains("开启") && !status.contains("全部关闭") -> attention("存在车门未关")
-                else -> normal()
-            }
-
-            "collision" -> when {
-                status.contains("关") -> attention("碰撞预警可能处于关闭状态")
-                else -> normal()
-            }
-
-            "lane" -> when {
-                status.contains("关") -> attention("车道偏离预警关闭")
-                else -> normal()
-            }
-
-            "lane_keep" -> when {
-                status.contains("关闭") -> attention("车道保持辅助关闭")
-                else -> normal()
-            }
-
-            "speed_limit" -> run {
-                // "模式 X · 偏差 +10"
+            "speed_limit" -> {
                 val offset = Regex("偏差\\s*([+-]?\\d+)").find(status)?.groupValues?.getOrNull(1)?.toIntOrNull() ?: 0
                 when {
-                    kotlin.math.abs(offset) >= 15 -> high("限速偏差过大：$offset")
-                    kotlin.math.abs(offset) >= 10 -> attention("限速偏差偏大：$offset")
+                    kotlin.math.abs(offset) >= 15 -> high("限速偏差过大：${offset}km/h")
+                    kotlin.math.abs(offset) >= 10 -> attention("限速偏差偏大：${offset}km/h")
                     else -> normal()
                 }
             }
 
-            "rain_safety" -> run {
-                val problems = mutableListOf<String>()
-                if (status.contains("雨天关窗关")) problems += "雨天自动关窗关闭"
-                if (status.contains("锁车关窗关")) problems += "锁车自动关窗关闭"
-                if (problems.isEmpty()) normal() else attention(problems.joinToString("、"))
+            "rain_safety" -> {
+                val issues = mutableListOf<String>()
+                if (status.contains("雨天关窗关")) issues += "雨天自动关窗关闭"
+                if (status.contains("锁车关窗关")) issues += "锁车自动关窗关闭"
+                if (issues.isEmpty()) normal() else attention(issues.joinToString("、"))
             }
 
-            "child_safety" -> run {
-                if (status.contains("儿童锁关")) attention("儿童锁未开启") else normal()
+            "door" -> when {
+                status.contains("已关闭") -> attention("开门预警(DOW)未开启")
+                else -> normal()
+            }
+
+            "light" -> when {
+                status.startsWith("外灯 OFF") -> attention("外灯处于关闭状态")
+                else -> normal()
+            }
+
+            "occupant" -> when {
+                status.contains("儿童锁关") -> attention("儿童锁未开启")
+                status.contains("副驾气囊禁用") && status.contains("有人") ->
+                    attention("副驾有人但气囊禁用，请确认配置")
+                else -> normal()
             }
 
             else -> normal()

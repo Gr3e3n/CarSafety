@@ -1,11 +1,11 @@
 {
-  "eventId": "EXP-20260518-001",
+  "eventId": "SIM-20260522-0001",
   "eventType": "COLLISION",
-  "scenarioId": "SCH-COLLISION-001",
-  "scenarioName": "追尾碰撞（跟车过近）",
+  "scenarioId": "SIM-COLLISION-0001",
+  "scenarioName": "追尾碰撞（跟车过近）（#1）",
   "timeMillis": 1740000139000,
   "location": "苏州·工业园区",
-  "summary": "【追尾碰撞（跟车过近）】COLLISION，HIGH等级；发生于隧道入口（雾），涉及施工区域未封闭完全",
+  "summary": "【追尾碰撞（跟车过近）（#1）】COLLISION，HIGH等级；发生于隧道入口（雾），涉及施工区域未封闭完全",
   "triggerReasons": [
     "已发生接触或显著减速碰撞",
     "行车记录仪/EDR 可佐证碰撞瞬间车速与制动",

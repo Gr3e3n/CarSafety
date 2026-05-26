@@ -64,7 +64,6 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
         render(bundle!!)
         setupSeverityPrediction()
         setupAiAnalysis()
-        refreshExperimentHint()
 
         binding.btnUploadChain.setOnClickListener {
             val b = bundle ?: return@setOnClickListener
@@ -100,16 +99,6 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        ExperimentRuntime.loadPersisted(this)
-        refreshExperimentHint()
-    }
-
-    private fun refreshExperimentHint() {
-        binding.tvExperimentSettingsHint.text = getString(
-            R.string.experiment_detail_experiment_hint,
-            ExperimentRuntime.normalizedGroup(),
-            ExperimentRuntime.normalizedAblation(),
-        )
     }
 
     override fun onDestroy() {
@@ -202,6 +191,15 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
     }
 
     private fun render(b: AccidentDetailBundle) {
+        binding.tvDetailHeroTitle.text = b.event.summary.ifBlank { "事故事件 ${b.event.id}" }
+        binding.tvDetailHeroMeta.text = buildString {
+            append(formatTime(b.event.timeMillis))
+            append("  ·  ")
+            append(b.event.locationText.ifBlank { "地点待补充" })
+            append("\n触发：")
+            append(b.event.triggerReasons.joinToString(" · ").ifBlank { "—" })
+        }
+
         binding.tvHeader.text = buildString {
             append("事件：").append(b.event.id).append('\n')
             append("时间：").append(formatTime(b.event.timeMillis)).append('\n')

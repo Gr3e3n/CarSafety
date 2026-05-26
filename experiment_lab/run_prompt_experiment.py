@@ -55,6 +55,24 @@ def make_payload(sample: dict[str, Any], group: str, ablation: str) -> dict[str,
     return payload
 
 
+def _progress_bar(total: int, desc: str):
+    try:
+        from tqdm import tqdm
+
+        return tqdm(total=total, desc=desc, unit="条", dynamic_ncols=True)
+    except ImportError:
+        return None
+
+
+def _print_progress(done: int, total: int, ok: int, desc: str) -> None:
+    width = 40
+    filled = int(width * done / max(total, 1))
+    bar = "█" * filled + "░" * (width - filled)
+    print(f"\r{desc} |{bar}| {done}/{total} 成功{ok}", end="", flush=True)
+    if done >= total:
+        print()
+
+
 def wrap_result(index: int, payload: dict[str, Any], raw_response: dict[str, Any], api_key_slot: int = 0) -> dict[str, Any]:
     return {
         "requestIndex": index,
@@ -64,6 +82,61 @@ def wrap_result(index: int, payload: dict[str, Any], raw_response: dict[str, Any
         "apiKeySlot": api_key_slot,
         "rawResponse": raw_response,
     }
+
+
+def run_cli_single_requests(
+    samples: list[dict[str, Any]],
+    group: str,
+    ablation: str,
+    workers: int,
+) -> list[dict[str, Any]]:
+    """N 次独立分析（每条样本一次 _analyze_payload），并发 + 进度条。"""
+    sys.path.insert(0, str(BACKEND_DIR))
+    from main import BATCH_CONCURRENCY, OPENAI_CLIENTS, AccidentAnalyzeRequest, _analyze_payload  # noqa: WPS433
+
+    if not OPENAI_CLIENTS:
+        raise RuntimeError("OPENAI_API_KEY 未配置，请在 backend/.env 中设置")
+
+    n_workers = workers or BATCH_CONCURRENCY
+    n_keys = len(OPENAI_CLIENTS)
+    payloads = [AccidentAnalyzeRequest(**make_payload(s, group, ablation)) for s in samples]
+    results: list[dict[str, Any] | None] = [None] * len(payloads)
+    total = len(payloads)
+    desc = f"{group}_{ablation}"
+    pbar = _progress_bar(total, desc)
+
+    def run_one(index: int, payload: AccidentAnalyzeRequest) -> dict[str, Any]:
+        client = OPENAI_CLIENTS[index % n_keys]
+        try:
+            raw = _analyze_payload(payload, client)
+            return wrap_result(index, payload.model_dump(), raw, index % n_keys)
+        except Exception as exc:
+            return wrap_result(
+                index,
+                payload.model_dump(),
+                {"success": False, "error": str(exc)},
+                index % n_keys,
+            )
+
+    done = 0
+    ok_count = 0
+    with ThreadPoolExecutor(max_workers=n_workers) as executor:
+        futures = {executor.submit(run_one, i, p): i for i, p in enumerate(payloads)}
+        for future in as_completed(futures):
+            idx = futures[future]
+            row = future.result()
+            results[idx] = row
+            done += 1
+            if row.get("rawResponse", {}).get("success"):
+                ok_count += 1
+            if pbar is not None:
+                pbar.update(1)
+                pbar.set_postfix(ok=ok_count, fail=done - ok_count)
+            else:
+                _print_progress(done, total, ok_count, desc)
+    if pbar is not None:
+        pbar.close()
+    return [r for r in results if r is not None]
 
 
 def run_cli_group(
@@ -125,6 +198,72 @@ def run_cli_group(
     return [r for r in results if r is not None]
 
 
+def run_http_single_requests(
+    samples: list[dict[str, Any]],
+    group: str,
+    ablation: str,
+    base_url: str,
+    timeout: float,
+    workers: int,
+) -> list[dict[str, Any]]:
+    """
+    与 App 一致：共 N 次 HTTP 请求，每次 POST /api/accident/analyze + 单条事故 JSON
+    （非 /analyze/batch 一次塞 500 条）。默认多线程并发，带进度条。
+    """
+    import httpx
+
+    base = base_url.rstrip("/")
+    url = base + "/api/accident/analyze"
+    bodies = [make_payload(s, group, ablation) for s in samples]
+    total = len(bodies)
+    results: list[dict[str, Any] | None] = [None] * total
+
+    with httpx.Client(timeout=timeout, trust_env=False) as client:
+        health = client.get(base + "/health")
+        health.raise_for_status()
+        info = health.json()
+        if not info.get("openai_configured"):
+            raise RuntimeError("后端未配置 OPENAI_API_KEY")
+        n_workers = workers or int(info.get("batch_concurrency") or 4)
+        print(
+            f"  后端 OK: model={info.get('model')} | "
+            f"{total} 个独立请求 → POST {url} | 并发={n_workers}"
+        )
+
+    desc = f"{group}_{ablation}"
+    pbar = _progress_bar(total, desc)
+    done = 0
+    ok_count = 0
+
+    def post_one(index: int, body: dict[str, Any]) -> dict[str, Any]:
+        with httpx.Client(timeout=timeout, trust_env=False) as client:
+            try:
+                resp = client.post(url, json=body)
+                resp.raise_for_status()
+                raw = resp.json()
+            except Exception as exc:
+                raw = {"success": False, "error": str(exc)}
+        return wrap_result(index, body, raw, 0)
+
+    with ThreadPoolExecutor(max_workers=n_workers) as executor:
+        futures = {executor.submit(post_one, i, b): i for i, b in enumerate(bodies)}
+        for future in as_completed(futures):
+            idx = futures[future]
+            row = future.result()
+            results[idx] = row
+            done += 1
+            if row.get("rawResponse", {}).get("success"):
+                ok_count += 1
+            if pbar is not None:
+                pbar.update(1)
+                pbar.set_postfix(ok=ok_count, fail=done - ok_count)
+            else:
+                _print_progress(done, total, ok_count, desc)
+    if pbar is not None:
+        pbar.close()
+    return [r for r in results if r is not None]
+
+
 def run_http_group(
     samples: list[dict[str, Any]],
     group: str,
@@ -183,7 +322,17 @@ def run_analysis(samples: Path, results_dir: Path, out_dir: Path) -> None:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="PC 一键提示词工程实验（A/B/C + 阶梯 Prompt）")
-    ap.add_argument("--mode", choices=["cli", "http"], default="cli", help="cli=直连 OpenAI; http=调 uvicorn")
+    ap.add_argument("--mode", choices=["cli", "http"], default="http", help="http=经 uvicorn（与 App 一致）；cli=直连 OpenAI")
+    ap.add_argument(
+        "--batch-endpoint",
+        action="store_true",
+        help="使用 POST /api/accident/analyze/batch（一次提交全部样本）。默认：N 次独立 /analyze 请求",
+    )
+    ap.add_argument(
+        "--sequential",
+        action="store_true",
+        help="（已废弃，等同默认）保留兼容",
+    )
     ap.add_argument("--base-url", default="http://127.0.0.1:8080", help="HTTP 模式后端地址")
     ap.add_argument("--groups", default=GROUPS_ALL, help=f"实验组别，默认全量 10 组: {GROUPS_ALL}")
     ap.add_argument("--groups-method", action="store_true", help=f"仅跑系统方法对比: {GROUPS_METHOD}")
@@ -191,10 +340,18 @@ def main() -> int:
     ap.add_argument("--ablation", default="D0", help="消融模式")
     ap.add_argument("--samples", type=Path, default=DEFAULT_SAMPLES)
     ap.add_argument("--out-dir", type=Path, default=None, help="结果输出目录（默认 run_<timestamp>）")
-    ap.add_argument("--concurrency", type=int, default=0, help="CLI 并发数，0=读 .env")
+    ap.add_argument(
+        "--workers",
+        "--concurrency",
+        dest="workers",
+        type=int,
+        default=0,
+        help="独立请求并发数，0=读后端 health 的 batch_concurrency",
+    )
     ap.add_argument("--http-timeout", type=float, default=600.0)
     ap.add_argument("--skip-existing", action="store_true", help="目录已有同组 JSON 则跳过 API")
     ap.add_argument("--analyze-only", action="store_true", help="仅分析已有 JSON，不调 API")
+    ap.add_argument("--skip-analysis", action="store_true", help="跑完 API 后不生成 analysis 统计报告")
     ap.add_argument("--results-dir", type=Path, default=None, help="--analyze-only 时指定结果目录")
     args = ap.parse_args()
 
@@ -228,7 +385,9 @@ def main() -> int:
     samples = load_samples(args.samples)
     print(f"样本: {len(samples)} 条 | 组别: {groups} | 消融: {ablation}")
     print(f"输出目录: {out_dir.resolve()}")
-    print(f"模式: {args.mode}")
+    use_batch = args.batch_endpoint and not args.sequential
+    api_style = "POST /analyze/batch（1 次）" if use_batch else f"POST /analyze ×{len(samples)}（独立请求）"
+    print(f"模式: {args.mode} | {api_style} | workers={args.workers or '自动'}")
 
     saved_files: list[Path] = []
     t_all = time.perf_counter()
@@ -245,9 +404,17 @@ def main() -> int:
             print(f"\n=== 开始 {group}_{ablation} ===")
             t0 = time.perf_counter()
             if args.mode == "cli":
-                results = run_cli_group(samples, group, ablation, args.concurrency)
+                if use_batch:
+                    print("  提示: CLI 无 /analyze/batch，仍按独立请求并发调模型", file=sys.stderr)
+                results = run_cli_single_requests(samples, group, ablation, args.workers)
             else:
-                results = run_http_group(samples, group, ablation, args.base_url, args.http_timeout)
+                results = (
+                    run_http_group(samples, group, ablation, args.base_url, args.http_timeout)
+                    if use_batch
+                    else run_http_single_requests(
+                        samples, group, ablation, args.base_url, args.http_timeout, args.workers
+                    )
+                )
             out_file = save_results(results, out_dir, group, ablation)
             ok = sum(1 for r in results if isinstance(r.get("rawResponse"), dict) and r["rawResponse"].get("success"))
             elapsed = time.perf_counter() - t0
@@ -271,31 +438,36 @@ def main() -> int:
         )
         return 130
 
-    analysis_dir = out_dir / "analysis"
-    print(f"\n=== 自动分析 ===")
-    run_analysis(args.samples, out_dir, analysis_dir)
+    if not args.skip_analysis:
+        analysis_dir = out_dir / "analysis"
+        print(f"\n=== 自动分析 ===")
+        run_analysis(args.samples, out_dir, analysis_dir)
+    else:
+        print("\n已跳过 analysis 统计（--skip-analysis）")
 
     total_elapsed = time.perf_counter() - t_all
     print(f"\n全部完成，总耗时 {total_elapsed:.1f}s")
     print("JSON 文件:")
     for f in saved_files:
         print(" -", f.resolve())
-    print("分析报告:")
-    for name in [
-        "unified_experiment_summary.csv",
-        "full_prompt_comparison_report.md",
-        "full_prompt_comparison.csv",
-        "metric_leaderboard.csv",
-        "prompt_ladder_report.md",
-        "prompt_experiment_report.md",
-        "experiment_analysis_report.md",
-        "condition_summary.csv",
-        "efficiency_summary.csv",
-        "per_sample_metrics.csv",
-    ]:
-        p = analysis_dir / name
-        if p.is_file():
-            print(" -", p.resolve())
+    if not args.skip_analysis:
+        analysis_dir = (args.out_dir or (DEFAULT_RESULTS_ROOT / "result")) / "analysis"
+        print("分析报告:")
+        for name in [
+            "unified_experiment_summary.csv",
+            "full_prompt_comparison_report.md",
+            "full_prompt_comparison.csv",
+            "metric_leaderboard.csv",
+            "prompt_ladder_report.md",
+            "prompt_experiment_report.md",
+            "experiment_analysis_report.md",
+            "condition_summary.csv",
+            "efficiency_summary.csv",
+            "per_sample_metrics.csv",
+        ]:
+            p = analysis_dir / name
+            if p.is_file():
+                print(" -", p.resolve())
     return 0
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- 基础色 -->
+    <!-- Material 默认 -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -9,22 +9,42 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- 自定义浅色系 -->
-    <color name="background">#F8F9FA</color>
-    <color name="status_bar_bg">#F0F2F5</color>
-    <color name="text_primary">#1E293B</color>
+    <!-- 全局界面 -->
+    <color name="background">#F1F5F9</color>
+    <color name="status_bar_bg">#F8FAFC</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#F8FAFC</color>
+    <color name="outline">#E2E8F0</color>
+    <color name="outline_light">#F1F5F9</color>
+    <color name="text_primary">#0F172A</color>
     <color name="text_secondary">#64748B</color>
+    <color name="text_tertiary">#94A3B8</color>
 
-    <!-- 模块主题色 -->
-    <color name="module_blue">#4A90E2</color>
-    <color name="module_green">#50E3C2</color>
-    <color name="module_orange">#F5A623</color>
-    <color name="module_purple">#9B51E0</color>
-    <color name="module_teal">#2DC7A0</color>
-    <color name="module_pink">#EB6F92</color>
-    <color name="module_blue_light">#7BC8FF</color>
-    <color name="module_yellow">#FFC542</color>
+    <!-- 品牌主色（统一蓝） -->
+    <color name="brand_primary">#3B82F6</color>
+    <color name="brand_primary_dark">#2563EB</color>
+    <color name="brand_primary_light">#60A5FA</color>
+    <color name="brand_container">#EFF6FF</color>
+    <color name="brand_on_container">#1E40AF</color>
 
-    <!-- 警告色 -->
-    <color name="warning_red">#E53935</color>
+    <!-- 成功 / 监控 -->
+    <color name="success">#10B981</color>
+    <color name="success_container">#D1FAE5</color>
+    <color name="success_on_container">#047857</color>
+
+    <!-- 模块点缀色（略收敛，避免彩虹感） -->
+    <color name="module_blue">#3B82F6</color>
+    <color name="module_green">#14B8A6</color>
+    <color name="module_orange">#F59E0B</color>
+    <color name="module_purple">#8B5CF6</color>
+    <color name="module_teal">#0D9488</color>
+    <color name="module_pink">#EC4899</color>
+    <color name="module_blue_light">#93C5FD</color>
+    <color name="module_yellow">#EAB308</color>
+
+    <color name="warning_red">#EF4444</color>
+
+    <!-- 事故溯源（与品牌色一致） -->
+    <color name="trace_primary">#3B82F6</color>
+    <color name="trace_primary_dark">#2563EB</color>
 </resources>

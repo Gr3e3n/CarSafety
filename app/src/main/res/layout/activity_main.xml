@@ -20,7 +20,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="4dp"
-            app:cardBackgroundColor="#F7F9FC"
+            app:cardBackgroundColor="@color/surface"
             app:cardCornerRadius="22dp"
             app:cardElevation="3dp">
 
@@ -45,7 +45,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="19:06"
-                        android:textColor="#334155"
+                        android:textColor="@color/text_primary"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -54,20 +54,20 @@
                         android:layout_height="18dp"
                         android:layout_marginEnd="8dp"
                         android:src="@drawable/ic_signal"
-                        android:tint="#94A3B8" />
+                        android:tint="@color/text_tertiary" />
 
                     <ImageView
                         android:layout_width="18dp"
                         android:layout_height="18dp"
                         android:layout_marginEnd="8dp"
                         android:src="@drawable/ic_bluetooth"
-                        android:tint="#94A3B8" />
+                        android:tint="@color/text_tertiary" />
 
                     <ImageView
                         android:layout_width="18dp"
                         android:layout_height="18dp"
                         android:src="@drawable/ic_battery"
-                        android:tint="#94A3B8" />
+                        android:tint="@color/text_tertiary" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -100,7 +100,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="INTELLIGENT SAFETY · 行车防护中台"
-                                android:textColor="#9AA9BD"
+                                android:textColor="@color/text_tertiary"
                                 android:textSize="9sp"
                                 android:textStyle="bold"
                                 android:letterSpacing="0.04"
@@ -111,7 +111,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="2026年4月15日 星期三"
-                                android:textColor="#64748B"
+                                android:textColor="@color/text_secondary"
                                 android:textSize="9sp"
                                 android:textStyle="bold" />
 
@@ -125,7 +125,7 @@
                                 android:paddingEnd="10dp"
                                 android:paddingBottom="4dp"
                                 android:text="监控运行中"
-                                android:textColor="#179E67"
+                                android:textColor="@color/success_on_container"
                                 android:textSize="9sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -135,7 +135,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text="智能安全中心"
-                            android:textColor="#0F172A"
+                            android:textColor="@color/text_primary"
                             android:textSize="23sp"
                             android:textStyle="bold" />
 
@@ -144,7 +144,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:text="实时监控 · 事故溯源 · 责任界定"
-                            android:textColor="#316EF4"
+                            android:textColor="@color/brand_primary"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -163,7 +163,7 @@
                             android:layout_height="34dp"
                             android:layout_gravity="center"
                             android:src="@drawable/ic_home_warning"
-                            android:tint="#B9C7F2" />
+                            android:tint="@color/brand_primary_light" />
                     </FrameLayout>
                 </LinearLayout>
 
@@ -182,7 +182,7 @@
                         android:focusable="false"
                         android:gravity="center"
                         android:text="实时监控"
-                        android:textColor="#275FEF"
+                        android:textColor="@color/brand_primary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
@@ -196,7 +196,7 @@
                         android:focusable="false"
                         android:gravity="center"
                         android:text="事故取证"
-                        android:textColor="#275FEF"
+                        android:textColor="@color/brand_primary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
@@ -210,7 +210,7 @@
                         android:focusable="false"
                         android:gravity="center"
                         android:text="责任存证"
-                        android:textColor="#275FEF"
+                        android:textColor="@color/brand_primary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -219,9 +219,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="14dp"
-                    android:background="#DEE6EF" />
+                    android:background="@color/outline" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="2dp"
+            android:text="安全监测模块"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

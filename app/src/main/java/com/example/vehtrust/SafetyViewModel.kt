@@ -1,13 +1,18 @@
-﻿package com.example.vehtrust
+package com.example.vehtrust
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.vehtrust.data.ModuleMetric
 import com.example.vehtrust.data.SafetyModule
 import com.example.vehtrust.mock.MockDataProvider
+import com.example.vehtrust.trace.AccidentRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class SafetyViewModel : ViewModel() {
 
@@ -21,19 +26,39 @@ class SafetyViewModel : ViewModel() {
     private fun startMockDataUpdate() {
         viewModelScope.launch {
             while (true) {
-                _modules.postValue(MockDataProvider.generateModules())
-                delay(2000) // 每2秒更新一次
+                val base = MockDataProvider.generateModules()
+                _modules.postValue(enrichTraceModule(base))
+                delay(2000)
             }
         }
     }
 
-    // ========== 真实数据接入接口 ==========
+    private fun enrichTraceModule(modules: List<SafetyModule>): List<SafetyModule> {
+        val events = AccidentRepository.listEvents()
+        val count = events.size
+        val last = events.maxByOrNull { it.timeMillis }
+        val lastTime = last?.let {
+            SimpleDateFormat("MM-dd HH:mm", Locale.CHINA).format(Date(it.timeMillis))
+        } ?: "暂无"
+        val lastSummary = last?.summary?.take(18)?.let { if (it.length == 18) "$it…" else it }
 
-    /**
-     * 从车辆系统接收真实数据更新
-     * @param moduleId 模块ID（对应info.txt中的常量名）
-     * @param value 新的值（可以是Boolean、Int、Float等）
-     */
+        return modules.map { module ->
+            if (module.id != "trace") return@map module
+            module.copy(
+                metrics = listOf(
+                    ModuleMetric("已存证", "${count}条"),
+                    ModuleMetric("采样率", "20Hz"),
+                    ModuleMetric("最近", lastTime),
+                ),
+                status = when {
+                    lastSummary != null -> "最近事件：$lastSummary · 点击进入详情/上链"
+                    count > 0 -> "共 $count 条记录 · 支持回放、AI 与链上存证"
+                    else -> "20Hz 监控运行中 · 触发后自动冻结前后 10 秒"
+                },
+            )
+        }
+    }
+
     fun updateModuleStatus(moduleId: String, value: Any) {
         val currentList = _modules.value ?: return
         val updatedList = currentList.map { module ->
@@ -41,70 +66,40 @@ class SafetyViewModel : ViewModel() {
                 module.copy(status = formatStatus(module, value))
             } else module
         }
-        _modules.postValue(updatedList)
+        _modules.postValue(enrichTraceModule(updatedList))
     }
 
-    /**
-     * 批量更新多个模块
-     */
     fun updateAllModules(newModules: List<SafetyModule>) {
-        _modules.postValue(newModules)
+        _modules.postValue(enrichTraceModule(newModules))
     }
 
-    /**
-     * 根据值类型格式化状态文本
-     */
     private fun formatStatus(module: SafetyModule, value: Any): String {
         return when (module.id) {
-            "adas" -> {
-                // 处理复合状态（需要更多数据）
-                module.status // 暂保留原有格式
-            }
-            "blindspot" -> {
-                when (value) {
-                    is Int -> when (value) {
-                        1 -> "视觉预警"
-                        2 -> "声音预警"
-                        3 -> "视觉+声音"
-                        else -> "关闭"
-                    }
-                    else -> module.status
+            "adas", "rear_safety", "rain_safety", "door", "occupant", "light" -> module.status
+            "blindspot" -> when (value) {
+                is Int -> when (value) {
+                    1 -> "变道警示 视觉 · RCTA 无报警"
+                    2 -> "变道警示 声音 · RCTA 无报警"
+                    3 -> "变道警示 视觉+声音 · RCTA 无报警"
+                    else -> "变道警示 关闭 · RCTA 无报警"
                 }
+                else -> module.status
             }
-            "fatigue" -> {
-                when (value) {
-                    is Int -> when (value) {
-                        1 -> "未知"
-                        2 -> "正常"
-                        3 -> "分心"
-                        4 -> "疲劳"
-                        else -> "未知"
-                    }
-                    else -> module.status
+            "fatigue" -> when (value) {
+                is Int -> when (value) {
+                    2 -> "状态正常 · 表情平静"
+                    3 -> "分心驾驶 · 表情异常"
+                    4 -> "疲劳驾驶 · 表情异常"
+                    else -> "未知状态 · 表情未知"
                 }
+                else -> module.status
             }
-            "collision" -> {
-                when (value) {
-                    is Int -> when (value) {
-                        1 -> "低灵敏度"
-                        2 -> "中灵敏度"
-                        3 -> "高灵敏度"
-                        255 -> "关闭"
-                        else -> "未知"
-                    }
-                    else -> module.status
-                }
-            }
+            "speed_limit" -> module.status
             else -> value.toString()
         }
     }
 
-    /**
-     * 发送控制命令（用户点击卡片时调用）
-     */
     fun sendControlCommand(moduleId: String, command: Any) {
-        // 这里调用 CarExt API 发送控制指令
-        // 例如：carExt.getCarManager(ISafety::class.java).setProperty(propertyId, command)
         println("发送控制指令: $moduleId -> $command")
     }
 }

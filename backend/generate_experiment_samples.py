@@ -10,11 +10,13 @@
 
 用法:
   python generate_experiment_samples.py
-  # 生成 backend/experiment_samples_realistic_50.json，请复制到 app/src/main/assets/ 同名文件。
+  python generate_experiment_samples.py --count 500 --output experiment_samples_500.json
+  # 默认 50 条 -> experiment_samples_realistic_50.json（可复制到 app/assets，仅 App 批量实验需要）
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import random
 from collections import Counter
@@ -464,6 +466,7 @@ def generate_sample(global_idx: int, event_type: str, scenario_name: str) -> Dic
 
 
 def generate_all_samples() -> List[Dict[str, Any]]:
+    """默认 50 条：与 TYPE_PLAN 一致（8 类固定配比）。"""
     samples: List[Dict[str, Any]] = []
     idx = 1
     for etype, count in TYPE_PLAN:
@@ -475,10 +478,49 @@ def generate_all_samples() -> List[Dict[str, Any]]:
     return samples
 
 
+def generate_n_samples(total: int, seed: int) -> List[Dict[str, Any]]:
+    """按 8 类事故轮换模拟 total 条，eventId 为 SIM-日期-序号。"""
+    random.seed(seed)
+    type_cycle: List[str] = []
+    for etype, n in TYPE_PLAN:
+        type_cycle.extend([etype] * max(1, n))
+    samples: List[Dict[str, Any]] = []
+    dt = datetime.now(timezone.utc).strftime("%Y%m%d")
+    for i in range(1, total + 1):
+        etype = type_cycle[(i - 1) % len(type_cycle)]
+        names = SCENARIO_NAMES[etype]
+        scenario = names[(i - 1) % len(names)]
+        if total > 50:
+            scenario = f"{scenario}（#{i}）"
+        s = generate_sample(i, etype, scenario)
+        s["eventId"] = f"SIM-{dt}-{i:04d}"
+        s["scenarioId"] = f"SIM-{etype}-{i:04d}"
+        s["experimentGroup"] = "C"
+        samples.append(s)
+    return samples
+
+
 def main() -> None:
-    random.seed(20260519)
-    samples = generate_all_samples()
-    out = Path(__file__).resolve().parent / "experiment_samples_realistic_50.json"
+    ap = argparse.ArgumentParser(description="模拟事故样本（可直接喂给 /api/accident/analyze）")
+    ap.add_argument("--count", type=int, default=50, help="条数，默认 50；大批量用 500")
+    ap.add_argument("--seed", type=int, default=20260519)
+    ap.add_argument(
+        "--output",
+        type=Path,
+        default=None,
+        help="输出 JSON 路径，默认 50 条为 experiment_samples_realistic_50.json",
+    )
+    args = ap.parse_args()
+    random.seed(args.seed)
+
+    if args.count == 50 and args.output is None:
+        samples = generate_all_samples()
+        out = Path(__file__).resolve().parent / "experiment_samples_realistic_50.json"
+    else:
+        samples = generate_n_samples(args.count, args.seed)
+        out = args.output or Path(__file__).resolve().parent / f"experiment_samples_{args.count}.json"
+
+    out = out if out.is_absolute() else Path(__file__).resolve().parent / out
     out.write_text(json.dumps(samples, ensure_ascii=False, indent=2), encoding="utf-8")
     ex0 = Path(__file__).resolve().parent / "experiment_sample_example_first.json"
     ex0.write_text(json.dumps(samples[0], ensure_ascii=False, indent=2), encoding="utf-8")

@@ -1,4 +1,4 @@
-﻿package com.example.vehtrust
+package com.example.vehtrust
 
 import android.content.ComponentName
 import android.content.Context
@@ -9,6 +9,7 @@ import android.os.IBinder
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.vehtrust.trace.AccidentRepository
 import com.example.vehtrust.adapter.ModuleAdapter
 import com.example.vehtrust.data.SafetyModule
 import com.example.vehtrust.databinding.ActivityMainBinding
@@ -45,6 +46,8 @@ class MainActivity : AppCompatActivity() {
         startForegroundService(serviceIntent)
         bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE)
 
+        AccidentRepository.initWithContext(applicationContext)
+
         viewModel = ViewModelProvider(this)[SafetyViewModel::class.java]
         setupRecyclerView()
         observeData()
@@ -69,7 +72,14 @@ class MainActivity : AppCompatActivity() {
             onItemClick = { module -> showModuleDetail(module) },
             onItemLongClick = { module -> showModuleSettings(module) }
         )
-        binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
+        val grid = GridLayoutManager(this, 2).apply {
+            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    return if (adapter.isFeaturedPosition(position)) 2 else 1
+                }
+            }
+        }
+        binding.recyclerView.layoutManager = grid
         binding.recyclerView.isNestedScrollingEnabled = false
         binding.recyclerView.adapter = adapter
     }
@@ -96,6 +106,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(
             Intent(this, ModuleDetailActivity::class.java)
                 .putExtra(ModuleDetailActivity.EXTRA_MODULE_ID, module.id)
+                .putExtra(ModuleDetailActivity.EXTRA_COLOR_RES, module.colorRes),
         )
     }
 
@@ -108,6 +119,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(
             Intent(this, ModuleDetailActivity::class.java)
                 .putExtra(ModuleDetailActivity.EXTRA_MODULE_ID, module.id)
+                .putExtra(ModuleDetailActivity.EXTRA_COLOR_RES, module.colorRes),
         )
     }
 } 

@@ -34,5 +34,47 @@
     <string name="experiment_batch_button">批量跑 50 条并保存结果</string>
     <string name="experiment_batch_running">正在批量请求云端，请稍候…</string>
     <string name="experiment_list_settings_title">云端实验（列表统一设置）</string>
+    <string name="experiment_lab_title">云端实验工作台</string>
+    <string name="experiment_lab_desc">论文/实验专用：配置 A/B/C 组别、消融 D0–D4，并批量跑 50 条样本。日常事故取证演示无需进入本页。</string>
     <string name="experiment_detail_experiment_hint">当前云端实验：%1$s + %2$s。分组与消融已在「事故溯源」列表页顶部设置；修改后返回本页会自动刷新。</string>
+
+    <string name="trace_back">返回</string>
+    <string name="trace_list_title">事故溯源中心</string>
+    <string name="trace_list_subtitle">20Hz 连续采样 · 触发后冻结事故前后各 10 秒 · 支持回放、责任分析与链上存证</string>
+    <string name="trace_list_section_events">历史事件</string>
+    <string name="trace_stat_events_label">已存证</string>
+    <string name="trace_stat_sample_label">采样</string>
+    <string name="trace_stat_monitor_label">监控</string>
+    <string name="trace_monitor_on">运行中</string>
+    <string name="trace_monitor_last">最近 %1$s</string>
+    <string name="trace_open_experiment_lab">实验</string>
+    <string name="trace_detail_hero_title">溯源分析</string>
+    <string name="trace_detail_flow_hint">遥测回放 → 责任界定 → 严重度 / AI → 上链存证</string>
+
+    <string name="trace_monitor_service_label">前台监控服务</string>
+    <string name="trace_capabilities_title">核心能力</string>
+    <string name="trace_cap_replay_title">遥测回放</string>
+    <string name="trace_cap_replay_desc">事故前后各 10 秒 · 20Hz</string>
+    <string name="trace_cap_resp_title">责任界定</string>
+    <string name="trace_cap_resp_desc">人/机/环境占比与指标</string>
+    <string name="trace_cap_ai_title">AI 研判</string>
+    <string name="trace_cap_ai_desc">结构化摘要与证据点</string>
+    <string name="trace_cap_chain_title">链上存证</string>
+    <string name="trace_cap_chain_desc">Fabric 哈希不可篡改</string>
+    <string name="trace_stat_events_hint">Room 持久化</string>
+    <string name="trace_stat_window_label">冻结窗口</string>
+    <string name="trace_stat_window_value">±10s</string>
+    <string name="trace_stat_window_hint">触发后自动采集</string>
+    <string name="trace_stat_chain_label">存证</string>
+    <string name="trace_stat_chain_value">SHA-256</string>
+    <string name="trace_flow_title">分析流程</string>
+    <string name="trace_flow_step1">① 冻结取证</string>
+    <string name="trace_flow_step2">② 回放指标</string>
+    <string name="trace_flow_step3">③ AI/严重度</string>
+    <string name="trace_flow_step4">④ 上链</string>
+    <string name="trace_last_event_title">最近事件</string>
+    <string name="trace_last_event_none">暂无触发记录</string>
+    <string name="trace_last_event_none_hint">监控服务在后台运行，满足触发条件后将自动写入列表。</string>
+    <string name="trace_list_empty_hint">列表为空：请等待模拟触发，或从安全中心持续运行监控服务后再查看。</string>
+    <string name="trace_event_count_badge">%1$d 条</string>
 </resources>

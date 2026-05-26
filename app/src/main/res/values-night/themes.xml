@@ -1,8 +1,8 @@
-﻿<resources>
+<resources>
     <style name="Theme.VehTrust" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">@color/background</item>
-        <item name="colorPrimary">@color/module_blue</item>
-        <item name="colorPrimaryVariant">@color/module_blue_light</item>
+        <item name="colorPrimary">@color/brand_primary</item>
+        <item name="colorPrimaryVariant">@color/brand_primary_dark</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSecondary">@color/module_teal</item>
         <item name="colorSecondaryVariant">@color/module_teal</item>

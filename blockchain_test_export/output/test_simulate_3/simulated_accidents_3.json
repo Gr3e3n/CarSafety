@@ -1,0 +1,265 @@
+[
+  {
+    "eventId": "SIM-20260523-0001",
+    "eventType": "COLLISION",
+    "scenarioId": "SIM-COLLISION-0001",
+    "scenarioName": "追尾碰撞（跟车过近）",
+    "timeMillis": 1740000139000,
+    "location": "北京·亦庄",
+    "summary": "【追尾碰撞（跟车过近）】COLLISION，LOW等级；发生于高架匝道（小雨），涉及路面抛洒物",
+    "triggerReasons": [
+      "已发生接触或显著减速碰撞",
+      "行车记录仪/EDR 可佐证碰撞瞬间车速与制动",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "LOW",
+    "autoDrivingState": "AUTONOMOUS",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 90.2,
+        "axMS2": -0.9,
+        "brake": 28,
+        "steerDeg": 2.8
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 81.0,
+        "axMS2": -1.8,
+        "brake": 36,
+        "steerDeg": -4.0
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 71.8,
+        "axMS2": -3.5,
+        "brake": 51,
+        "steerDeg": -2.4
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 62.6,
+        "axMS2": -4.2,
+        "brake": 57,
+        "steerDeg": 0.5
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 64,
+      "systemFactor": 26,
+      "environmentFactor": 10,
+      "conclusion": "责任倾向：碰撞后果以纵向安全距离不足或突发障碍为主，需结合行车记录仪与路权认定",
+      "reasons": [
+        "【反应时间】1069ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】293ms（踏板 20%→80%）— 制动迟缓，上升过慢",
+        "强制动",
+        "【AEB/系统介入】-745ms",
+        "【制动时 TTC 估算】2.31s — 时距尚可",
+        "【事故前 3s 均速】76.4 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "小雨",
+      "road": "高架匝道",
+      "obstacle": "路面抛洒物",
+      "laneMarking": "夜间磨损不清"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "本车与目标相对运动估计；路面抛洒物 场景下 TTC 估计更新频率正常",
+      "planning": "规划在高架匝道保持车道并请求舒适制动；未触发紧急换道",
+      "control": "纵向制动请求建立；碰撞前约 0.3s 达到最大制动能力"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 1069,
+      "brakeRiseTimeMs": 293,
+      "aebDelayMs": -745,
+      "ttcAtBrakeSeconds": 2.31,
+      "brakeEffective": false,
+      "maxSteerLast2sDeg": 6.5,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：COLLISION 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "SIM-20260523-0002",
+    "eventType": "COLLISION",
+    "scenarioId": "SIM-COLLISION-0002",
+    "scenarioName": "侧向刮擦（变道冲突）",
+    "timeMillis": 1740000278000,
+    "location": "苏州·工业园区",
+    "summary": "【侧向刮擦（变道冲突）】COLLISION，MEDIUM等级；发生于长下坡接弯（晴），涉及行人靠近路缘",
+    "triggerReasons": [
+      "已发生接触或显著减速碰撞",
+      "行车记录仪/EDR 可佐证碰撞瞬间车速与制动",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "MEDIUM",
+    "autoDrivingState": "MANUAL",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 79.9,
+        "axMS2": -1.2,
+        "brake": 30,
+        "steerDeg": -1.9
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 70.7,
+        "axMS2": -2.4,
+        "brake": 41,
+        "steerDeg": 4.2
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 61.5,
+        "axMS2": -4.1,
+        "brake": 56,
+        "steerDeg": 0.8
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 52.3,
+        "axMS2": -6.3,
+        "brake": 76,
+        "steerDeg": 4.0
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 43.1,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": 3.6
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 58,
+      "systemFactor": 30,
+      "environmentFactor": 12,
+      "conclusion": "责任倾向：碰撞后果以纵向安全距离不足或突发障碍为主，需结合行车记录仪与路权认定",
+      "reasons": [
+        "【反应时间】890ms — 偏长（>800ms），建议关注注意力状态",
+        "【制动上升时间】575ms（踏板 20%→80%）— 制动果断",
+        "强制动",
+        "【AEB/系统介入】-441ms",
+        "【制动时 TTC 估算】2.12s — 时距尚可",
+        "【事故前 3s 均速】61.5 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "晴",
+      "road": "长下坡接弯",
+      "obstacle": "行人靠近路缘",
+      "laneMarking": "反光"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "本车与目标相对运动估计；行人靠近路缘 场景下 TTC 估计更新频率正常",
+      "planning": "规划在长下坡接弯保持车道并请求舒适制动；未触发紧急换道",
+      "control": "纵向制动请求建立；碰撞前约 0.3s 达到最大制动能力"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 890,
+      "brakeRiseTimeMs": 575,
+      "aebDelayMs": -441,
+      "ttcAtBrakeSeconds": 2.12,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 6.1,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：COLLISION 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  },
+  {
+    "eventId": "SIM-20260523-0003",
+    "eventType": "COLLISION",
+    "scenarioId": "SIM-COLLISION-0003",
+    "scenarioName": "静止障碍碰撞",
+    "timeMillis": 1740000417000,
+    "location": "深圳·南山区",
+    "summary": "【静止障碍碰撞】COLLISION，MEDIUM等级；发生于园区内部路（多云），涉及前方车辆减速未打灯",
+    "triggerReasons": [
+      "已发生接触或显著减速碰撞",
+      "行车记录仪/EDR 可佐证碰撞瞬间车速与制动",
+      "车载边缘节点已上传摘要哈希（模拟链上存证索引）"
+    ],
+    "severity": "MEDIUM",
+    "autoDrivingState": "MANUAL",
+    "telemetry": [
+      {
+        "tMs": -4200,
+        "speedKph": 54.7,
+        "axMS2": -1.2,
+        "brake": 30,
+        "steerDeg": 3.2
+      },
+      {
+        "tMs": -3550,
+        "speedKph": 45.5,
+        "axMS2": -2.4,
+        "brake": 41,
+        "steerDeg": 3.5
+      },
+      {
+        "tMs": -2900,
+        "speedKph": 36.3,
+        "axMS2": -4.1,
+        "brake": 56,
+        "steerDeg": 3.4
+      },
+      {
+        "tMs": -2250,
+        "speedKph": 27.1,
+        "axMS2": -6.3,
+        "brake": 76,
+        "steerDeg": 4.1
+      },
+      {
+        "tMs": -1600,
+        "speedKph": 17.9,
+        "axMS2": -5.8,
+        "brake": 72,
+        "steerDeg": -2.2
+      }
+    ],
+    "responsibility": {
+      "driverFactor": 74,
+      "systemFactor": 14,
+      "environmentFactor": 12,
+      "conclusion": "责任倾向：碰撞后果以纵向安全距离不足或突发障碍为主，需结合行车记录仪与路权认定",
+      "reasons": [
+        "【反应时间】1301ms — 过长（>1200ms），显著增加碰撞风险",
+        "【制动上升时间】598ms（踏板 20%→80%）— 制动果断",
+        "强制动",
+        "【AEB/系统介入】-169ms",
+        "【制动时 TTC 估算】3.0s — 时距尚可",
+        "【事故前 3s 均速】36.3 km/h"
+      ]
+    },
+    "environment": {
+      "weather": "多云",
+      "road": "园区内部路",
+      "obstacle": "前方车辆减速未打灯",
+      "laneMarking": "施工临时标线"
+    },
+    "decisionTrace": {
+      "sensorInput": "前向毫米波雷达 + 摄像头融合",
+      "perception": "本车与目标相对运动估计；前方车辆减速未打灯 场景下 TTC 估计更新频率正常",
+      "planning": "规划在园区内部路保持车道并请求舒适制动；未触发紧急换道",
+      "control": "纵向制动请求建立；碰撞前约 0.3s 达到最大制动能力"
+    },
+    "derivedSignals": {
+      "reactionTimeMs": 1301,
+      "brakeRiseTimeMs": 598,
+      "aebDelayMs": -169,
+      "ttcAtBrakeSeconds": 3.0,
+      "brakeEffective": true,
+      "maxSteerLast2sDeg": 5.2,
+      "driverTakeoverSummary": "无明确接管请求或已恢复手动",
+      "riskPredictionSummary": "端侧风险模型：COLLISION 置信偏高，建议云端复盘侧重证据链一致性"
+    },
+    "experimentGroup": "C"
+  }
+]
