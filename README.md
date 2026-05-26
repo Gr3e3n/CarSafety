@@ -69,7 +69,7 @@
 ## 📱 界面预览
 
 <p align="center"><b>安全中心</b> — 事故监测与安全模块总览</p>
-<p align="center"><img src="demo/figures/图片13.png" width="520"></p>
+<p align="center"><img src="demo/SecurityCenter.png" width="520"></p>
 
 <p align="center"><b>上链成功</b> — Hash 存证结果与交易凭证</p>
 <p align="center"><img src="demo/chain.png" width="520"></p>
@@ -133,13 +133,10 @@
 │
 ├── EcarX-CarExt-SDK/             # 🚘 亿咖通车载扩展 SDK 参考文档
 │
-├── VehTrust_Carui/               # 🖥️ 车机大屏 UI 可选包
-│
 ├── demo/                         # 📸 演示素材
 │   ├── figures/                  # 架构图（fig01~fig12.png）
-│   ├── 图片13.png              # 安全中心 截图
-│   ├── chain.png / chain.mp4    # 上链成功 截图/录屏
-│   ├── analysis.mp4             # 事故分析 录屏
+│   ├── SecurityCenter.png         # 安全中心 截图
+│   ├── chain.png              # 上链成功 截图
 │   └── CarScreen.jpg            # 车机大屏 实拍
 │
 ├── csa.png                       # Logo
@@ -339,7 +336,7 @@ python -m uvicorn main:app --host 0.0.0.0 --port 8080 --reload
 
 <div align="center">
 
-**🚗 车溯安**
+**车溯安**
 
 端侧把证据留住 · 云端把过程讲清 · 链上把凭证钉死
 
