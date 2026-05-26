@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">溯安行</string>
+    <string name="app_name">VehTrust</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="ai_analysis_title">AI事故原因分析</string>
     <string name="ai_analysis_desc">结合本地责任指标、事故时序特征与 OpenAI 服务输出事故因果研判。</string>
@@ -48,7 +48,6 @@
     <string name="trace_monitor_on">运行中</string>
     <string name="trace_monitor_last">最近 %1$s</string>
     <string name="trace_open_experiment_lab">实验</string>
-    <string name="trace_detail_screen_title">事故溯源详情</string>
     <string name="trace_detail_hero_title">溯源分析</string>
     <string name="trace_detail_flow_hint">遥测回放 → 责任界定 → 严重度 / AI → 上链存证</string>
 

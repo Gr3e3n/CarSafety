@@ -3,13 +3,11 @@ package com.example.vehtrust
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
-import android.graphics.Color
 import android.graphics.Typeface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
-import android.view.MotionEvent
 import android.view.View
 import android.view.animation.LinearInterpolator
 import android.webkit.WebSettings
@@ -19,7 +17,6 @@ import android.widget.SeekBar
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -54,28 +51,10 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val perfTimer = PerfTimer.start()
         ExperimentRuntime.loadPersisted(this)
         binding = ActivityAccidentTraceDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.toolbarDetail.setNavigationOnClickListener { finish() }
-
-        // 顶部返回 + 物理/手势返回优先关闭地图页/WebView，再退出 Activity
-        onBackPressedDispatcher.addCallback(
-            this,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    if (::binding.isInitialized && binding.wvAccidentSiteMap.canGoBack()) {
-                        binding.wvAccidentSiteMap.goBack()
-                    } else {
-                        finish()
-                    }
-                }
-            },
-        )
-
-        setupScrollAndMapTouchDelegation()
+        supportActionBar?.title = "溯源详情"
 
         viewModel = ViewModelProvider(this)[AccidentTraceViewModel::class.java]
 
@@ -95,9 +74,7 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
             binding.tvChainError.visibility = View.GONE
 
             lifecycleScope.launch {
-                val t = PerfTimer.start()
                 val result = viewModel.uploadToBlockchain(b)
-                t.log("Blockchain", if (result.success) "上链成功" else "上链失败")
 
                 if (result.success) {
                     binding.tvChainHash.text = result.hash
@@ -113,17 +90,6 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
                 }
             }
         }
-
-        window.decorView.viewTreeObserver.addOnPreDrawListener(
-            object : android.view.ViewTreeObserver.OnPreDrawListener {
-                override fun onPreDraw(): Boolean {
-                    perfTimer.log("AccidentTraceDetail", "首帧加载")
-                    @Suppress("DEPRECATION")
-                    window.decorView.viewTreeObserver.removeOnPreDrawListener(this)
-                    return true
-                }
-            },
-        )
     }
 
     override fun onStop() {
@@ -133,24 +99,15 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        binding.wvAccidentSiteMap.onResume()
-    }
-
-    override fun onPause() {
-        binding.wvAccidentSiteMap.onPause()
-        super.onPause()
     }
 
     override fun onDestroy() {
-        replayAnimator?.cancel()
-        replayAnimator = null
-        runCatching { binding.viewAccidentReplay.setLayerType(View.LAYER_TYPE_NONE, null) }
-        if (!isChangingConfigurations && isFinishing) {
-            runCatching {
-                binding.wvAccidentSiteMap.stopLoading()
-                binding.wvAccidentSiteMap.loadUrl("about:blank")
-                binding.wvAccidentSiteMap.destroy()
-            }
+        runCatching {
+            binding.wvAccidentSiteMap.stopLoading()
+            binding.wvAccidentSiteMap.loadUrl("about:blank")
+            binding.wvAccidentSiteMap.onPause()
+            binding.wvAccidentSiteMap.removeAllViews()
+            binding.wvAccidentSiteMap.destroy()
         }
         super.onDestroy()
     }
@@ -169,9 +126,7 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
             binding.tvSeverityEvidence.visibility = View.GONE
 
             lifecycleScope.launch {
-                val t = PerfTimer.start()
                 val result = viewModel.analyzeCollisionSeverity(b)
-                t.log("CollisionSeverity", "碰撞严重度预测")
                 renderCollisionSeverity(result)
                 binding.btnPredictSeverity.isEnabled = true
                 binding.btnPredictSeverity.text = getString(R.string.severity_prediction_retry)
@@ -189,12 +144,10 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
             binding.tvAiAnalysisResult.visibility = View.GONE
 
             lifecycleScope.launch {
-                val t = PerfTimer.start()
                 val metrics = viewModel.analyzeMetrics(b)
                 val severityText = binding.tvSeverityNarrative.takeIf { it.visibility == View.VISIBLE }
                     ?.text?.toString()?.trim()?.takeIf { it.isNotEmpty() }
                 val result = viewModel.analyzeByAi(b, metrics, severityText)
-                t.log("AiAnalysis", if (result.remoteError != null) "AI离线降级" else "AI在线分析")
                 binding.tvAiAnalysisResult.text = result.toStyledDisplayText()
                 binding.tvAiAnalysisResult.visibility = View.VISIBLE
                 binding.tvAiAnalysisStatus.visibility = View.VISIBLE
@@ -376,11 +329,8 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
         replayAnimator?.cancel()
         replayPlaying = true
         binding.btnReplayPlay.text = "暂停"
-        setReplayAcceleration(true)
-        val spanTelemetry = (replayEndMs - replayCurrentMs).coerceAtLeast(300)
         replayAnimator = ValueAnimator.ofInt(replayCurrentMs, replayEndMs).apply {
-            duration =
-                (spanTelemetry * REPLAY_DURATION_SCALE).toLong().coerceIn(800L, 72_000L)
+            duration = (replayEndMs - replayCurrentMs).toLong().coerceAtLeast(300L)
             interpolator = LinearInterpolator()
             addUpdateListener { animator ->
                 updateReplayAt(animator.animatedValue as Int)
@@ -389,7 +339,6 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
                 object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator) {
                         replayPlaying = false
-                        setReplayAcceleration(false)
                         binding.btnReplayPlay.text = if (replayCurrentMs >= replayEndMs) "重播" else "播放"
                     }
                 },
@@ -402,18 +351,9 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
         replayAnimator?.cancel()
         replayAnimator = null
         replayPlaying = false
-        setReplayAcceleration(false)
         if (resetButton) {
-            binding.btnReplayPlay.text =
-                if (replayCurrentMs >= replayEndMs && replayTelemetry.isNotEmpty()) "重播" else "播放"
+            binding.btnReplayPlay.text = if (replayCurrentMs >= replayEndMs && replayTelemetry.isNotEmpty()) "重播" else "播放"
         }
-    }
-
-    private fun setReplayAcceleration(playing: Boolean) {
-        binding.viewAccidentReplay.setLayerType(
-            if (playing) View.LAYER_TYPE_HARDWARE else View.LAYER_TYPE_NONE,
-            null,
-        )
     }
 
     private fun updateReplayAt(tMs: Int, updateSeek: Boolean = true) {
@@ -441,8 +381,7 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
         val prev = replayTelemetry[(nextIndex - 1).coerceAtLeast(0)]
         val next = replayTelemetry[nextIndex]
         val span = (next.tMs - prev.tMs).takeIf { it != 0 } ?: 1
-        val ratioRaw = ((tMs - prev.tMs).toFloat() / span).coerceIn(0f, 1f)
-        val ratio = smoothstepReplayRatio(ratioRaw)
+        val ratio = ((tMs - prev.tMs).toFloat() / span).coerceIn(0f, 1f)
         return TelemetryPoint(
             tMs = tMs,
             speedKph = lerp(prev.speedKph, next.speedKph, ratio),
@@ -452,8 +391,8 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
             ayMS2 = lerp(prev.ayMS2, next.ayMS2, ratio),
             yawRateDegS = lerp(prev.yawRateDegS, next.yawRateDegS, ratio),
             throttlePct = lerp(prev.throttlePct.toFloat(), next.throttlePct.toFloat(), ratio).toInt().coerceIn(0, 100),
-            aebActive = lerp(if (prev.aebActive) 1f else 0f, if (next.aebActive) 1f else 0f, ratioRaw) >= 0.5f,
-            blinkerCode = if (ratioRaw >= 0.5f) next.blinkerCode else prev.blinkerCode,
+            aebActive = lerp(if (prev.aebActive) 1f else 0f, if (next.aebActive) 1f else 0f, ratio) >= 0.5f,
+            blinkerCode = if (ratio >= 0.5f) next.blinkerCode else prev.blinkerCode,
             fcwActiveLevel = lerp(prev.fcwActiveLevel.toFloat(), next.fcwActiveLevel.toFloat(), ratio)
                 .toInt().coerceIn(0, 3),
         )
@@ -471,12 +410,6 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
     }
 
     private fun lerp(start: Float, end: Float, ratio: Float): Float = start + (end - start) * ratio
-
-    /** 与回放视图一致的段内平滑，拖动进度条时 HUD 数值不跳齿 */
-    private fun smoothstepReplayRatio(raw: Float): Float {
-        val t = raw.coerceIn(0f, 1f)
-        return t * t * (3f - 2f * t)
-    }
 
     private fun renderDeepLearning(result: DeepLearningResult) {
         binding.tvDlSummary.text = buildString {
@@ -791,18 +724,6 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
     private fun formatTime(ms: Long): String =
         SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date(ms))
 
-    private fun setupScrollAndMapTouchDelegation() {
-        binding.wvAccidentSiteMap.setOnTouchListener { _, ev ->
-            when (ev.actionMasked) {
-                MotionEvent.ACTION_DOWN ->
-                    binding.scrollDetailRoot.requestDisallowInterceptTouchEvent(true)
-                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL ->
-                    binding.scrollDetailRoot.requestDisallowInterceptTouchEvent(false)
-            }
-            false
-        }
-    }
-
     /** Leaflet + OSM 瓦片（需网络）；实车可换高德/百度 SDK 或离线 MBTiles */
     private fun setupAccidentSiteMap(event: AccidentEvent) {
         val coord = AccidentSiteCoordinates.resolve(event)
@@ -815,142 +736,54 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
         binding.wvAccidentSiteMap.settings.apply {
             javaScriptEnabled = true
             domStorageEnabled = true
-            allowFileAccess = true
-            mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+            mixedContentMode = WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE
             cacheMode = WebSettings.LOAD_DEFAULT
-            loadsImagesAutomatically = true
-            blockNetworkImage = false
-            blockNetworkLoads = false
-            useWideViewPort = true
-            loadWithOverviewMode = true
-            builtInZoomControls = false
-            displayZoomControls = false
-            setSupportZoom(true)
-            mediaPlaybackRequiresUserGesture = false
         }
-        // 硬件图层 + Leaflet 在部分机型上会出现整块发黑；地图区用默认合成更稳
-        binding.wvAccidentSiteMap.setLayerType(View.LAYER_TYPE_NONE, null)
-        binding.wvAccidentSiteMap.setBackgroundColor(Color.WHITE)
-        binding.wvAccidentSiteMap.webViewClient = object : WebViewClient() {
-            override fun onPageFinished(view: WebView?, url: String?) {
-                super.onPageFinished(view, url)
-                view ?: return
-                // WebView 初次布局高度偶发为 0，延迟触发 Leaflet 重算尺寸，避免灰/黑底块
-                view.postDelayed({
-                    view.evaluateJavascript(
-                        "try{window.__vtLeafletMap&&window.__vtLeafletMap.invalidateSize(true)}catch(e){}",
-                        null,
-                    )
-                }, 60)
-                view.postDelayed({
-                    view.evaluateJavascript(
-                        "try{window.__vtLeafletMap&&window.__vtLeafletMap.invalidateSize(true)}catch(e){}",
-                        null,
-                    )
-                }, 320)
-            }
-        }
+        binding.wvAccidentSiteMap.webViewClient = WebViewClient()
         binding.wvAccidentSiteMap.isHorizontalScrollBarEnabled = false
         binding.wvAccidentSiteMap.isVerticalScrollBarEnabled = false
-        binding.wvAccidentSiteMap.overScrollMode = View.OVER_SCROLL_NEVER
-        // 读取本地 leaflet 文件并内联到 HTML，不依赖任何外部文件
-        val leafletCss = assets.open("leaflet.css").bufferedReader(Charsets.UTF_8).readText()
-        val leafletJs = assets.open("leaflet.js").bufferedReader(Charsets.UTF_8).readText()
-        val html = buildLeafletMapHtml(
-            coord.latitude, coord.longitude,
-            event.locationText.ifBlank { "事故位置" },
-            leafletCss, leafletJs,
-        )
+        val html = buildLeafletMapHtml(coord.latitude, coord.longitude, event.locationText.ifBlank { "事故位置" })
         binding.wvAccidentSiteMap.loadDataWithBaseURL(
-            null, html, "text/html", "UTF-8", null,
+            "https://cdn.jsdelivr.net/",
+            html,
+            "text/html",
+            "UTF-8",
+            null,
         )
         binding.btnOpenExternalMap.setOnClickListener {
             openExternalMap(coord.latitude, coord.longitude, event.locationText.ifBlank { "事故位置" })
         }
     }
 
-    private fun buildLeafletMapHtml(
-        lat: Double, lon: Double, label: String,
-        leafletCss: String, leafletJs: String,
-    ): String {
-        val safePopup = label
+    private fun buildLeafletMapHtml(lat: Double, lon: Double, label: String): String {
+        val j = label
             .replace("\\", "\\\\")
             .replace("'", "\\'")
             .replace("\"", "\\\"")
             .replace("\n", " ")
             .replace("\r", " ")
-            .take(120)
-        val cartoVoyagerTiles =
-            "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-        return sequenceOf(
-            "<!DOCTYPE html>",
-            "<html><head><meta charset=\"utf-8\"/>",
-            "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no\"/>",
-            "<style>", leafletCss, "</style>",
-            "<style>",
-            "html,body{height:100%;margin:0;background:#e8eef5;color-scheme:light;}",
-            "#mapWrap{height:100%;width:100%;border-radius:12px;overflow:hidden;",
-            "  box-shadow:inset 0 0 0 1px rgba(148,163,184,.35);}",
-            "#m{height:100%;width:100%;}",
-            ".leaflet-container{background:#e8eef5;font-family:system-ui,-apple-system,sans-serif;}",
-            ".leaflet-tile-pane{filter:none;}",
-            ".leaflet-control-scale-line{border:1px solid rgba(15,23,42,.25)!important;",
-            "  background:rgba(255,255,255,.92)!important;color:#334155!important;}",
-            ".vt-pin-outer{background:transparent!important;border:none!important;}",
-            "</style>",
-            "</head><body>",
-            "<div id=\"mapWrap\"><div id=\"m\"></div></div>",
-            "<div id=\"_dbg\" style=\"position:fixed;bottom:0;left:0;right:0;max-height:80px;overflow:auto;background:rgba(0,0,0,.8);color:#0f0;font:10px monospace;padding:4px;z-index:9999;display:none\"></div>",
-            "<script>", leafletJs, "</script>",
-            "<script>",
-            "function _log(m){var d=document.getElementById('_dbg');d.style.display='block';d.innerHTML+=m+'<br>';console.log(m);}",
-            "_log('leaflet.js loaded, L='+(typeof L));",
-            "(function(){",
-            "var lat=" + lat + ",lon=" + lon + ";",
-            "_log('coords: '+lat+','+lon);",
-            "var map=L.map('m',{",
-            "  zoomControl:true,zoomSnap:1,preferCanvas:false,",
-            "  zoomAnimation:true,fadeAnimation:true,",
-            "  attributionControl:true,",
-            "  scrollWheelZoom:true",
-            "}).setView([lat-0.0024,lon-0.0016],13.5);",
-            "window.__vtLeafletMap=map;",
-            "_log('map created');",
-            "var tiles=L.tileLayer(",
-            "  '" + cartoVoyagerTiles + "',",
-            "  {maxZoom:19,updateWhenIdle:true,keepBuffer:3,",
-            "   attribution:'&copy; OpenStreetMap'}",
-            ");",
-            "tiles.on('tileerror',function(e){_log('TILE ERR z='+e.tile._tileCoords.z+' x='+e.tile._tileCoords.x+' y='+e.tile._tileCoords.y);});",
-            "tiles.on('load',function(){_log('first tile loaded OK');});",
-            "tiles.addTo(map);",
-            "_log('tile layer added');",
-            "L.circle([lat,lon],{",
-            "  radius:95,color:'#0ea5e9',fillColor:'#38bdf8',fillOpacity:0.12,weight:2,opacity:0.85",
-            "}).addTo(map);",
-            "var pinHtml='<div style=\"width:24px;height:24px;background:linear-gradient(145deg,#3b82f6,#1d4ed8);border:3px solid #fff;border-radius:50%;box-shadow:0 3px 12px rgba(0,0,0,.4)\"></div>';",
-            "var icon=L.divIcon({className:'vt-pin-outer',html:pinHtml,iconSize:[24,24],iconAnchor:[12,12]});",
-            "var mk=L.marker([lat,lon],{icon:icon,riseOnHover:true}).addTo(map);",
-            "mk.bindPopup('<div style=\"min-width:180px;max-width:260px;padding:2px 0\">'+",
-            "  '<div style=\"font-weight:700;color:#0f172a;font-size:14px;line-height:1.35'>" + safePopup + "</div>'+",
-            "  '<div style=\"margin-top:6px;font-size:11px;color:#64748b\">演示用近似坐标 · 实车请接入 GNSS</div></div>',",
-            "  {maxWidth:280,className:'vt-popup'});",
-            "map.whenReady(function(){",
-            "  map.invalidateSize(true);",
-            "  try{map.doubleClickZoom.disable();}catch(e){}",
-            "  L.control.scale({metric:true,imperial:false,maxWidth:100}).addTo(map);",
-            "  requestAnimationFrame(function(){",
-            "    map.flyTo([lat,lon],17,{duration:0.95,easeLinearity:0.24,animate:true});",
-            "    window.setTimeout(function(){try{mk.openPopup();}catch(e2){}},1000);",
-            "  });",
-            "});",
-            "})();",
-            "</script></body></html>",
-        ).joinToString("\n")
+        return """
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
+<style>html,body,#m{margin:0;padding:0;height:100%;width:100%;}</style>
+</head><body>
+<div id="m"></div>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function(){
+var lat=$lat,lon=$lon;
+var map=L.map('m',{zoomControl:true,attributionControl:true}).setView([lat,lon],16);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(map);
+L.marker([lat,lon]).addTo(map).bindPopup('$j');
+})();
+</script></body></html>
+        """.trimIndent()
     }
 
     private fun openExternalMap(lat: Double, lon: Double, label: String) {
-        val uri = Uri.parse("geo:0,0?q=${lat},${lon}(${Uri.encode(label)})")
+        val uri = Uri.parse("geo:0,0?q=$lat,$lon(${Uri.encode(label)})")
         val intent = Intent(Intent.ACTION_VIEW, uri)
         startActivity(Intent.createChooser(intent, "选择地图应用"))
     }
@@ -958,6 +791,5 @@ class AccidentTraceDetailActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_EVENT_ID = "extra_event_id"
         private const val REPLAY_SEEK_MAX = 1000
-        private const val REPLAY_DURATION_SCALE = 1.82f
     }
 }

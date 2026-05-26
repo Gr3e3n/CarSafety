@@ -25,7 +25,6 @@ object AccidentSiteCoordinates {
             text.contains("深圳") -> 22.5431 to 114.0579
             text.contains("广州") -> 23.1291 to 113.2644
             text.contains("成都") -> 30.5728 to 104.0668
-            text.contains("苏州") -> 31.2990 to 120.5853
             else -> 32.0570 to 118.7780
         }
         val h = event.id.hashCode()

@@ -9,8 +9,6 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!-- ↓ 新增：网络权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- Android 13+ 通知权限（前台服务通知必需） -->
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -40,8 +38,7 @@
 
         <activity
             android:name=".AccidentTraceDetailActivity"
-            android:exported="false"
-            android:parentActivityName=".AccidentTraceActivity" />
+            android:exported="false" />
 
         <activity
             android:name=".ModuleDetailActivity"

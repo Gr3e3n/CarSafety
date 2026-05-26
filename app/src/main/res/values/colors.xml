@@ -44,9 +44,6 @@
 
     <color name="warning_red">#EF4444</color>
 
-    <!-- 自适应图标背景 -->
-    <color name="ic_launcher_background">#3B82F6</color>
-
     <!-- 事故溯源（与品牌色一致） -->
     <color name="trace_primary">#3B82F6</color>
     <color name="trace_primary_dark">#2563EB</color>
