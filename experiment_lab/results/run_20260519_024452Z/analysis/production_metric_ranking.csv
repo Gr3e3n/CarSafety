@@ -1,6 +1,0 @@
-﻿condition,prompt_type,production_metric_wins
-C_D0,结构化全量（生产版）,5
-BASELINE_D0,普通Prompt,2
-B_D0,通用大模型（系统方法）,1
-P3_D0,CoT Prompt,1
-P4_D0,Few-shot Prompt,1

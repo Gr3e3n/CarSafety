@@ -1,6 +1,0 @@
-﻿metric_label,metric_key,condition,value,prompt_type
-生产质量指数 PQI,PQI_mean,C_D0,97.71,结构化全量（生产版）
-结构化规范符合度,structured_compliance_mean,C_D0,1.0,结构化全量（生产版）
-九字段齐全率,field_completeness_rate,C_D0,1.0,结构化全量（生产版）
-可读性/5,readability_mean,C_D0,5.0,结构化全量（生产版）
-置信度说明覆盖率,confidence_present_rate,C_D0,1.0,结构化全量（生产版）

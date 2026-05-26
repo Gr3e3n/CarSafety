@@ -1,9 +1,0 @@
-﻿condition,prompt_type,experiment_track,metric_wins
-BASELINE_D0,普通Prompt,提示词工程阶梯,7
-C_D0,结构化全量（生产版）,系统方法对比,5
-A_D0,模板生成（系统方法）,系统方法对比,4
-B_D0,通用大模型（系统方法）,系统方法对比,4
-P3_D0,CoT Prompt,提示词工程阶梯,3
-P1_D0,Role Prompt,提示词工程阶梯,2
-P4_D0,Few-shot Prompt,提示词工程阶梯,1
-P6_D0,增量语义 Prompt,提示词工程阶梯,1

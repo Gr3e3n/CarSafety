@@ -1,4 +1,0 @@
-﻿condition,latency_ms_mean,latency_ms_p50,latency_ms_p95,prompt_tokens_mean,completion_tokens_mean,total_tokens_mean,total_tokens_sum,retry_rate,tokens_per_evidence_hit,VQI_mean,QI_mean
-A_D0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0,0,37.772
-B_D0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0,0,27.2052
-C_D0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0,0,90.0722
