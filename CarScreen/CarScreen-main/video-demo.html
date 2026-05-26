@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>视频演示 - CarScreen</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        video {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .back-link {
+            margin-top: 30px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0366d6;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+        .back-link:hover {
+            background-color: #0353b0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚗 CarScreen 项目演示</h1>
+
+    <video controls width="100%">
+        <source src="https://gr3e3n.github.io/CarScreen/demo/demo.mp4" type="video/mp4">
+        您的浏览器不支持视频标签。
+    </video>
+
+    <div>
+        <!-- 注意这里：用仓库主页的链接，不要用blob的 -->
+        <a href="https://github.com/Gr3e3n/CarScreen" class="back-link">
+            ← 返回README
+        </a>
+    </div>
+    <p style="color: #666; margin-top: 10px;">点击按钮返回项目主页（README渲染页）</p>
+</body>
+</html>

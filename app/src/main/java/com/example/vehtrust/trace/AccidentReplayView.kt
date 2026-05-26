@@ -29,6 +29,8 @@ class AccidentReplayView @JvmOverloads constructor(
     private var playheadMs: Int = 0
     private var frame: ReplayFrame = ReplayFrame.Empty
     private var sceneSpec: AccidentSceneSpec = AccidentSceneSpec.Default
+    /** 航向低通，减少逐帧跳变 */
+    private var smoothedOwnCarYawDeg = 0f
 
     private val bgPaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG).apply { color = Color.rgb(236, 240, 245) }
     private val cardPaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG).apply { color = Color.rgb(252, 253, 255) }
@@ -185,18 +187,27 @@ class AccidentReplayView @JvmOverloads constructor(
         telemetry.clear()
         telemetry += points.sortedBy { it.tMs }
         rebuildDistanceTimeline()
+        smoothedOwnCarYawDeg = 0f
         val firstTime = telemetry.firstOrNull()?.tMs ?: 0
         setPlayhead(firstTime)
     }
 
     fun setAccidentContext(event: AccidentEvent, environment: EnvironmentSnapshot?) {
         sceneSpec = AccidentSceneSpec.from(event, environment)
+        smoothedOwnCarYawDeg = 0f
         invalidate()
     }
 
     fun setPlayhead(tMs: Int) {
         playheadMs = tMs
         frame = interpolate(tMs)
+        val rawYaw = targetOwnCarDisplayYawDeg()
+        val delta = abs(rawYaw - smoothedOwnCarYawDeg)
+        if (delta > 14f) {
+            smoothedOwnCarYawDeg = rawYaw
+        } else {
+            smoothedOwnCarYawDeg += (rawYaw - smoothedOwnCarYawDeg) * 0.42f
+        }
         invalidate()
     }
 
@@ -214,8 +225,8 @@ class AccidentReplayView @JvmOverloads constructor(
             return
         }
 
-        val scene = RectF(dp(16f), dp(18f), width - dp(16f), height * 0.62f)
-        val chart = RectF(dp(16f), scene.bottom + dp(24f), width - dp(16f), height - dp(16f))
+        val scene = RectF(dp(16f), dp(18f), width - dp(16f), height * 0.58f)
+        val chart = RectF(dp(16f), scene.bottom + dp(20f), width - dp(16f), height - dp(14f))
 
         drawScene(canvas, scene)
         drawSceneVignette(canvas, scene)
@@ -224,13 +235,15 @@ class AccidentReplayView @JvmOverloads constructor(
     }
 
     private fun drawScene(canvas: Canvas, area: RectF) {
-        val impactIntensity = impactIntensity()
-        val shakeX = sin(playheadMs / 32f) * dp(5f) * impactIntensity
-        val shakeY = cos(playheadMs / 27f) * dp(3f) * impactIntensity
+        val impact = impactIntensity()
+        val shakeBlend = impact * collisionShakeEnvelope()
+        val phase = frame.progressToImpact * (PI * 4f).toFloat()
+        val shakeX = sin(phase) * dp(1.85f) * shakeBlend
+        val shakeY = cos(phase * 0.88f) * dp(1.15f) * shakeBlend
 
         canvas.save()
         canvas.clipRect(area)
-        val pitchSquash = ((-frame.axMS2).coerceIn(0f, 9.5f) / 9.5f) * 0.038f
+        val pitchSquash = ((-frame.axMS2).coerceIn(0f, 9.5f) / 9.5f) * 0.028f
         canvas.translate(shakeX, shakeY)
         canvas.scale(1f, 1f - pitchSquash, area.centerX(), area.centerY())
         drawAerialEnvironment(canvas, area)
@@ -239,7 +252,7 @@ class AccidentReplayView @JvmOverloads constructor(
         drawBrakeDustAndHeat(canvas, area)
         drawAerialTrafficAndObstacle(canvas, area)
         drawAerialVehicle(canvas, area)
-        drawAerialImpactEffects(canvas, area, impactIntensity)
+        drawAerialImpactEffects(canvas, area, impact)
         drawRainAndCameraNoise(canvas, area)
         canvas.restore()
     }
@@ -382,7 +395,10 @@ class AccidentReplayView @JvmOverloads constructor(
         val centerY = road.centerY()
         lanePaint.strokeWidth = dp(1.85f)
         lanePaint.color = Color.argb(235, 250, 250, 246)
-        lanePaint.pathEffect = android.graphics.DashPathEffect(floatArrayOf(dp(10f), dp(8f)), playheadMs / 20f % dp(18f))
+        lanePaint.pathEffect = android.graphics.DashPathEffect(
+            floatArrayOf(dp(10f), dp(8f)),
+            (frame.progressToImpact * dp(52f)) % dp(18f),
+        )
         lanePaint.alpha = 238
         canvas.drawLine(road.left + dp(18f), centerY, road.right - dp(18f), centerY, lanePaint)
         lanePaint.pathEffect = null
@@ -468,13 +484,16 @@ class AccidentReplayView @JvmOverloads constructor(
         }
     }
 
-    /** 俯视图航向：前轮转角 + 横摆角速度 + 碰撞段抖动 */
-    private fun ownCarDisplayYawDeg(): Float {
+    /** 目标俯视图航向（未平滑），供低通滤波使用 */
+    private fun targetOwnCarDisplayYawDeg(): Float {
         val steerYaw = (frame.steerDeg * 0.48f).coerceIn(-14f, 14f)
         val dynamicYaw = (frame.yawRateDegS * 0.24f).coerceIn(-10f, 10f)
-        val impactShake = impactIntensity() * sin(playheadMs / 18f) * 7f
-        return (steerYaw + dynamicYaw + impactShake).coerceIn(-22f, 22f)
+        val wobble = impactIntensity() * collisionShakeEnvelope() *
+            sin(frame.progressToImpact * (PI * 3f).toFloat()) * 2.4f
+        return (steerYaw + dynamicYaw + wobble).coerceIn(-22f, 22f)
     }
+
+    private fun ownCarDisplayYawDeg(): Float = smoothedOwnCarYawDeg
 
     /** 间距线颜色：融合车间距、近似 TTC、FCW 等级 */
     private fun followingGapRiskColor(gapMeters: Float): Int {
@@ -661,9 +680,9 @@ class AccidentReplayView @JvmOverloads constructor(
         val rearX = ownCarX(area) - dp(46f)
         val cy = ownCarY(area)
         repeat(18) { i ->
-            val phase = (playheadMs / 55f + i * 0.7f)
-            val ox = sin(phase) * dp(6f) * intensity + (i % 5 - 2) * dp(2.2f)
-            val oy = cos(phase * 1.1f) * dp(5f) * intensity + (i / 5 - 1) * dp(3f)
+            val phase = frame.progressToImpact * 5.5f + i * 0.7f
+            val ox = sin(phase) * dp(5f) * intensity + (i % 5 - 2) * dp(2.2f)
+            val oy = cos(phase * 1.1f) * dp(4f) * intensity + (i / 5 - 1) * dp(3f)
             smokePaint.color = Color.argb(
                 (28 + 85 * intensity).roundToInt(),
                 148 + i * 2,
@@ -935,7 +954,7 @@ class AccidentReplayView @JvmOverloads constructor(
 
         debrisPaint.color = Color.rgb(251, 146, 60)
         repeat(22) { index ->
-            val angle = index * 0.54f + playheadMs * 0.004f
+            val angle = index * 0.54f + frame.progressToImpact * (PI * 2.2f).toFloat()
             val dist = dp(12f + (index % 6) * 10f) * scenarioIntensity
             val x = cx + cos(angle) * dist * 1.18f
             val y = cy + sin(angle) * dist * 0.72f
@@ -1203,7 +1222,7 @@ class AccidentReplayView @JvmOverloads constructor(
 
         debrisPaint.color = Color.rgb(251, 146, 60)
         repeat(18) { index ->
-            val angle = index * 0.62f + playheadMs * 0.004f
+            val angle = index * 0.62f + frame.progressToImpact * (PI * 2f).toFloat()
             val dist = dp(14f + (index % 5) * 9f) * intensity
             val x = cx + cos(angle) * dist
             val y = cy + sin(angle) * dist * 0.72f
@@ -1212,19 +1231,26 @@ class AccidentReplayView @JvmOverloads constructor(
     }
 
     private fun drawRainAndCameraNoise(canvas: Canvas, area: RectF) {
+        val w = area.width().roundToInt().coerceAtLeast(1)
+        val h = area.height().roundToInt().coerceAtLeast(1)
+        val drift = distanceAt(playheadMs) * 3.8f + playheadMs * 0.015f
         if (sceneSpec.wetRoad) {
-            rainPaint.color = Color.argb(52, 226, 232, 240)
-            repeat(16) { index ->
-                val x = area.left + ((index * 37 + playheadMs / 7) % area.width().roundToInt())
-                val y = area.top + ((index * 53 + playheadMs / 4) % area.height().roundToInt())
-                canvas.drawLine(x, y, x - dp(5f), y + dp(14f), rainPaint)
+            rainPaint.color = Color.argb(34, 226, 232, 240)
+            repeat(11) { index ->
+                val xi = ((index * 37 + drift).toInt() % w + w) % w
+                val yi = ((index * 53 + drift * 0.62f).toInt() % h + h) % h
+                val x = area.left + xi
+                val y = area.top + yi
+                canvas.drawLine(x, y, x - dp(4f), y + dp(12f), rainPaint)
             }
         }
         if (sceneSpec.lowVisibility && !sceneSpec.wetRoad) {
-            rainPaint.color = Color.argb(32, 203, 213, 225)
-            repeat(12) { index ->
-                val x = area.left + ((index * 41 + playheadMs / 9) % area.width().roundToInt())
-                val y = area.top + ((index * 47 + playheadMs / 6) % area.height().roundToInt())
+            rainPaint.color = Color.argb(22, 203, 213, 225)
+            repeat(9) { index ->
+                val xi = ((index * 41 + drift * 0.55f).toInt() % w + w) % w
+                val yi = ((index * 47 + drift * 0.38f).toInt() % h + h) % h
+                val x = area.left + xi
+                val y = area.top + yi
                 canvas.drawLine(x, y, x - dp(3f), y + dp(9f), rainPaint)
             }
             rainPaint.color = Color.argb(70, 226, 232, 240)
@@ -1393,7 +1419,8 @@ class AccidentReplayView @JvmOverloads constructor(
         val prev = telemetry[(nextIndex - 1).coerceAtLeast(0)]
         val next = telemetry[nextIndex]
         val span = (next.tMs - prev.tMs).takeIf { it != 0 } ?: 1
-        val ratio = ((clamped - prev.tMs).toFloat() / span).coerceIn(0f, 1f)
+        val ratioRaw = ((clamped - prev.tMs).toFloat() / span).coerceIn(0f, 1f)
+        val ratio = smoothstep01(ratioRaw)
         val minT = telemetry.first().tMs
         val maxT = telemetry.last().tMs
         val progress = if (maxT == minT) 1f else ((clamped - minT).toFloat() / (maxT - minT)).coerceIn(0f, 1f)
@@ -1407,8 +1434,8 @@ class AccidentReplayView @JvmOverloads constructor(
             ayMS2 = lerp(prev.ayMS2, next.ayMS2, ratio),
             yawRateDegS = lerp(prev.yawRateDegS, next.yawRateDegS, ratio),
             throttlePct = lerp(prev.throttlePct.toFloat(), next.throttlePct.toFloat(), ratio),
-            aebActive = lerp(if (prev.aebActive) 1f else 0f, if (next.aebActive) 1f else 0f, ratio) >= 0.5f,
-            blinkerCode = if (ratio >= 0.5f) next.blinkerCode else prev.blinkerCode,
+            aebActive = lerp(if (prev.aebActive) 1f else 0f, if (next.aebActive) 1f else 0f, ratioRaw) >= 0.5f,
+            blinkerCode = if (ratioRaw >= 0.5f) next.blinkerCode else prev.blinkerCode,
             fcwActiveLevel = lerp(prev.fcwActiveLevel.toFloat(), next.fcwActiveLevel.toFloat(), ratio).roundToInt().coerceIn(0, 3),
             progressToImpact = progress,
             axJerkMS3 = axJerk,
@@ -1495,9 +1522,11 @@ class AccidentReplayView @JvmOverloads constructor(
         val impactX = impactX(area) - dp(62f)
         val progress = (distanceAt(playheadMs) / impactDistanceMeters().coerceAtLeast(1f)).coerceIn(0f, 1.04f)
         val brakingLag = (frame.brake / 100f).coerceIn(0f, 1f) * dp(10f)
-        val slipSway = sin(playheadMs / 41f) * dp(1.2f) * (frame.brake / 100f).coerceIn(0f, 1f) *
-            ((-frame.axMS2) / 8f).coerceIn(0f, 1.4f)
-        return startX + (impactX - startX) * progress - brakingLag + slipSway
+        val slipSway = collisionShakeEnvelope() * sin(frame.progressToImpact * (PI * 2f).toFloat()) *
+            dp(0.55f) * (frame.brake / 100f).coerceIn(0f, 1f) *
+            ((-frame.axMS2) / 8f).coerceIn(0f, 1.2f)
+        val progressEased = smoothstep01(progress.coerceIn(0f, 1.04f))
+        return startX + (impactX - startX) * progressEased - brakingLag + slipSway
     }
 
     private fun ownCarY(area: RectF): Float {
@@ -1540,6 +1569,27 @@ class AccidentReplayView @JvmOverloads constructor(
     private fun RectF.insetCopy(inset: Float): RectF = RectF(left + inset, top + inset, right - inset, bottom - inset)
 
     private fun dp(value: Float): Float = value * resources.displayMetrics.density
+
+    /** 0～1 平滑插值，减轻稀疏遥测点之间的折线感 */
+    private fun smoothstep01(x: Float): Float {
+        val t = x.coerceIn(0f, 1f)
+        return t * t * (3f - 2f * t)
+    }
+
+    private fun smoothstep(edge0: Float, edge1: Float, x: Float): Float {
+        val denom = edge1 - edge0
+        if (abs(denom) < 1e-5f) return if (x >= edge1) 1f else 0f
+        val t = ((x - edge0) / denom).coerceIn(0f, 1f)
+        return t * t * (3f - 2f * t)
+    }
+
+    /**
+     * 仅在时间轴接近碰撞点（tMs → 0⁻）时渐强，避免重刹全程高频晃屏。
+     */
+    private fun collisionShakeEnvelope(): Float {
+        val t = playheadMs.coerceAtMost(0).toFloat()
+        return smoothstep(-480f, -90f, t) * (1f - smoothstep(-40f, 120f, playheadMs.toFloat()))
+    }
 
     private fun lerp(start: Float, end: Float, ratio: Float): Float = start + (end - start) * ratio
 

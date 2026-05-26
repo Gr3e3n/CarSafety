@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Binder
 import android.os.IBinder
 import com.example.vehtrust.MainActivity
@@ -66,10 +67,12 @@ class AccidentMonitorService : Service() {
             Intent(this, MainActivity::class.java),
             PendingIntent.FLAG_IMMUTABLE,
         )
+        val largeIcon = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
         return Notification.Builder(this, CHANNEL_ID)
             .setContentTitle("事故溯源监控运行中")
             .setContentText("20Hz 高频采样 · 保留事故前后各 10 秒数据")
-            .setSmallIcon(android.R.drawable.ic_dialog_alert)
+            .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setLargeIcon(largeIcon)
             .setContentIntent(pendingIntent)
             .setOngoing(true)
             .build()

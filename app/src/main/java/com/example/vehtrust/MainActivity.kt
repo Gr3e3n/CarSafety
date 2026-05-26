@@ -1,12 +1,17 @@
 package com.example.vehtrust
 
+import android.Manifest
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.vehtrust.trace.AccidentRepository
@@ -36,10 +41,24 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val perfTimer = PerfTimer.start()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
         updateHeaderDisplay()
+
+        // Android 13+ 必须请求通知权限，否则前台服务通知不可见
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                != PackageManager.PERMISSION_GRANTED
+            ) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                    REQUEST_NOTIFICATION_PERMISSION,
+                )
+            }
+        }
 
         // 启动前台服务（保活监控，App 退出后继续运行）
         val serviceIntent = Intent(this, AccidentMonitorService::class.java)
@@ -51,6 +70,17 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[SafetyViewModel::class.java]
         setupRecyclerView()
         observeData()
+
+        window.decorView.viewTreeObserver.addOnPreDrawListener(
+            object : android.view.ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    perfTimer.log("MainActivity", "首帧加载")
+                    @Suppress("DEPRECATION")
+                    window.decorView.viewTreeObserver.removeOnPreDrawListener(this)
+                    return true
+                }
+            },
+        )
     }
 
     override fun onResume() {
@@ -122,4 +152,8 @@ class MainActivity : AppCompatActivity() {
                 .putExtra(ModuleDetailActivity.EXTRA_COLOR_RES, module.colorRes),
         )
     }
-} 
+
+    companion object {
+        private const val REQUEST_NOTIFICATION_PERMISSION = 101
+    }
+}

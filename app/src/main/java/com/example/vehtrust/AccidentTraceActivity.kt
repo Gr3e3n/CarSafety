@@ -17,6 +17,7 @@ class AccidentTraceActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val perfTimer = PerfTimer.start()
         binding = ActivityAccidentTraceBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
@@ -43,5 +44,16 @@ class AccidentTraceActivity : AppCompatActivity() {
         viewModel.events.observe(this) { events ->
             adapter.submitEvents(events)
         }
+
+        window.decorView.viewTreeObserver.addOnPreDrawListener(
+            object : android.view.ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    perfTimer.log("AccidentTraceActivity", "首帧加载")
+                    @Suppress("DEPRECATION")
+                    window.decorView.viewTreeObserver.removeOnPreDrawListener(this)
+                    return true
+                }
+            },
+        )
     }
 }
